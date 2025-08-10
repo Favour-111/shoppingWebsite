@@ -170,6 +170,7 @@
   overflow: hidden;
   height: 0 !important;
   padding: 0 !important;
+  transition: 350ms;
   li {
     border: none !important;
     height: 35px;
@@ -181,7 +182,7 @@
   }
 }
 .nav-sm-list-dropdown.active {
-  height: 140px !important;
+  height: 120px !important;
 }
 @media screen and (min-width: 1000px) {
   .nav-sm-container {
