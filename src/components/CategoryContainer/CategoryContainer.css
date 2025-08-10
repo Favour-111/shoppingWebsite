@@ -6,7 +6,7 @@
   --hover-blue: #3b82f6;
 }
 .CategoryContainer {
-  padding: 20px 65px;
+  padding: 20px 0;
   margin-top: 40px;
 }
 .CategoryContainer-head {
@@ -63,7 +63,6 @@
 
 @media screen and (max-width: 1200px) {
   .CategoryContainer {
-    padding: 30px !important;
     margin-top: 0;
   }
 }
@@ -72,9 +71,6 @@
     width: 50% !important;
   }
   .CategoryContainer-head {
-    font-size: 22px;
-  }
-  .CategoryContainer {
-    padding: 20px !important;
+    font-size: 20px;
   }
 }

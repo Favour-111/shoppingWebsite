@@ -8,6 +8,7 @@ import Slider from "react-slick";
 import CategoryContainer from "../../components/CategoryContainer/CategoryContainer";
 import NavSm from "../../components/NavSm/NavSm";
 import NewProduct from "../../components/NewProduct/NewProduct";
+import Item from "../../components/Item/Item";
 var settings = {
   dots: false,
   infinite: true,
@@ -43,65 +44,70 @@ const Home = () => {
     <div>
       <NavBar />
       <NavSm />
-      <div className="banners-container">
-        <div className="first-banner">
-          <Slider {...settings}>
-            {bannerItems.map((item) => {
-              return (
-                <div className={`banner-left ${item.bannerClass}`}>
-                  <div className="banner-right-top">
-                    Executive offer <span>{item.offer}%</span>
-                  </div>
-                  <div className="banner-right-head">{item.Head}</div>
-                  <div className="banner-right-week">
-                    On only this week don't miss
-                  </div>
-                  <div className="banner-right-price">
-                    Start from <span>N{item.Price}</span>
-                  </div>
-                  <button className="banner-right-button">
-                    <div>{item.ButtonText}</div>
-                    <div>
-                      <LuMoveRight />
+      <div className="home-container">
+        <div className="banners-container">
+          <div className="first-banner">
+            <Slider {...settings}>
+              {bannerItems.map((item) => {
+                return (
+                  <div className={`banner-left ${item.bannerClass}`}>
+                    <div className="banner-right-top">
+                      Executive offer <span>{item.offer}%</span>
                     </div>
-                  </button>
-                  <img src={item.image} className="img-fluid" alt="" />
-                </div>
-              );
-            })}
-          </Slider>
-        </div>
+                    <div className="banner-right-head">{item.Head}</div>
+                    <div className="banner-right-week">
+                      On only this week don't miss
+                    </div>
+                    <div className="banner-right-price">
+                      Start from <span>N{item.Price}</span>
+                    </div>
+                    <button className="banner-right-button">
+                      <div>{item.ButtonText}</div>
+                      <div>
+                        <LuMoveRight />
+                      </div>
+                    </button>
+                    <img src={item.image} className="img-fluid" alt="" />
+                  </div>
+                );
+              })}
+            </Slider>
+          </div>
 
-        <div className="banner-right">
-          <div className="banner-right-item-top">
-            <div className="banner-top-head">10% cashback on First Order</div>
-            <div className="banner-top-content">
-              Refresh your day the
-              <br /> with Fresh Seasoning
+          <div className="banner-right">
+            <div className="banner-right-item-top">
+              <div className="banner-top-head">10% cashback on First Order</div>
+              <div className="banner-top-content">
+                Refresh your day the
+                <br /> with Fresh Seasoning
+              </div>
+              <button className="banner-top-button">Shop Now</button>
+              <img
+                src="https://png.pngtree.com/png-vector/20240529/ourmid/pngtree-pina-colada-with-pineapple-slice-and-cherry-png-image_12511808.png"
+                alt=""
+              />
             </div>
-            <button className="banner-top-button">Shop Now</button>
-            <img
-              src="https://png.pngtree.com/png-vector/20240529/ourmid/pngtree-pina-colada-with-pineapple-slice-and-cherry-png-image_12511808.png"
-              alt=""
-            />
-          </div>
-          <div className="banner-right-item-bottom">
-            <div className="banner-top-head">Say yes to season’s fresh</div>
-            <div className="banner-top-content">
-              Refresh your day the
-              <br /> with Fresh Seasoning
+            <div className="banner-right-item-bottom">
+              <div className="banner-top-head">Say yes to season’s fresh</div>
+              <div className="banner-top-content">
+                Refresh your day the
+                <br /> with Fresh Seasoning
+              </div>
+              <button className="banner-top-button">Shop Now</button>
+              <img
+                src="https://static.vecteezy.com/system/resources/previews/051/960/680/non_2x/an-assortment-of-various-grocery-items-including-fruits-bread-cereals-and-jars-arranged-neatly-for-display-perfect-for-food-related-projects-png.png"
+                alt=""
+              />
             </div>
-            <button className="banner-top-button">Shop Now</button>
-            <img
-              src="https://static.vecteezy.com/system/resources/previews/051/960/680/non_2x/an-assortment-of-various-grocery-items-including-fruits-bread-cereals-and-jars-arranged-neatly-for-display-perfect-for-food-related-projects-png.png"
-              alt=""
-            />
           </div>
         </div>
-      </div>
-      <CategoryContainer />
-      <div>
-        <NewProduct />
+        <CategoryContainer />
+        <div>
+          <NewProduct />
+        </div>
+        <div className="p-1 mt-3">
+          <Item />
+        </div>
       </div>
     </div>
   );
