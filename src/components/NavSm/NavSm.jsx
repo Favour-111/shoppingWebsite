@@ -13,6 +13,7 @@ import { MdChevronRight } from "react-icons/md";
 const NavSm = () => {
   const [openNav, setOpenNav] = useState(false);
   const [categoryOpen, setcategoryOpen] = useState(false);
+  const [AccountSm, setAccountSm] = useState(false);
   return (
     <div className="nav-sm">
       <div className="nav-sm-container mt-2">
@@ -56,6 +57,59 @@ const NavSm = () => {
                 })}
               </div>
             </div>
+            <div>
+              <ul className="nav-sm-list-item-container">
+                <div>
+                  <li>
+                    <Link className="nav-sm-list-item">Home</Link>
+                  </li>
+                  <li>
+                    <Link className="nav-sm-list-item">Shop</Link>
+                  </li>
+                  <li onClick={() => setAccountSm(!AccountSm)}>
+                    <Link className="nav-sm-list-item">Account</Link>
+                    <div>
+                      <MdChevronRight />
+                    </div>
+                  </li>
+                </div>
+
+                <ul
+                  className={`nav-sm-list-dropdown   ${
+                    AccountSm ? "active" : ""
+                  }`}
+                >
+                  <div className="p-2 ">
+                    <li>
+                      <Link className="nav-sm-list-dropdown-link">Order</Link>
+                    </li>
+                    <li>
+                      <Link className="nav-sm-list-dropdown-link">
+                        Settings
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="nav-sm-list-dropdown-link">Address</Link>
+                    </li>
+                  </div>
+                </ul>
+                <li>
+                  <Link className="nav-sm-list-item">Mega menu</Link>
+                  <div>
+                    <MdChevronRight />
+                  </div>
+                </li>
+                <li>
+                  <Link className="nav-sm-list-item">About</Link>
+                </li>
+                <li>
+                  <Link className="nav-sm-list-item">Contact</Link>
+                </li>
+                <li>
+                  <Link className="nav-sm-list-item">Blog page</Link>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
         <div className="shopping-icons-sm" onClick={() => setOpenNav(true)}>
@@ -88,34 +142,6 @@ const NavSm = () => {
           <input type="text" placeholder="Search something" />
           <IoSearchOutline />
         </div>
-      </div>
-      <div>
-        <ul className="nav-sm-list-item-container">
-          <li>
-            <Link className="nav-sm-list-item">Home</Link>
-            <div>
-              <MdChevronRight />
-            </div>
-          </li>
-          <li>
-            <Link className="nav-sm-list-item">About</Link>
-            <div>
-              <MdChevronRight />
-            </div>
-          </li>
-          <li>
-            <Link className="nav-sm-list-item">Home</Link>
-            <div>
-              <MdChevronRight />
-            </div>
-          </li>
-          <li>
-            <Link className="nav-sm-list-item">Home</Link>
-            <div>
-              <MdChevronRight />
-            </div>
-          </li>
-        </ul>
       </div>
     </div>
   );
