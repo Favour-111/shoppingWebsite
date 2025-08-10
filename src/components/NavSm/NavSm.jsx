@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./NavSm.css";
 import { LiaOpencart } from "react-icons/lia";
 import { RiMenuFill, RiUserLine } from "react-icons/ri";
-import { FiHeart } from "react-icons/fi";
+import { FiHeart, FiUser } from "react-icons/fi";
 import { LuMenu, LuShoppingBag } from "react-icons/lu";
 import { IoClose, IoCloseOutline, IoSearchOutline } from "react-icons/io5";
 import { HiOutlineLocationMarker } from "react-icons/hi";
@@ -129,7 +129,7 @@ const NavSm = () => {
             <div className="shopping-counter-sm">2</div>
           </div>
           <div className="shopping-icons-sm">
-            <RiUserLine size={18} />
+            <FiUser size={21} />
           </div>
           <div className="shopping-icons-sm">
             <LuShoppingBag />

@@ -22,6 +22,7 @@
 .shopping-icons-sm {
   position: relative;
   color: #787878;
+  font-size: 18px;
 }
 .shopping-counter-sm {
   height: 14px;
@@ -163,9 +164,7 @@
   }
 }
 .nav-sm-list-dropdown {
-  border-left: 1px solid #d3d3d368;
-  border-right: 1px solid #d3d3d368;
-  border-bottom: 1px solid #d3d3d368;
+  border: none;
   border-radius: 5px;
   overflow: hidden;
   height: 0 !important;
@@ -183,6 +182,9 @@
 }
 .nav-sm-list-dropdown.active {
   height: 120px !important;
+  border-left: 1px solid #d3d3d368;
+  border-right: 1px solid #d3d3d368;
+  border-bottom: 1px solid #d3d3d368;
 }
 @media screen and (min-width: 1000px) {
   .nav-sm-container {
