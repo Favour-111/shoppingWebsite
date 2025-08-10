@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import CategoryContainer from "../../components/CategoryContainer/CategoryContainer";
 import NavSm from "../../components/NavSm/NavSm";
+import NewProduct from "../../components/NewProduct/NewProduct";
 var settings = {
   dots: false,
   infinite: true,
@@ -30,8 +31,7 @@ const Home = () => {
       bannerClass: "Left1",
     },
     {
-      image:
-        "https://wallpapers.com/images/hd/hennessy-very-special-cognac-bottle-au9vqd57y96cat23.png",
+      image: "https://www.pngmart.com/files/23/Hennessy-PNG-Clipart.png",
       offer: "25",
       Head: "All Hennessy Drinks Deals",
       Price: "1,575",
@@ -76,7 +76,8 @@ const Home = () => {
           <div className="banner-right-item-top">
             <div className="banner-top-head">10% cashback on First Order</div>
             <div className="banner-top-content">
-              Max cashback: <span>N3,500</span>{" "}
+              Refresh your day the
+              <br /> with Fresh Seasoning
             </div>
             <button className="banner-top-button">Shop Now</button>
             <img
@@ -88,7 +89,7 @@ const Home = () => {
             <div className="banner-top-head">Say yes to season’s fresh</div>
             <div className="banner-top-content">
               Refresh your day the
-              <br /> fruity way Shop
+              <br /> with Fresh Seasoning
             </div>
             <button className="banner-top-button">Shop Now</button>
             <img
@@ -99,6 +100,9 @@ const Home = () => {
         </div>
       </div>
       <CategoryContainer />
+      <div>
+        <NewProduct />
+      </div>
     </div>
   );
 };

@@ -38,7 +38,7 @@
     right: 0;
     top: 0;
     transform: rotate(-40deg);
-    opacity: 0.8;
+    opacity: 0.9;
   }
 }
 .Left1 {
@@ -212,11 +212,34 @@
       right: -80px;
     }
   }
+  .banner-top-button {
+    height: 35px;
+    width: 80px;
+    font-size: 10px;
+  }
+  .banner-top-head {
+    font-size: 22px;
+  }
+  .banner-top-content {
+    font-size: 14px;
+  }
+  .banner-right-item-top {
+    img {
+      width: 200px;
+      bottom: 0;
+    }
+  }
+  .banner-right-item-bottom {
+    img {
+      width: 220px;
+      bottom: 10px;
+    }
+  }
 }
 @media screen and (max-width: 1200px) {
   .banners-container {
     flex-direction: column;
-    padding: 30px 90px;
+    padding: 30px 20px;
     width: 100%;
   }
   .first-banner {

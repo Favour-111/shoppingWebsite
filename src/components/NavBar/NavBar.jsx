@@ -10,7 +10,7 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { Link } from "react-router";
 import { IoLocationOutline } from "react-icons/io5";
 import { HiOutlineLocationMarker } from "react-icons/hi";
-import { FiHeart } from "react-icons/fi";
+import { FiHeart, FiUser } from "react-icons/fi";
 import category from "../categories";
 const NavBar = () => {
   const [mainDrop, setMainDrop] = useState(false);
@@ -51,7 +51,7 @@ const NavBar = () => {
               <div className="shopping-counter">2</div>
             </div>
             <div className="shopping-icons">
-              <RiUserLine />
+              <FiUser size={23} />
             </div>
             <div className="shopping-icons">
               <LuShoppingBag />

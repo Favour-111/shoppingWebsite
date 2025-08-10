@@ -152,7 +152,7 @@
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid #d3d3d368;
-    height: 41px;
+    height: 45px;
     padding: 0 5px;
   }
   .nav-sm-list-item {
@@ -186,7 +186,7 @@
   border-right: 1px solid #d3d3d368;
   border-bottom: 1px solid #d3d3d368;
 }
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 1001px) {
   .nav-sm-container {
     display: none;
   }
