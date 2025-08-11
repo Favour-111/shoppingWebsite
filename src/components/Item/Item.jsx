@@ -2,7 +2,7 @@ import React from "react";
 import "./Item.css";
 import { MdAdd } from "react-icons/md";
 import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
-import useNavigate from "react-router-dom";
+import { useNavigate } from "react-router";
 const Item = ({ product }) => {
   const navigate = useNavigate();
   const renderStars = () => {
@@ -36,12 +36,6 @@ const Item = ({ product }) => {
         </div>
         <div className="item-bottom">
           <div className="price">
-            {!product.oldPrice ? (
-              ""
-            ) : (
-              <div className="old-price">₦{product.oldPrice}</div>
-            )}
-
             <div className="New-price">₦{product.newPrice}</div>
           </div>
           <button className="cart-btn">
@@ -50,7 +44,7 @@ const Item = ({ product }) => {
                 <MdAdd className="svg" />
               </div>
             </div>
-            <span>Send</span>
+            <span>Add</span>
           </button>
         </div>
       </div>

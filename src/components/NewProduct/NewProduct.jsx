@@ -30,10 +30,26 @@ const NewProduct = () => {
             })}
           </div>
         </div>
-        <div className="p-1 mt-3 NewProducts">
-          {product.map((item) => {
-            return <Item product={item} />;
-          })}
+        <div className="new-product-container">
+          <div className="mt-3 NewProducts">
+            {product
+              .filter((item) => {
+                if (item.category === activeButton) {
+                  return item;
+                }
+              })
+              .slice(0, 10)
+              .map((item) => {
+                return <Item product={item} />;
+              })}
+            {product.filter(
+              (item) => activeButton === "All" || item.category === activeButton
+            ).length === 0 && (
+              <div className="no-products">
+                No products found in this category.
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

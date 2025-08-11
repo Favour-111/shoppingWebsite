@@ -10,6 +10,9 @@ import NavSm from "../../components/NavSm/NavSm";
 import NewProduct from "../../components/NewProduct/NewProduct";
 import Item from "../../components/Item/Item";
 import product from "../../components/Product";
+import Special from "../../components/Special/Special";
+import BestSellers from "../../components/BestSellers/BestSellers";
+import Subscribe from "../../components/Subscribe/Subscribe";
 var settings = {
   dots: false,
   infinite: true,
@@ -105,6 +108,33 @@ const Home = () => {
         <CategoryContainer />
         <div>
           <NewProduct />
+        </div>
+        <div className="second-banner">
+          <div>
+            <div className="second-banner-head">One Stop Grocery Shop</div>
+            <div className="second-banner-content">
+              Shopping for your furry friend? Find food, treats, and more in one
+              easy spot.
+            </div>
+            <button href="tel:+2347069961314" className="fancy-button">
+              <span>Start shop now</span>
+            </button>
+          </div>
+          <div>
+            <img
+              src="https://freshcart.codescandy.com/assets/images/svg-graphics/store-graphics.svg"
+              alt=""
+            />
+          </div>
+        </div>
+        <div>
+          <Special />
+        </div>
+        <div>
+          <BestSellers />
+        </div>
+        <div>
+          <Subscribe />
         </div>
       </div>
     </div>

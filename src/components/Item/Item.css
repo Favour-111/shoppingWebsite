@@ -8,9 +8,10 @@
 .item-body {
   height: 330px;
   border: 1px solid #d3d3d378;
-  width: 19% !important;
+  width: 100% !important;
   padding: 10px;
   border-radius: 10px;
+  margin-top: 20px;
 }
 .item-image {
   height: 55%;
@@ -143,5 +144,17 @@
 
   to {
     transform: translateY(-0.1em);
+  }
+}
+@media screen and (max-width: 420px) {
+  .item-image {
+    img {
+      width: 120px !important;
+    }
+  }
+}
+@media screen and (max-width: 1250px) {
+  .item-body {
+    width: 100% !important;
   }
 }
