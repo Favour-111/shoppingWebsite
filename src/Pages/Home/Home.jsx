@@ -50,7 +50,7 @@ const Home = () => {
       <NavSm />
       <div className="home-container">
         <div className="banners-container">
-          <div className="first-banner">
+          <div className="first-banner p-0">
             <Slider {...settings}>
               {bannerItems.map((item) => {
                 return (

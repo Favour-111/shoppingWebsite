@@ -146,7 +146,7 @@
     transform: translateY(-0.1em);
   }
 }
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 4px) {
   .item-image {
     img {
       width: 120px !important;

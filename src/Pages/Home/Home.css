@@ -226,7 +226,7 @@
   overflow: hidden;
 }
 .slick-slide > div {
-  margin: 0 15px;
+  margin: 0 1px;
 }
 .fancy-button:hover:before {
   top: -70%;
