@@ -26,6 +26,13 @@
   display: flex;
   align-items: center;
 }
+.NewProducts {
+  width: 100% !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
 .new-prod-filter-container {
   width: 70%;
 }
@@ -38,7 +45,8 @@
 .filter-buttons {
   background-color: transparent;
   font-size: 13px;
-  color: #1e293b;
+  color: #787878;
+  font-weight: 600;
   cursor: pointer;
   transform: 350ms;
   padding: 10px 20px;

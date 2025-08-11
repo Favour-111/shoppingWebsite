@@ -9,6 +9,7 @@ import CategoryContainer from "../../components/CategoryContainer/CategoryContai
 import NavSm from "../../components/NavSm/NavSm";
 import NewProduct from "../../components/NewProduct/NewProduct";
 import Item from "../../components/Item/Item";
+import product from "../../components/Product";
 var settings = {
   dots: false,
   infinite: true,
@@ -104,9 +105,6 @@ const Home = () => {
         <CategoryContainer />
         <div>
           <NewProduct />
-        </div>
-        <div className="p-1 mt-3">
-          <Item />
         </div>
       </div>
     </div>

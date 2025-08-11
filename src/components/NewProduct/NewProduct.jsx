@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./NewProduct.css";
 import category from "../categories";
+import product from "../Product";
+import Item from "../Item/Item";
 const NewProduct = () => {
   const [activeButton, setActiveButton] = useState("Dry Goods");
   return (
@@ -27,6 +29,11 @@ const NewProduct = () => {
               );
             })}
           </div>
+        </div>
+        <div className="p-1 mt-3 NewProducts">
+          {product.map((item) => {
+            return <Item product={item} />;
+          })}
         </div>
       </div>
     </div>
