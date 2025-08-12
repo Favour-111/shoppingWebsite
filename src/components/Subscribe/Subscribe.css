@@ -90,7 +90,6 @@
 @media screen and (max-width: 830px) {
   .subscribe-overlay {
     flex-direction: column;
-    height: 100%;
     gap: 50px;
   }
   .subscribe-body {
