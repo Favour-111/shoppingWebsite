@@ -1,8 +1,10 @@
 import React from "react";
 import "./Subscribe.css";
+import AboutSection from "../AboutSection/AboutSection";
 const Subscribe = () => {
   return (
     <div>
+      <AboutSection />
       <div className="subscribe-body">
         <div className="subscribe-overlay">
           <div className="overlay-left">
@@ -23,7 +25,7 @@ const Subscribe = () => {
           </div>
           <div className="overlay-right">
             <img
-              src="https://static.vecteezy.com/system/resources/previews/055/333/088/non_2x/stylish-man-with-shopping-bag-in-casual-attire-free-png.png"
+              src="https://wallpapers.com/images/hd/assorted-cold-drinks-collection-3mgji2i0uycrhzni.jpg"
               alt=""
             />
           </div>

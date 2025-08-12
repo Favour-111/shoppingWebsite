@@ -13,6 +13,7 @@ import product from "../../components/Product";
 import Special from "../../components/Special/Special";
 import BestSellers from "../../components/BestSellers/BestSellers";
 import Subscribe from "../../components/Subscribe/Subscribe";
+import AboutSection from "../../components/AboutSection/AboutSection";
 var settings = {
   dots: false,
   infinite: true,
@@ -50,7 +51,7 @@ const Home = () => {
       <NavSm />
       <div className="home-container">
         <div className="banners-container">
-          <div className="first-banner p-0">
+          <div className="first-banner ">
             <Slider {...settings}>
               {bannerItems.map((item) => {
                 return (

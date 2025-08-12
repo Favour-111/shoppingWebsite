@@ -9,7 +9,7 @@
   background-color: var(--text-blue);
   height: 440px;
   left: 0;
-  margin-top: 90px;
+  margin-top: 60px;
   right: 0;
   position: absolute;
 }
@@ -49,7 +49,7 @@
 .overlay-right {
   width: 50%;
   img {
-    width: 300px;
+    width: 400px;
   }
 }
 .overlay-input-container {
@@ -81,7 +81,7 @@
 }
 @media screen and (max-width: 430px) {
   .subscribe-overlay {
-    padding: 0 20px;
+    padding: 0 30px;
     img {
       width: 300px;
     }
@@ -91,6 +91,7 @@
   .subscribe-overlay {
     flex-direction: column;
     height: 100%;
+    gap: 50px;
   }
   .subscribe-body {
     height: 75%;
