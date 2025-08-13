@@ -6,10 +6,8 @@
   --hover-blue: #3b82f6;
 }
 .AboutSection-container {
-  padding: 70px 0;
+  padding: 100px 0;
   display: flex;
-  margin-top: 50px;
-  align-items: center;
   justify-content: space-between;
 }
 .AboutSection-icon {
@@ -25,8 +23,8 @@
   font-weight: 600;
 }
 .AboutSection-Section {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 500;
   margin-top: 10px;
   color: #787878;
 }

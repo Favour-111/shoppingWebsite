@@ -14,6 +14,7 @@ import Special from "../../components/Special/Special";
 import BestSellers from "../../components/BestSellers/BestSellers";
 import Subscribe from "../../components/Subscribe/Subscribe";
 import AboutSection from "../../components/AboutSection/AboutSection";
+import Footer from "../../components/Footer/Footer";
 var settings = {
   dots: false,
   infinite: true,
@@ -29,7 +30,7 @@ const Home = () => {
   const bannerItems = [
     {
       image:
-        "https://static.wixstatic.com/media/bc12db_943b05a78837470b92026585bc1d17cc~mv2.png/v1/fill/w_476,h_1500,al_c,q_90,enc_avif,quality_auto/bc12db_943b05a78837470b92026585bc1d17cc~mv2.png",
+        "https://wallpapers.com/images/hd/hennessy-black-cognac-bottle-kau030aayyqqp4a5.jpg",
       offer: "35",
       Head: "Best Online Store,For Drinks",
       Price: "3,500",
@@ -135,9 +136,10 @@ const Home = () => {
           <BestSellers />
         </div>
         <div>
-          <Subscribe />
+          <AboutSection />
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
