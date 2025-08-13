@@ -15,6 +15,7 @@ import BestSellers from "../../components/BestSellers/BestSellers";
 import Subscribe from "../../components/Subscribe/Subscribe";
 import AboutSection from "../../components/AboutSection/AboutSection";
 import Footer from "../../components/Footer/Footer";
+import BackToTop from "../../components/BackToTop/BackToTop";
 var settings = {
   dots: false,
   infinite: true,
@@ -140,6 +141,7 @@ const Home = () => {
         </div>
       </div>
       <Footer />
+      <BackToTop />
     </div>
   );
 };

@@ -129,7 +129,11 @@ const NavBar = () => {
               </div>
             </li>
             <li className="nav-Itm">About</li>
-            <li className="nav-Itm">Contact</li>
+            <li>
+              <Link className="nav-Itm" to="/contact-us">
+                Contact
+              </Link>
+            </li>
             <li className="nav-Itm">Blog Page</li>
           </ul>
         </div>

@@ -43,7 +43,7 @@
   .AboutSection-container {
     padding: 40px 10px;
     flex-direction: column;
-    row-gap: 20px;
+    row-gap: 30px;
   }
   .AboutSection-Item {
     width: 100%;

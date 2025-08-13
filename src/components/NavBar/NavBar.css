@@ -110,6 +110,10 @@
       font-weight: 600;
     }
   }
+  .nav-Itm {
+    color: #1e293b;
+    text-decoration: none;
+  }
   .nav-item-dropdown {
     display: flex;
     align-items: center;

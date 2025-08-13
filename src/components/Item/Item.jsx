@@ -3,6 +3,9 @@ import "./Item.css";
 import { MdAdd } from "react-icons/md";
 import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { useNavigate } from "react-router";
+import { GiShoppingCart } from "react-icons/gi";
+import { IoIosHeartEmpty } from "react-icons/io";
+import { IoEyeOutline } from "react-icons/io5";
 const Item = ({ product }) => {
   const navigate = useNavigate();
   const renderStars = () => {
@@ -46,6 +49,17 @@ const Item = ({ product }) => {
             </div>
             <span>Add</span>
           </button>
+          <div className="button-relative-container">
+            <div className="button-1 shadow-sm">
+              <GiShoppingCart />
+            </div>
+            <div className="button-1 shadow-sm">
+              <IoIosHeartEmpty />
+            </div>
+            <div className="button-1 shadow-sm">
+              <IoEyeOutline />
+            </div>
+          </div>
         </div>
       </div>
     </div>

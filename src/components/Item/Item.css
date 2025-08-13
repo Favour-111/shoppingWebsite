@@ -6,12 +6,37 @@
   --hover-blue: #3b82f6;
 }
 .item-body {
+  position: relative;
   height: 330px;
   border: 1px solid #d3d3d378;
   width: 100% !important;
   padding: 10px;
   border-radius: 10px;
+  overflow: hidden;
   margin-top: 20px;
+}
+.button-relative-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-direction: column;
+}
+.button-1 {
+  height: 40px;
+  border-radius: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  transform: translateX(50px);
+  transition: 400ms;
+}
+.item-body:hover .button-1 {
+  transform: translateX(2px);
 }
 .item-image {
   height: 55%;
@@ -97,7 +122,7 @@
   font-family: inherit;
   background: var(--primary-blue);
   color: white;
-  padding: 7px 10px;
+  padding: 8px 12px;
   display: flex;
   align-items: center;
   border: none;

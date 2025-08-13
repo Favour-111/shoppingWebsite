@@ -103,7 +103,9 @@ const NavSm = () => {
                   <Link className="nav-sm-list-item">About</Link>
                 </li>
                 <li>
-                  <Link className="nav-sm-list-item">Contact</Link>
+                  <Link className="nav-sm-list-item" to="/contact-us">
+                    Contact
+                  </Link>
                 </li>
                 <li>
                   <Link className="nav-sm-list-item">Blog page</Link>
