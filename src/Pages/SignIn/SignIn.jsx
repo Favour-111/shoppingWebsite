@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./SignIn.css";
 import { LiaOpencart } from "react-icons/lia";
+import { Link } from "react-router";
 
 const SignIn = () => {
   const [formData, setFormData] = useState({
@@ -40,12 +41,12 @@ const SignIn = () => {
   return (
     <div>
       <div className="nav-form">
-        <div className="logo">
+        <Link className="logo" to="/">
           <div>
             <LiaOpencart className="logo-icon" />
           </div>
           <div>FizzMart</div>
-        </div>
+        </Link>
         <div className="account-switch">
           Don't have an account? <span>Sign Up</span>
         </div>

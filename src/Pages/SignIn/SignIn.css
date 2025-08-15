@@ -120,4 +120,7 @@ button:hover {
     align-items: center;
     gap: 7px;
   }
+  .sing-in-container {
+    height: 85vh;
+  }
 }

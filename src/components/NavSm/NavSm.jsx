@@ -13,6 +13,7 @@ import { MdChevronRight } from "react-icons/md";
 const NavSm = () => {
   const [openNav, setOpenNav] = useState(false);
   const [categoryOpen, setcategoryOpen] = useState(false);
+  const [AccountDrop, setAccountDrop] = useState(false);
   const [AccountSm, setAccountSm] = useState(false);
   return (
     <div className="nav-sm">
@@ -77,26 +78,52 @@ const NavSm = () => {
                     </div>
                   </li>
                 </div>
+                {AccountDrop ? (
+                  <ul
+                    className={`nav-sm-list-dropdown   ${
+                      AccountSm ? "active" : ""
+                    }`}
+                  >
+                    <div className="p-2 ">
+                      <li>
+                        <Link className="nav-sm-list-dropdown-link">Order</Link>
+                      </li>
+                      <li>
+                        <Link className="nav-sm-list-dropdown-link">
+                          Settings
+                        </Link>
+                      </li>
+                      <li>
+                        <Link className="nav-sm-list-dropdown-link">
+                          Address
+                        </Link>
+                      </li>
+                    </div>
+                  </ul>
+                ) : (
+                  <ul
+                    className={`nav-sm-list-dropdown   ${
+                      AccountSm ? "active" : ""
+                    }`}
+                  >
+                    <div className="p-2 ">
+                      <li>
+                        <Link
+                          className="nav-sm-list-dropdown-link"
+                          to="/sign-in"
+                        >
+                          Sign In
+                        </Link>
+                      </li>
+                      <li>
+                        <Link className="nav-sm-list-dropdown-link">
+                          Sign Up
+                        </Link>
+                      </li>
+                    </div>
+                  </ul>
+                )}
 
-                <ul
-                  className={`nav-sm-list-dropdown   ${
-                    AccountSm ? "active" : ""
-                  }`}
-                >
-                  <div className="p-2 ">
-                    <li>
-                      <Link className="nav-sm-list-dropdown-link">Order</Link>
-                    </li>
-                    <li>
-                      <Link className="nav-sm-list-dropdown-link">
-                        Settings
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="nav-sm-list-dropdown-link">Address</Link>
-                    </li>
-                  </div>
-                </ul>
                 <li>
                   <Link className="nav-sm-list-item">Mega menu</Link>
                   <div>
