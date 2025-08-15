@@ -6,7 +6,7 @@
   --hover-blue: #3b82f6;
 }
 .nav-sm-container {
-  padding: 15px 30px;
+  padding: 15px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -14,7 +14,7 @@
 .nav-sm-icons {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
 }
 .nav-sm-item {
   position: relative;
@@ -55,7 +55,7 @@
   display: flex;
   align-items: center;
   border-radius: 20px;
-  padding: 0 20px;
+  padding: 0 15px;
   input {
     border: none;
     outline: none;

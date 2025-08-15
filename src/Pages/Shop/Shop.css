@@ -130,8 +130,8 @@ select {
     align-items: flex-start;
   }
   .shop-name {
-    font-size: 25px;
-    padding: 20px;
+    font-size: 20px;
+    padding: 30px 20px;
     font-weight: 500;
     img {
       width: 60px;

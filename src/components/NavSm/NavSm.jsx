@@ -66,7 +66,9 @@ const NavSm = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link className="nav-sm-list-item">Shop</Link>
+                    <Link to="/shop-list" className="nav-sm-list-item">
+                      Shop
+                    </Link>
                   </li>
                   <li onClick={() => setAccountSm(!AccountSm)}>
                     <Link className="nav-sm-list-item">Account</Link>
@@ -116,9 +118,7 @@ const NavSm = () => {
             </div>
           </div>
         </div>
-        <div className="shopping-icons-sm" onClick={() => setOpenNav(true)}>
-          <LuMenu size={25} />
-        </div>
+
         <div>
           <div className="logo-sm">
             <div>
@@ -138,6 +138,9 @@ const NavSm = () => {
           <div className="shopping-icons-sm">
             <LuShoppingBag />
             <div className="shopping-counter-sm">2</div>
+          </div>
+          <div className="shopping-icons-sm" onClick={() => setOpenNav(true)}>
+            <LuMenu size={25} />
           </div>
         </div>
       </div>
