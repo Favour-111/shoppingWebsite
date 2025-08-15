@@ -27,37 +27,39 @@ const Item = ({ product }) => {
   };
   return (
     <div className="item-body">
-      <div className="item-image">
-        <img src={product.image} alt="" />
-      </div>
-      <div className="item-content">
-        <div className="item-category">{product.category}</div>
-        <div className="item-Name">{product.name}</div>
-        <div className="rating">
-          <div>{renderStars()}</div>
-          <div className="mt-1">({product.rating})</div>
+      <div className="item-border">
+        <div className="item-image">
+          <img src={product.image} alt="" />
         </div>
-        <div className="item-bottom">
-          <div className="price">
-            <div className="New-price">₦{product.newPrice}</div>
+        <div className="item-content">
+          <div className="item-category">{product.category}</div>
+          <div className="item-Name">{product.name}</div>
+          <div className="rating">
+            <div>{renderStars()}</div>
+            <div className="mt-1">({product.rating})</div>
           </div>
-          <button className="cart-btn">
-            <div class="svg-wrapper-1">
-              <div class="svg-wrapper">
-                <MdAdd className="svg" />
+          <div className="item-bottom">
+            <div className="price">
+              <div className="New-price">₦{product.newPrice}</div>
+            </div>
+            <button className="cart-btn">
+              <div class="svg-wrapper-1">
+                <div class="svg-wrapper">
+                  <MdAdd className="svg" />
+                </div>
               </div>
-            </div>
-            <span>Add</span>
-          </button>
-          <div className="button-relative-container">
-            <div className="button-1 shadow-sm">
-              <GiShoppingCart />
-            </div>
-            <div className="button-1 shadow-sm">
-              <IoIosHeartEmpty />
-            </div>
-            <div className="button-1 shadow-sm">
-              <IoEyeOutline />
+              <span>Add</span>
+            </button>
+            <div className="button-relative-container">
+              <div className="button-1 shadow-sm">
+                <GiShoppingCart />
+              </div>
+              <div className="button-1 shadow-sm">
+                <IoIosHeartEmpty />
+              </div>
+              <div className="button-1 shadow-sm">
+                <IoEyeOutline />
+              </div>
             </div>
           </div>
         </div>
