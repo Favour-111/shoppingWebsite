@@ -123,4 +123,7 @@ button:hover {
   .sing-in-container {
     height: 85vh;
   }
+  .form-container {
+    padding: 50px 20px;
+  }
 }
