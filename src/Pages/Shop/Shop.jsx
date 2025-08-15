@@ -4,6 +4,7 @@ import NavBar from "../../components/NavBar/NavBar";
 import NavSm from "../../components/NavSm/NavSm";
 import Item from "../../components/Item/Item";
 import product from "../../components/Product";
+import Footer from "../../components/Footer/Footer";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
 const Shop = () => {
@@ -231,6 +232,7 @@ const Shop = () => {
         {/* Pagination */}
         <div className="pagination">{renderPagination()}</div>
       </div>
+      <Footer />
     </div>
   );
 };

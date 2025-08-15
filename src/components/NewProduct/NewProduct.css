@@ -139,3 +139,14 @@
     padding: 0 10px;
   }
 }
+@media screen and (max-width: 370px) {
+  .NewProducts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important;
+    gap: 10px;
+    margin: auto;
+    align-items: stretch !important;
+    width: 100%;
+    max-width: 1200px; /* keeps it centered */
+  }
+}

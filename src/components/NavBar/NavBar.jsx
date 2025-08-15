@@ -136,7 +136,9 @@ const NavBar = () => {
                   }`}
                 >
                   <li>
-                    <Link className="account-link">Sign In</Link>
+                    <Link className="account-link" to="/sign-in">
+                      Sign In
+                    </Link>
                   </li>
                   <li>
                     <Link className="account-link">SignUp</Link>

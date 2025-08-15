@@ -68,9 +68,19 @@
 }
 @media screen and (max-width: 510px) {
   .category {
-    width: 50% !important;
+    width: 33% !important;
   }
   .CategoryContainer-head {
     font-size: 20px;
+  }
+  .category-item {
+    width: 100px;
+    height: 100px;
+    img {
+      width: 65px;
+    }
+  }
+  .category-list-name {
+    font-size: 11px;
   }
 }
