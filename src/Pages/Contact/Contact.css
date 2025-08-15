@@ -1,6 +1,10 @@
 :root {
-  --color: rgb(83 109 254);
-  --text: #4b5966;
+  --primary-blue: #1e40af;
+  --accent-blue: #0ea5e9;
+  --background-blue: #eff6ff;
+  --text-blue: #1e293b;
+  --text-normal: #4b5966;
+  --hover-blue: #3b82f6;
 }
 
 .contact-container {
@@ -12,11 +16,12 @@
   margin-top: 60px;
   text-align: center;
   .Contact-header {
+    font-weight: 700;
     color: #4b5966;
     font-size: 25px;
     text-transform: capitalize;
     span {
-      color: var(--color);
+      color: var(--hover-blue);
     }
   }
   .contact-content {
@@ -46,6 +51,7 @@
   .contact-info-head {
     font-size: 20px;
     color: var(--text);
+    font-weight: 600;
     text-transform: capitalize;
   }
   .contact-content-item {
@@ -60,7 +66,7 @@
 .contact-form {
   input {
     width: 100%;
-    padding: 15px 10px;
+    padding: 10px;
     border: 1px solid #e3e3e3;
     border-radius: 5px;
     margin-top: 30px;
@@ -76,9 +82,11 @@
     padding: 15px;
   }
   button {
-    background-color: var(--color);
+    background-color: var(--hover-blue);
     color: white;
     padding: 10px 15px;
+    font-size: 14px;
+    font-weight: 600;
     border: none;
     border-radius: 5px;
     margin-top: 10px;

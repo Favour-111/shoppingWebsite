@@ -3,8 +3,10 @@
   --accent-blue: #0ea5e9;
   --background-blue: #eff6ff;
   --text-blue: #1e293b;
+  --text-normal: #4b5966;
   --hover-blue: #3b82f6;
 }
+
 .NewProduct-container {
   margin-top: 80px;
 }
@@ -65,7 +67,7 @@
   color: var(--hover-blue);
 }
 .filter-buttons.active {
-  background-color: var(--primary-blue);
+  background-color: var(--hover-blue);
   color: white;
 }
 .no-products {

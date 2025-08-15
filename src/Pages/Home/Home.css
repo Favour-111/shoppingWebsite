@@ -3,8 +3,10 @@
   --accent-blue: #0ea5e9;
   --background-blue: #eff6ff;
   --text-blue: #1e293b;
+  --text-normal: #4b5966;
   --hover-blue: #3b82f6;
 }
+
 .banners-container {
   display: flex;
   align-items: center;
@@ -126,7 +128,7 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background-color: var(--primary-blue);
+  background-color: var(--hover-blue);
   border-radius: 5px;
 }
 .banner-right-item-top {
@@ -154,7 +156,7 @@
   }
 }
 .banner-top-button {
-  background-color: var(--primary-blue);
+  background-color: var(--hover-blue);
   color: white;
   border: none;
   font-weight: 700;
@@ -202,7 +204,7 @@
   margin-top: 20px;
   font-weight: 500;
   cursor: pointer;
-  background-color: var(--text-blue);
+  background-color: var(--hover-blue);
   transition: all 0.2s ease;
 }
 
@@ -402,7 +404,7 @@
     font-size: 25px;
   }
   .banner-left {
-    padding: 30px 20px;
+    padding: 30px;
     img {
       width: 140px;
     }
@@ -412,7 +414,7 @@
     padding: 50px 30px;
   }
   .second-banner-head {
-    margin-top: 10px;
+    margin-top: 0;
   }
   .second-banner-content {
     width: 100%;

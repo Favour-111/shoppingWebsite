@@ -15,6 +15,7 @@ import category from "../categories";
 const NavBar = () => {
   const [mainDrop, setMainDrop] = useState(false);
   const [AccountDrop, setAccountDrop] = useState(false);
+  const [logged, setLogged] = useState(false);
   return (
     <div>
       <div className="top-bar">Super Value Deals - Save more with coupons</div>
@@ -90,8 +91,16 @@ const NavBar = () => {
                 </div>
               </ul>
             </li>
-            <li className="nav-Itm">Home</li>
-            <li className="nav-Itm">Shop</li>
+            <li className="nav-Itm">
+              <Link to="/" className="nav-Itm">
+                Home
+              </Link>{" "}
+            </li>
+            <li className="nav-Itm">
+              <Link className="nav-Itm" to="/shop-list">
+                Shop
+              </Link>{" "}
+            </li>
 
             <li
               className="nav-Itm"
@@ -104,21 +113,36 @@ const NavBar = () => {
                   <MdKeyboardArrowDown className="mb-1" />
                 </div>
               </div>
-              <ul
-                className={`account-drop-down shadow-sm ${
-                  AccountDrop ? "active" : ""
-                }`}
-              >
-                <li>
-                  <Link className="account-link">Order</Link>
-                </li>
-                <li>
-                  <Link className="account-link">Settings</Link>
-                </li>
-                <li>
-                  <Link className="account-link">Address</Link>
-                </li>
-              </ul>
+              {logged === true ? (
+                <ul
+                  className={`account-drop-down shadow-sm ${
+                    AccountDrop ? "active" : ""
+                  }`}
+                >
+                  <li>
+                    <Link className="account-link">Order</Link>
+                  </li>
+                  <li>
+                    <Link className="account-link">Settings</Link>
+                  </li>
+                  <li>
+                    <Link className="account-link">Address</Link>
+                  </li>
+                </ul>
+              ) : (
+                <ul
+                  className={`account-drop-down shadow-sm ${
+                    AccountDrop ? "active" : ""
+                  }`}
+                >
+                  <li>
+                    <Link className="account-link">Sign In</Link>
+                  </li>
+                  <li>
+                    <Link className="account-link">SignUp</Link>
+                  </li>
+                </ul>
+              )}
             </li>
             <li className="nav-Itm">
               <div className="nav-item-dropdown">

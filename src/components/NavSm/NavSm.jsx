@@ -61,7 +61,9 @@ const NavSm = () => {
               <ul className="nav-sm-list-item-container">
                 <div>
                   <li>
-                    <Link className="nav-sm-list-item">Home</Link>
+                    <Link className="nav-sm-list-item" to="/">
+                      Home
+                    </Link>
                   </li>
                   <li>
                     <Link className="nav-sm-list-item">Shop</Link>

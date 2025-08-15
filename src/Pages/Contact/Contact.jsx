@@ -37,7 +37,7 @@ const Contact = () => {
                   alt="mail"
                 />
               </div>
-              <div>villyz0102@gmail.com</div>
+              <div>peterminelove@gmail.com</div>
             </div>
             <div className="d-flex align-items-center gap-1 contact-content-item">
               <div>
@@ -48,7 +48,7 @@ const Contact = () => {
                   alt="domain"
                 />
               </div>
-              <div>www.villyz.com</div>
+              <div>www.FizzMart.com</div>
             </div>
           </div>
           <div className="contact-info-itm shadow-sm">
@@ -69,7 +69,7 @@ const Contact = () => {
                   alt="phone"
                 />
               </div>
-              <div>+55139977862</div>
+              <div>+8023911608</div>
             </div>
           </div>
           <div className="contact-info-itm shadow-sm">
@@ -80,7 +80,7 @@ const Contact = () => {
               alt="marker"
             />
             <div className="contact-info-head mt-2">Address</div>
-            <div className="d-flex align-items-center gap-1 contact-content-item">
+            <div className="d-flex gap-1 contact-content-item">
               <div>
                 <img
                   width="15"
@@ -89,7 +89,10 @@ const Contact = () => {
                   alt="marker"
                 />
               </div>
-              <div>New jersey United State</div>
+              <div>
+                Igba otun phase 2 sango
+                <br /> ota ogun state
+              </div>
             </div>
           </div>
         </div>
