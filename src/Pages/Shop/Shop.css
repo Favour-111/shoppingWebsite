@@ -8,6 +8,7 @@
 }
 
 .bread-crumb {
+  margin-top: 20px;
   color: var(--text-normal);
   display: flex;
   font-size: 13px;
@@ -121,6 +122,9 @@ select {
     img {
       width: 60px;
     }
+  }
+  .bread-crumb {
+    margin-top: 5px;
   }
 }
 @media screen and (max-width: 504px) {

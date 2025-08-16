@@ -158,7 +158,7 @@ const NavSm = () => {
           </Link>
         </div>
         <div className="nav-sm-icons">
-          <Link to="/cart-page" className="shopping-icons-sm">
+          <Link to="/Wishlist-page" className="shopping-icons-sm">
             <FiHeart />
             <div className="shopping-counter-sm">2</div>
           </Link>

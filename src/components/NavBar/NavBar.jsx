@@ -47,10 +47,10 @@ const NavBar = () => {
           </div>
 
           <div className="nav-icons">
-            <div className="shopping-icons">
+            <Link to="/Wishlist-page" className="shopping-icons">
               <FiHeart />
               <div className="shopping-counter">2</div>
-            </div>
+            </Link>
             <div className="shopping-icons">
               <FiUser size={23} />
             </div>

@@ -11,8 +11,8 @@ const Cart = () => {
     <div>
       <NavBar />
       <NavSm />
-      <div className="home-container mt-3">
-        <div className="bread-crumb mt-3">
+      <div className="home-container ">
+        <div className="bread-crumb ">
           <span>Home</span>
           <div className="slash">/</div>
           <span>Shop</span>
