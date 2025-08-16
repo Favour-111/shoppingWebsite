@@ -150,12 +150,12 @@ const NavSm = () => {
         </div>
 
         <div>
-          <div className="logo-sm">
+          <Link to="/" className="logo-sm">
             <div>
               <LiaOpencart className="logo-icon" />
             </div>
             <div>FizzMart</div>
-          </div>
+          </Link>
         </div>
         <div className="nav-sm-icons">
           <Link to="/cart-page" className="shopping-icons-sm">
@@ -165,10 +165,10 @@ const NavSm = () => {
           <div className="shopping-icons-sm">
             <FiUser size={21} />
           </div>
-          <div className="shopping-icons-sm">
+          <Link to="/cart-page" className="shopping-icons-sm">
             <LuShoppingBag />
             <div className="shopping-counter-sm">2</div>
-          </div>
+          </Link>
           <div className="shopping-icons-sm" onClick={() => setOpenNav(true)}>
             <LuMenu size={25} />
           </div>
