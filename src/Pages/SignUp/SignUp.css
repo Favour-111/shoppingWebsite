@@ -13,7 +13,7 @@
 
 @media screen and (max-width: 950px) {
   .sing-in-container {
-    height: 60vh;
+    height: 65vh;
   }
   .form-container-background {
     flex-direction: row-reverse;
