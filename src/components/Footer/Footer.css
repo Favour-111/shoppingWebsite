@@ -8,6 +8,8 @@
 .Footer {
   background-color: #f0f3f2;
   padding: 80px;
+  position: relative;
+  z-index: 10000;
 }
 .Footer-background {
   width: 100%;

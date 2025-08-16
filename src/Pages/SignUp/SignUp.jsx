@@ -1,13 +1,16 @@
 import React, { useState } from "react";
-import "./SignIn.css";
+import "./SignUp.css";
 import { LiaOpencart } from "react-icons/lia";
 import { Link } from "react-router";
 import { useNavigate } from "react-router";
 import Footer from "../../components/Footer/Footer";
-const SignIn = () => {
+
+const SignUp = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     password: "",
+    name: "",
+    phoneNumber: "",
     email: "",
   });
 
@@ -26,6 +29,16 @@ const SignIn = () => {
       newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = "Please enter a valid email";
+    }
+    if (!formData.name) {
+      newErrors.name = "Name is required";
+    }
+    if (!formData.phoneNumber) {
+      newErrors.phoneNumber = "Phone number is required";
+    } else if (!Number(formData.phoneNumber)) {
+      newErrors.phoneNumber = "Phone number should be a number";
+    } else if (!/^\+?\d{10,15}$/.test(formData.phoneNumber)) {
+      newErrors.phoneNumber = "Enter a valid phone number (10–15 digits)";
     }
     return newErrors;
   };
@@ -50,8 +63,8 @@ const SignIn = () => {
           <div>FizzMart</div>
         </Link>
         <div className="account-switch">
-          Don't have an account?{" "}
-          <span onClick={() => navigate("/sign-Up")}>Sign Up</span>
+          Already have an account?{" "}
+          <span onClick={() => navigate("/sign-in")}>Sign In</span>
         </div>
       </div>
       <div className="form-container-background">
@@ -63,51 +76,68 @@ const SignIn = () => {
         </div>
         <div className="sing-in-container">
           <form onSubmit={handleSubmit} className="form-container">
-            <div className="form-head">Sign In</div>
+            <div className="form-head">Sign Up</div>
             <div className="form-Content">
-              Enter your credentials to continue
+              Welcome to Fizz Mart!
+              <br /> Enter your details to get started.
             </div>
-            <div className="form-group">
-              <input
-                name="email"
-                type="email"
-                placeholder="Email"
-                value={formData.email}
-                onChange={handleChange}
-                className={errors.email ? "error-input" : ""}
-              />
-              {errors.email && <p className="error-text">{errors.email}</p>}
+            <div className="row">
+              <div className="form-group col-6">
+                <input
+                  name="name"
+                  type="text"
+                  placeholder="Name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className={` ${errors.name ? "error-input" : ""}`}
+                />
+                {errors.name && <p className="error-text">{errors.name}</p>}
+              </div>
+              <div className="form-group col-6">
+                <input
+                  name="email"
+                  type="email"
+                  placeholder="Email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className={errors.email ? "error-input" : ""}
+                />
+                {errors.email && <p className="error-text">{errors.email}</p>}
+              </div>
             </div>
-
-            <div className="form-group">
+            <div className="form-group ">
               <input
                 name="password"
                 type="password"
                 placeholder="Password"
                 value={formData.password}
                 onChange={handleChange}
-                className={`mt-3 ${errors.password ? "error-input" : ""}`}
+                className={` ${errors.password ? "error-input" : ""}`}
               />
               {errors.password && (
                 <p className="error-text">{errors.password}</p>
               )}
             </div>
-            <div className="d-flex align-items-center justify-content-between mt-2 w-100 ">
-              <div className="d-flex align-items-center gap-1">
-                <div>
-                  <input type="checkbox" />
-                </div>
-                <div className="form-label mt-2">Remember me</div>
-              </div>
-              <div className="Forgot-password">Forgot Password?</div>
+            <div className="form-group ">
+              <input
+                name="phoneNumber"
+                type="text"
+                placeholder="Phone Number"
+                value={formData.phoneNumber}
+                onChange={handleChange}
+                className={` ${errors.phoneNumber ? "error-input" : ""}`}
+              />
+              {errors.phoneNumber && (
+                <p className="error-text">{errors.phoneNumber}</p>
+              )}
             </div>
 
             <button type="submit" className="submit">
-              Sign In
+              Register
             </button>
             <div className="create-div">
-              Don't have an account?{" "}
-              <span onClick={() => navigate("/sign-Up")}>Create one </span>
+              Have an account?{" "}
+              <span onClick={() => navigate("/sign-in")}> Sign In</span>
             </div>
           </form>
         </div>
@@ -117,4 +147,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;

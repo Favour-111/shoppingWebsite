@@ -54,10 +54,10 @@ const NavBar = () => {
             <div className="shopping-icons">
               <FiUser size={23} />
             </div>
-            <div className="shopping-icons">
+            <Link to="/cart-page" className="shopping-icons">
               <LuShoppingBag />
               <div className="shopping-counter">2</div>
-            </div>
+            </Link>
           </div>
         </div>
         <div className="nav-bottom">
@@ -141,7 +141,9 @@ const NavBar = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link className="account-link">SignUp</Link>
+                    <Link className="account-link" to="/sign-up">
+                      SignUp
+                    </Link>
                   </li>
                 </ul>
               )}

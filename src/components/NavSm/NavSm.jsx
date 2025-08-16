@@ -116,7 +116,10 @@ const NavSm = () => {
                         </Link>
                       </li>
                       <li>
-                        <Link className="nav-sm-list-dropdown-link">
+                        <Link
+                          className="nav-sm-list-dropdown-link"
+                          to="/sign-up"
+                        >
                           Sign Up
                         </Link>
                       </li>
@@ -155,10 +158,10 @@ const NavSm = () => {
           </div>
         </div>
         <div className="nav-sm-icons">
-          <div className="shopping-icons-sm">
+          <Link to="/cart-page" className="shopping-icons-sm">
             <FiHeart />
             <div className="shopping-counter-sm">2</div>
-          </div>
+          </Link>
           <div className="shopping-icons-sm">
             <FiUser size={21} />
           </div>
