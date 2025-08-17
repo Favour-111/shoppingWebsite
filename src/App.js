@@ -9,19 +9,22 @@ import Cart from "./Pages/Cart/Cart";
 import SignUp from "./Pages/SignUp/SignUp";
 import WishList from "./Pages/WishList/WishList";
 import About from "./Pages/About/About";
-
+import toast, { Toaster } from "react-hot-toast";
 function App() {
   return (
-    <Routes>
-      <Route element={<Home />} path="/" />
-      <Route element={<Contact />} path="/contact-us" />
-      <Route element={<Shop />} path="/shop-list" />
-      <Route element={<SignIn />} path="/sign-in" />
-      <Route element={<Cart />} path="/cart-page" />
-      <Route element={<SignUp />} path="/sign-up" />
-      <Route element={<WishList />} path="/Wishlist-page" />
-      <Route element={<About />} path="/About-page" />
-    </Routes>
+    <>
+      <Routes>
+        <Route element={<Home />} path="/" />
+        <Route element={<Contact />} path="/contact-us" />
+        <Route element={<Shop />} path="/shop-list" />
+        <Route element={<SignIn />} path="/sign-in" />
+        <Route element={<Cart />} path="/cart-page" />
+        <Route element={<SignUp />} path="/sign-up" />
+        <Route element={<WishList />} path="/Wishlist-page" />
+        <Route element={<About />} path="/About-page" />
+      </Routes>
+      <Toaster />
+    </>
   );
 }
 

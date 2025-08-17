@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./NavBar.css";
 import { LiaOpencart } from "react-icons/lia";
 import { LuShoppingBag } from "react-icons/lu";
@@ -12,7 +12,9 @@ import { IoLocationOutline } from "react-icons/io5";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { FiHeart, FiUser } from "react-icons/fi";
 import category from "../categories";
+import { ShopContext } from "../Context/ShopContext";
 const NavBar = () => {
+  const { getTotalCart } = useContext(ShopContext);
   const [mainDrop, setMainDrop] = useState(false);
   const [AccountDrop, setAccountDrop] = useState(false);
   const [logged, setLogged] = useState(false);
@@ -56,7 +58,7 @@ const NavBar = () => {
             </div>
             <Link to="/cart-page" className="shopping-icons">
               <LuShoppingBag />
-              <div className="shopping-counter">2</div>
+              <div className="shopping-counter">{getTotalCart()}</div>
             </Link>
           </div>
         </div>

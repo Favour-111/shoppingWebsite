@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./NavSm.css";
 import { LiaOpencart } from "react-icons/lia";
 import { RiMenuFill, RiUserLine } from "react-icons/ri";
@@ -10,7 +10,9 @@ import { PiSquaresFour } from "react-icons/pi";
 import category from "../categories";
 import { Link } from "react-router";
 import { MdChevronRight } from "react-icons/md";
+import { ShopContext } from "../Context/ShopContext";
 const NavSm = () => {
+  const { getTotalCart } = useContext(ShopContext);
   const [openNav, setOpenNav] = useState(false);
   const [categoryOpen, setcategoryOpen] = useState(false);
   const [AccountDrop, setAccountDrop] = useState(false);
@@ -167,7 +169,7 @@ const NavSm = () => {
           </div>
           <Link to="/cart-page" className="shopping-icons-sm">
             <LuShoppingBag size={20} />
-            <div className="shopping-counter-sm">2</div>
+            <div className="shopping-counter-sm">{getTotalCart()}</div>
           </Link>
           <div className="shopping-icons-sm" onClick={() => setOpenNav(true)}>
             <LuMenu size={24} />

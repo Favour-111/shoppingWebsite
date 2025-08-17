@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Item.css";
 import { MdAdd } from "react-icons/md";
 import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
@@ -6,7 +6,10 @@ import { useNavigate } from "react-router";
 import { GiShoppingCart } from "react-icons/gi";
 import { IoIosHeartEmpty } from "react-icons/io";
 import { IoEyeOutline } from "react-icons/io5";
+import { ShopContext } from "../Context/ShopContext";
+import toast, { Toaster } from "react-hot-toast";
 const Item = ({ product }) => {
+  const { addToCart } = useContext(ShopContext);
   const navigate = useNavigate();
   const renderStars = () => {
     const stars = [];
@@ -42,13 +45,14 @@ const Item = ({ product }) => {
             <div className="price">
               <div className="New-price">₦{product.newPrice}</div>
             </div>
-            <button className="cart-btn">
-              <div class="svg-wrapper-1">
-                <div class="svg-wrapper">
-                  <MdAdd className="svg" />
-                </div>
-              </div>
-              <span>Add</span>
+            <button
+              onClick={() => {
+                addToCart(product.id);
+                toast.success(`${product.name} has been added to cart`);
+              }}
+              className="cart-btn"
+            >
+              Add
             </button>
             <div className="button-relative-container">
               <div className="button-1 shadow-sm">
