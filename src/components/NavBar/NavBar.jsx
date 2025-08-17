@@ -156,7 +156,11 @@ const NavBar = () => {
                 </div>
               </div>
             </li>
-            <li className="nav-Itm">About</li>
+            <li className="nav-Itm">
+              <Link className="nav-Itm" to="/About-page">
+                About
+              </Link>
+            </li>
             <li>
               <Link className="nav-Itm" to="/contact-us">
                 Contact

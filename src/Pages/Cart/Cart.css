@@ -28,6 +28,7 @@
 }
 .cart-body {
   width: 70%;
+  margin-top: 10px;
 }
 .cart-summary {
   padding: 20px;
@@ -36,7 +37,7 @@
   background-color: rgb(243 243 243);
 }
 .coupon-button {
-  background-color: var(--hover-blue);
+  background-color: var(--primary-blue);
   color: white;
   width: 30%;
   padding: 8px;
@@ -77,7 +78,7 @@
   width: 60%;
 }
 .Apply-open {
-  color: var(--hover-blue);
+  color: var(--primary-blue);
   text-decoration: underline;
   font-size: 13px;
 }
@@ -118,7 +119,7 @@
   font-size: 12px;
   font-weight: 500;
   .cart-remove-icon {
-    color: var(--hover-blue);
+    color: var(--primary-blue);
   }
   .text {
     margin-top: 3px;
@@ -201,6 +202,6 @@
   }
   .cart-header {
     font-size: 20px;
-    margin-top: 20px;
+    margin-top: 30px;
   }
 }

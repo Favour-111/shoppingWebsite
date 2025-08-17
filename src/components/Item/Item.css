@@ -51,7 +51,7 @@
 }
 .button-1:hover {
   color: white;
-  background-color: var(--hover-blue);
+  background-color: var(--primary-blue);
 }
 .item-image {
   display: flex;
@@ -138,7 +138,7 @@
 /* From Uiverse.io by adamgiebl */
 .cart-btn {
   font-family: inherit;
-  background: var(--hover-blue);
+  background: var(--primary-blue);
   color: white;
   padding: 8px 12px;
   display: flex;

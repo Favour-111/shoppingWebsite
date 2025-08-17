@@ -65,10 +65,10 @@
   white-space: nowrap;
 }
 .filter-buttons:hover {
-  color: var(--hover-blue);
+  color: var(--primary-blue);
 }
 .filter-buttons.active {
-  background-color: var(--hover-blue);
+  background-color: var(--primary-blue);
   color: white;
 }
 .no-products {

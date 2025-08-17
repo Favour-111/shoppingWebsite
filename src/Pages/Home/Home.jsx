@@ -16,6 +16,7 @@ import Subscribe from "../../components/Subscribe/Subscribe";
 import AboutSection from "../../components/AboutSection/AboutSection";
 import Footer from "../../components/Footer/Footer";
 import BackToTop from "../../components/BackToTop/BackToTop";
+import chicken from "../../assets/images/43-430088_chicken-png-free-commercial-use-images-chicken-meat.png";
 var settings = {
   dots: false,
   infinite: true,
@@ -30,21 +31,21 @@ var settings = {
 const Home = () => {
   const bannerItems = [
     {
-      image:
-        "https://wallpapers.com/images/hd/hennessy-black-cognac-bottle-kau030aayyqqp4a5.jpg",
+      image: chicken,
       offer: "35",
-      Head: "Best Online Store,For Drinks",
+      Head: "Premium Drinks at Unbeatable Prices",
       Price: "3,500",
-      ButtonText: "Get best deal",
-      bannerClass: "Left1",
+      ButtonText: "Shop This Week Offer",
+      bannerClass: "Left2",
     },
     {
-      image: "https://www.pngmart.com/files/23/Hennessy-PNG-Clipart.png",
-      offer: "25",
-      Head: "All Hennessy Drinks Deals",
-      Price: "1,575",
-      ButtonText: "Get best deal",
-      bannerClass: "Left2",
+      image:
+        "https://www.pikpng.com/pngl/b/43-430088_chicken-png-free-commercial-use-images-chicken-meat.png",
+      offer: "20",
+      Head: "Best Chicken Deals, Fresh at Low Price!",
+      Price: "2,800",
+      ButtonText: "Grab the Deal",
+      bannerClass: "Left1",
     },
   ];
   return (
@@ -63,10 +64,10 @@ const Home = () => {
                     </div>
                     <div className="banner-right-head">{item.Head}</div>
                     <div className="banner-right-week">
-                      On only this week don't miss
+                      On only this week ... Don't miss
                     </div>
                     <div className="banner-right-price">
-                      Start from <span>N{item.Price}</span>
+                      Start from <span>₦{item.Price}</span>
                     </div>
                     <button className="banner-right-button">
                       <div>{item.ButtonText}</div>

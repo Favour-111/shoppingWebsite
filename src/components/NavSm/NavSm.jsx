@@ -174,7 +174,7 @@ const NavSm = () => {
           </div>
         </div>
       </div>
-      <div className="px-4">
+      <div className="px-3">
         <div className="nav-bar-input-sm">
           <input type="text" placeholder="Search something" />
           <IoSearchOutline />

@@ -102,8 +102,8 @@
 }
 
 .social-item:hover {
-  color: var(--hover-blue);
-  border: 1px solid var(--hover-blue);
+  color: var(--primary-blue);
+  border: 1px solid var(--primary-blue);
 }
 
 @media screen and (max-width: 960px) {

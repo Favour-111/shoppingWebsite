@@ -21,7 +21,7 @@
     font-size: 25px;
     text-transform: capitalize;
     span {
-      color: var(--hover-blue);
+      color: var(--primary-blue);
     }
   }
   .contact-content {
@@ -82,7 +82,7 @@
     padding: 15px;
   }
   button {
-    background-color: var(--hover-blue);
+    background-color: var(--primary-blue);
     color: white;
     padding: 10px 15px;
     font-size: 14px;

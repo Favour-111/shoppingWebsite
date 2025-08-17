@@ -95,7 +95,7 @@ const SignIn = () => {
             <div className="d-flex align-items-center justify-content-between mt-2 w-100 ">
               <div className="d-flex align-items-center gap-1">
                 <div>
-                  <input type="checkbox" />
+                  <input type="checkbox" className="checkBox-container" />
                 </div>
                 <div className="form-label mt-2">Remember me</div>
               </div>

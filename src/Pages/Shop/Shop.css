@@ -16,7 +16,7 @@
   align-items: center;
   gap: 15px;
   span {
-    color: var(--hover-blue);
+    color: var(--primary-blue);
   }
 }
 .slash {
@@ -92,9 +92,9 @@ select {
 }
 
 .page-btn.active {
-  background: var(--hover-blue); /* green like your screenshot */
+  background: var(--primary-blue); /* green like your screenshot */
   color: #fff;
-  border-color: var(--hover-blue);
+  border-color: var(--primary-blue);
 }
 
 .page-btn:disabled {
@@ -118,7 +118,7 @@ select {
   .shop-name {
     font-size: 30px;
     padding: 20px;
-    font-weight: 500;
+    font-weight: 600;
     img {
       width: 60px;
     }
@@ -136,7 +136,7 @@ select {
   .shop-name {
     font-size: 20px;
     padding: 30px 20px;
-    font-weight: 500;
+    font-weight: 600;
     img {
       width: 60px;
     }

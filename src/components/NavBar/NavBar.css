@@ -128,7 +128,7 @@
   }
   .menu-container {
     font-size: 13px;
-    background-color: var(--hover-blue);
+    background-color: var(--primary-blue);
     color: white;
     padding: 8px 30px;
     border-radius: 10px;
