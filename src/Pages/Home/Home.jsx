@@ -39,12 +39,11 @@ const Home = () => {
       bannerClass: "Left2",
     },
     {
-      image:
-        "https://www.pikpng.com/pngl/b/43-430088_chicken-png-free-commercial-use-images-chicken-meat.png",
+      image: chicken,
       offer: "20",
       Head: "Best Chicken Deals, Fresh at Low Price!",
       Price: "2,800",
-      ButtonText: "Grab the Deal",
+      ButtonText: "Grab This Week Deal",
       bannerClass: "Left1",
     },
   ];
