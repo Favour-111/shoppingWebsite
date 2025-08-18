@@ -13,6 +13,11 @@ const Cart = () => {
   const Navigate = useNavigate();
   const { product, cartItems, RemoveCart, addToCart, removeFromCart } =
     useContext(ShopContext);
+  console.log(cartItems);
+  const cartProducts = product.filter(
+    (itm) => cartItems && cartItems[itm.id] && cartItems[itm.id] > 0
+  );
+
   return (
     <div>
       <NavBar />
@@ -27,10 +32,10 @@ const Cart = () => {
         </div>
         <div className="cart-header">Shop Cart</div>
         <div className="cart-content">Review your items before checkout</div>
-        {cartItems.length > 0 ? (
+        {cartProducts.length > 0 ? (
           <div className="cart-container">
             <div className="cart-body">
-              {product.map((item) => {
+              {cartProducts.map((item) => {
                 if (cartItems[item.id] > 0) {
                   return (
                     <div className="cart-item">

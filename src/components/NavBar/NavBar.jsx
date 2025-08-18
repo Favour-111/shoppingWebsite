@@ -14,7 +14,7 @@ import { FiHeart, FiUser } from "react-icons/fi";
 import category from "../categories";
 import { ShopContext } from "../Context/ShopContext";
 const NavBar = () => {
-  const { getTotalCart } = useContext(ShopContext);
+  const { getTotalCart, getTotalList } = useContext(ShopContext);
   const [mainDrop, setMainDrop] = useState(false);
   const [AccountDrop, setAccountDrop] = useState(false);
   const [logged, setLogged] = useState(false);
@@ -51,7 +51,7 @@ const NavBar = () => {
           <div className="nav-icons">
             <Link to="/Wishlist-page" className="shopping-icons">
               <FiHeart />
-              <div className="shopping-counter">2</div>
+              <div className="shopping-counter">{getTotalList()}</div>
             </Link>
             <div className="shopping-icons">
               <FiUser size={23} />

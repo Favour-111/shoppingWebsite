@@ -23,7 +23,14 @@ function App() {
         <Route element={<WishList />} path="/Wishlist-page" />
         <Route element={<About />} path="/About-page" />
       </Routes>
-      <Toaster />
+      <Toaster
+        toastOptions={{
+          style: {
+            fontSize: "12px", // 👈 reduce font size
+            padding: "8px 12px",
+          },
+        }}
+      />
     </>
   );
 }

@@ -39,6 +39,7 @@
   opacity: 0;
   visibility: hidden;
   justify-content: center;
+  cursor: pointer;
   align-items: center;
   width: 35px;
   transition: opacity 400ms, transform 400ms, visibility 400ms;
@@ -49,7 +50,27 @@
   visibility: visible;
   transform: translateY(0);
 }
-.button-1:hover {
+.button-2 {
+  height: 35px;
+  border-radius: 20%;
+  background-color: white;
+  display: flex;
+  opacity: 0;
+  visibility: hidden;
+  justify-content: center;
+  cursor: pointer;
+  align-items: center;
+  color: var(--primary-blue);
+  width: 35px;
+  transition: opacity 400ms, transform 400ms, visibility 400ms;
+  transform: translateY(-10px);
+}
+.item-body:hover .button-2 {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.button-2:hover {
   color: white;
   background-color: var(--primary-blue);
 }

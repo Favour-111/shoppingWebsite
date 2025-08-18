@@ -4,12 +4,13 @@ import { MdAdd } from "react-icons/md";
 import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { useNavigate } from "react-router";
 import { GiShoppingCart } from "react-icons/gi";
-import { IoIosHeartEmpty } from "react-icons/io";
+import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
 import { IoEyeOutline } from "react-icons/io5";
 import { ShopContext } from "../Context/ShopContext";
 import toast, { Toaster } from "react-hot-toast";
 const Item = ({ product }) => {
-  const { addToCart } = useContext(ShopContext);
+  const { addToCart, cartItems, addToList, WishList, removeList } =
+    useContext(ShopContext);
   const navigate = useNavigate();
   const renderStars = () => {
     const stars = [];
@@ -52,15 +53,35 @@ const Item = ({ product }) => {
               }}
               className="cart-btn"
             >
-              Add
+              {cartItems[product.id] > 0 ? "In cart" : "Add"}
             </button>
             <div className="button-relative-container">
               <div className="button-1 shadow-sm">
                 <GiShoppingCart />
               </div>
-              <div className="button-1 shadow-sm">
-                <IoIosHeartEmpty />
-              </div>
+              {WishList[product.id] > 0 ? (
+                <div
+                  className="button-2 shadow-sm"
+                  onClick={() => {
+                    removeList(product.id);
+
+                    toast.success(`${product.name} removed from wishList`);
+                  }}
+                >
+                  <IoIosHeart />
+                </div>
+              ) : (
+                <div
+                  className="button-1 shadow-sm"
+                  onClick={() => {
+                    addToList(product.id);
+                    toast.success(`${product.name} added to wishList`);
+                  }}
+                >
+                  <IoIosHeartEmpty />
+                </div>
+              )}
+
               <div className="button-1 shadow-sm">
                 <IoEyeOutline />
               </div>

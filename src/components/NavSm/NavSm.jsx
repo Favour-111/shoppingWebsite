@@ -12,7 +12,7 @@ import { Link } from "react-router";
 import { MdChevronRight } from "react-icons/md";
 import { ShopContext } from "../Context/ShopContext";
 const NavSm = () => {
-  const { getTotalCart } = useContext(ShopContext);
+  const { getTotalCart, getTotalList } = useContext(ShopContext);
   const [openNav, setOpenNav] = useState(false);
   const [categoryOpen, setcategoryOpen] = useState(false);
   const [AccountDrop, setAccountDrop] = useState(false);
@@ -162,7 +162,7 @@ const NavSm = () => {
         <div className="nav-sm-icons">
           <Link to="/Wishlist-page" className="shopping-icons-sm">
             <FiHeart size={20} />
-            <div className="shopping-counter-sm">2</div>
+            <div className="shopping-counter-sm">{getTotalList()}</div>
           </Link>
           <div className="shopping-icons-sm">
             <FiUser size={23} />
