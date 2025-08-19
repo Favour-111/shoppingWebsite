@@ -161,18 +161,18 @@ const NavSm = () => {
         </div>
         <div className="nav-sm-icons">
           <Link to="/Wishlist-page" className="shopping-icons-sm">
-            <FiHeart size={20} />
+            <FiHeart size={21} />
             <div className="shopping-counter-sm">{getTotalList()}</div>
           </Link>
           <div className="shopping-icons-sm">
-            <FiUser size={23} />
+            <FiUser size={25} />
           </div>
           <Link to="/cart-page" className="shopping-icons-sm">
-            <LuShoppingBag size={20} />
+            <LuShoppingBag size={21} />
             <div className="shopping-counter-sm">{getTotalCart()}</div>
           </Link>
           <div className="shopping-icons-sm" onClick={() => setOpenNav(true)}>
-            <LuMenu size={24} />
+            <LuMenu size={25} />
           </div>
         </div>
       </div>

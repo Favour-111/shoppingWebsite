@@ -14,7 +14,7 @@
 .nav-sm-icons {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 20px;
 }
 .nav-sm-item {
   position: relative;

@@ -119,13 +119,13 @@ td {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 13px;
+    padding: 13px 10px;
     border-bottom: 1px solid #d3d3d3;
     font-size: 13px;
     color: var(--text-normal);
     font-weight: 600;
     img {
-      width: 50px;
+      width: 60px;
     }
   }
   .wishlist-itm-sm:first-child {

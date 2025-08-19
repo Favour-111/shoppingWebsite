@@ -8,6 +8,7 @@ import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
 import { IoEyeOutline } from "react-icons/io5";
 import { ShopContext } from "../Context/ShopContext";
 import toast, { Toaster } from "react-hot-toast";
+import { FiShoppingBag } from "react-icons/fi";
 const Item = ({ product }) => {
   const { addToCart, cartItems, addToList, WishList, removeList } =
     useContext(ShopContext);
@@ -53,6 +54,7 @@ const Item = ({ product }) => {
               }}
               className="cart-btn"
             >
+              <FiShoppingBag className="me-2" />
               {cartItems[product.id] > 0 ? "In cart" : "Add"}
             </button>
             <div className="button-relative-container">
