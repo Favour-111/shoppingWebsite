@@ -52,7 +52,7 @@ const RatingFilter = ({ rating, setRating }) => {
   );
 };
 
-const Shop = () => {
+const Shop = ({ page }) => {
   // --- STATE ---
   const [filter, setFilter] = useState(false);
   const [itemsPerPage, setItemsPerPage] = useState(10);
@@ -62,11 +62,13 @@ const Shop = () => {
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [rating, setRating] = useState(""); // 1–5
-
+  let filteredCategory;
   // --- FILTER (Dry Goods only) ---
+
   const filteredProducts = useMemo(() => {
     return product.filter((p) => {
-      if (p.category !== "Dry Goods") return false;
+      filteredCategory = p.category !== page;
+      if (filteredCategory) return false;
       if (inStock === "in" && !p.inStock) return false;
       if (inStock === "out" && p.inStock) return false;
       if (minPrice && Number(p.newPrice) < Number(minPrice)) return false;
@@ -74,7 +76,7 @@ const Shop = () => {
       if (rating && Number(p.rating) < Number(rating)) return false;
       return true;
     });
-  }, [inStock, minPrice, maxPrice, rating]);
+  }, [page, inStock, minPrice, maxPrice, rating]);
 
   // --- SORT ---
   const sortedProducts = useMemo(() => {
@@ -216,7 +218,7 @@ const Shop = () => {
           <div className="slash">/</div>
           <span>Shop</span>
           <div className="slash">/</div>
-          Dry Goods
+          {page}
         </div>
         <div className="shop">
           <div className="filter-container">
@@ -339,7 +341,7 @@ const Shop = () => {
           <div className="shop-bdy">
             {/* Heading + image */}
             <div className="shop-name">
-              <div>Dry Goods</div>
+              <div>{page}</div>
               <div>
                 <img
                   src="https://png.pngtree.com/png-clipart/20240527/original/pngtree-selection-of-liquor-bottles-against-png-image_15187936.png"
@@ -410,6 +412,11 @@ const Shop = () => {
                 </div>
               </div>
             </div>
+            {currentProducts.length < 1 ? (
+              <p className="no-prod">No product found in this category</p>
+            ) : (
+              <></>
+            )}
 
             {/* Products grid */}
             <div className="new-product-container">
@@ -424,135 +431,132 @@ const Shop = () => {
             <div className="pagination">{renderPagination()}</div>
           </div>
         </div>
-        <div className={`filter-container-bg ${filter ? "active" : ""}`}>
-          <div
-            className={`filter-container-sm shadow-sm ${
-              filter ? "active" : ""
-            }`}
-          >
-            <div className="filter-sm">
-              {/* --- Filter Head --- */}
-              <div className="d-flex align-items-center justify-content-between mb-4">
-                <div className="filter-sm-head">Filter</div>
-                <div className="close-icon" onClick={() => setFilter(false)}>
-                  <MdOutlineClose size={25} color="#787878" />
-                </div>
+        <div className={`filter-container-bg ${filter ? "active" : ""}`}></div>
+        <div
+          className={`filter-container-sm shadow-sm ${filter ? "active" : ""}`}
+        >
+          <div className="filter-sm">
+            {/* --- Filter Head --- */}
+            <div className="d-flex align-items-center justify-content-between mb-4">
+              <div className="filter-sm-head">Filter</div>
+              <div className="close-icon" onClick={() => setFilter(false)}>
+                <MdOutlineClose size={25} color="#787878" />
               </div>
-              {/* --- Filter category --- */}
-              <div className="filter-category">
-                <div className="filter-head">Categories</div>
-                <div className="filter-item mb-3">
-                  <div className="filter-cat-items">
-                    <div>Dry Goods</div>
-                    <div>
-                      <MdOutlineChevronRight />
-                    </div>
-                  </div>
-                  <div className="filter-cat-items">
-                    <div>Wine and Spirit</div>
-                    <div>
-                      <MdOutlineChevronRight />
-                    </div>
-                  </div>
-                  <div className="filter-cat-items">
-                    <div>Soft Drink</div>
-                    <div>
-                      <MdOutlineChevronRight />
-                    </div>
-                  </div>
-                  <div className="filter-cat-items">
-                    <div>Meat & poultry</div>
-                    <div>
-                      <MdOutlineChevronRight />
-                    </div>
-                  </div>
-                  <div className="filter-cat-items">
-                    <div>Processed Goods</div>
-                    <div>
-                      <MdOutlineChevronRight />
-                    </div>
-                  </div>
-                  <div className="filter-cat-items">
-                    <div>Kitchen item</div>
-                    <div>
-                      <MdOutlineChevronRight />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/* Stock filter */}
-              <div className="filter-head mb-2">Stock</div>
-              <select
-                value={inStock}
-                className="form-select mb-4 p-2"
-                onChange={(e) => {
-                  setInStock(e.target.value);
-                  setCurrentPage(1);
-                }}
-              >
-                <option value="">All Stock</option>
-                <option value="in">In Stock</option>
-                <option value="out">Out of Stock</option>
-              </select>
-
-              {/* Price range */}
-              <div>
-                <div className="filter-head mb-2">Price ₦</div>
-                <div className="d-flex align-items-center  mb-4 gap-2">
+            </div>
+            {/* --- Filter category --- */}
+            <div className="filter-category">
+              <div className="filter-head">Categories</div>
+              <div className="filter-item mb-3">
+                <div className="filter-cat-items">
+                  <div>Dry Goods</div>
                   <div>
-                    {" "}
-                    <input
-                      type="text"
-                      placeholder="Min Price"
-                      value={minPrice}
-                      onChange={(e) => {
-                        setMinPrice(e.target.value);
-                        setCurrentPage(1);
-                      }}
-                    />
+                    <MdOutlineChevronRight />
                   </div>
-                  <div>-</div>
+                </div>
+                <div className="filter-cat-items">
+                  <div>Wine and Spirit</div>
                   <div>
-                    <input
-                      type="text"
-                      placeholder="Max Price"
-                      value={maxPrice}
-                      onChange={(e) => {
-                        setMaxPrice(e.target.value);
-                        setCurrentPage(1);
-                      }}
-                    />
+                    <MdOutlineChevronRight />
+                  </div>
+                </div>
+                <div className="filter-cat-items">
+                  <div>Soft Drink</div>
+                  <div>
+                    <MdOutlineChevronRight />
+                  </div>
+                </div>
+                <div className="filter-cat-items">
+                  <div>Meat & poultry</div>
+                  <div>
+                    <MdOutlineChevronRight />
+                  </div>
+                </div>
+                <div className="filter-cat-items">
+                  <div>Processed Goods</div>
+                  <div>
+                    <MdOutlineChevronRight />
+                  </div>
+                </div>
+                <div className="filter-cat-items">
+                  <div>Kitchen item</div>
+                  <div>
+                    <MdOutlineChevronRight />
                   </div>
                 </div>
               </div>
-              <div className="filter-head mb-2">Sort</div>
+            </div>
+            {/* Stock filter */}
+            <div className="filter-head mb-2">Stock</div>
+            <select
+              value={inStock}
+              className="form-select mb-4 p-2"
+              onChange={(e) => {
+                setInStock(e.target.value);
+                setCurrentPage(1);
+              }}
+            >
+              <option value="">All Stock</option>
+              <option value="in">In Stock</option>
+              <option value="out">Out of Stock</option>
+            </select>
 
-              <select
-                value={sortBy}
-                className="form-select p-2"
-                onChange={(e) => {
-                  setSortBy(e.target.value);
-                  setCurrentPage(1);
-                }}
-              >
-                <option value="">Sort By : Featured</option>
-                <option value="recent">Recently Added</option>
-                <option value="price-high">Price : High to Low</option>
-                <option value="price-low">Price : Low to High</option>
-                <option value="rating">Avg rating</option>
-              </select>
-              <div className="filter-head mt-4">Ratings</div>
-
-              <RatingFilter rating={rating} setRating={setRating} />
-
-              {/* banner */}
-              <div className="side-banner">
-                <div className="side-head">Dry Goods</div>
-                <div className="side-content">Get Upto 25% off</div>
-                <button>
-                  Shop now <FaArrowRightLong className="ms-2" />
-                </button>
+            {/* Price range */}
+            <div>
+              <div className="filter-head mb-2">Price ₦</div>
+              <div className="d-flex align-items-center  mb-4 gap-2">
+                <div>
+                  {" "}
+                  <input
+                    type="text"
+                    placeholder="Min Price"
+                    value={minPrice}
+                    onChange={(e) => {
+                      setMinPrice(e.target.value);
+                      setCurrentPage(1);
+                    }}
+                  />
+                </div>
+                <div>-</div>
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Max Price"
+                    value={maxPrice}
+                    onChange={(e) => {
+                      setMaxPrice(e.target.value);
+                      setCurrentPage(1);
+                    }}
+                  />
+                </div>
               </div>
+            </div>
+            <div className="filter-head mb-2">Sort</div>
+
+            <select
+              value={sortBy}
+              className="form-select p-2"
+              onChange={(e) => {
+                setSortBy(e.target.value);
+                setCurrentPage(1);
+              }}
+            >
+              <option value="">Sort By : Featured</option>
+              <option value="recent">Recently Added</option>
+              <option value="price-high">Price : High to Low</option>
+              <option value="price-low">Price : Low to High</option>
+              <option value="rating">Avg rating</option>
+            </select>
+            <div className="filter-head mt-4">Ratings</div>
+
+            <RatingFilter rating={rating} setRating={setRating} />
+
+            {/* banner */}
+            <div className="side-banner">
+              <div className="side-head">Dry Goods</div>
+              <div className="side-content">Get Upto 25% off</div>
+              <button>
+                Shop now <FaArrowRightLong className="ms-2" />
+              </button>
             </div>
           </div>
         </div>

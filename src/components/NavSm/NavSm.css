@@ -132,6 +132,7 @@
 }
 .department-sm-itm {
   display: flex;
+  text-decoration: none;
   align-items: center;
   margin-top: 15px;
   gap: 15px;

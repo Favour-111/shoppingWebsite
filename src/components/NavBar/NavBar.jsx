@@ -86,7 +86,12 @@ const NavBar = () => {
                     return (
                       <li className="">
                         <img src={item.image} alt="" />
-                        <Link className="Dropdown-link">{item.name}</Link>
+                        <Link
+                          className="Dropdown-link"
+                          to={`/category-${item.name}`}
+                        >
+                          {item.name}
+                        </Link>
                       </li>
                     );
                   })}
@@ -96,11 +101,6 @@ const NavBar = () => {
             <li className="nav-Itm">
               <Link to="/" className="nav-Itm">
                 Home
-              </Link>{" "}
-            </li>
-            <li className="nav-Itm">
-              <Link className="nav-Itm" to="/shop-list">
-                Shop
               </Link>{" "}
             </li>
 

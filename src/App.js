@@ -9,6 +9,7 @@ import Cart from "./Pages/Cart/Cart";
 import SignUp from "./Pages/SignUp/SignUp";
 import WishList from "./Pages/WishList/WishList";
 import About from "./Pages/About/About";
+import category from "./components/categories";
 import toast, { Toaster } from "react-hot-toast";
 function App() {
   return (
@@ -16,7 +17,14 @@ function App() {
       <Routes>
         <Route element={<Home />} path="/" />
         <Route element={<Contact />} path="/contact-us" />
-        <Route element={<Shop />} path="/shop-list" />
+        {category.map((item) => {
+          return (
+            <Route
+              element={<Shop page={item.name} />}
+              path={`/category-${item.name}`}
+            />
+          );
+        })}
         <Route element={<SignIn />} path="/sign-in" />
         <Route element={<Cart />} path="/cart-page" />
         <Route element={<SignUp />} path="/sign-up" />

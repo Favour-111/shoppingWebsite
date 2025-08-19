@@ -197,38 +197,55 @@ select {
   gap: 10px;
 }
 .filter-container-sm {
-  display: none;
+  /* display: none; */
+}
+.no-prod {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
 }
 @media screen and (max-width: 1046px) {
   .filter-container-bg {
-    display: none;
+    background-color: rgba(0, 0, 0, 0.502);
+    height: 100vh;
+    width: 100%;
     position: fixed;
+    z-index: 100000000;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.457);
-    z-index: 100000000000;
+    opacity: 0;
+    visibility: hidden;
+    transition: 200ms;
   }
   .filter-container-bg.active {
-    display: block;
+    opacity: 1;
+    visibility: visible;
   }
+
   .filter-container-sm {
-    display: block;
-    transform: translateX(100%);
-    background-color: white;
-    z-index: 10000;
+    width: 90% !important;
+    height: 100%;
+    overflow: scroll;
     position: fixed;
     left: 0;
-    bottom: 0;
+    transform: translateX(-100%);
     top: 0;
-    width: 50%;
-    overflow: scroll;
-    scrollbar-width: none;
+    padding: 0 !important;
+    bottom: 0;
+    z-index: 10000000000;
+    background-color: white;
+    transition: 350ms;
+    scrollbar-width: thin !important;
+    scrollbar-color: #e3e3e3 #f1f1f1 !important;
   }
+
   .filter-container-sm.active {
     transform: translateX(0);
   }
+
   .close-icon {
     cursor: pointer;
   }
@@ -237,6 +254,8 @@ select {
     padding: 20px;
   }
   .filter-container {
+    height: 0;
+
     width: 0 !important;
     overflow: hidden;
   }

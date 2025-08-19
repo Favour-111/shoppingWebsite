@@ -52,10 +52,14 @@ const NavSm = () => {
               <div className="px-4 py-3">
                 {category.map((item) => {
                   return (
-                    <div className="department-sm-itm">
+                    <Link
+                      to={`/category-${item.name}`}
+                      onClick={() => setOpenNav(false)}
+                      className="department-sm-itm"
+                    >
                       <img src={item.image} alt="" />
                       <div>{item.name}</div>
-                    </div>
+                    </Link>
                   );
                 })}
               </div>
@@ -68,11 +72,7 @@ const NavSm = () => {
                       Home
                     </Link>
                   </li>
-                  <li>
-                    <Link to="/shop-list" className="nav-sm-list-item">
-                      Shop
-                    </Link>
-                  </li>
+
                   <li onClick={() => setAccountSm(!AccountSm)}>
                     <Link className="nav-sm-list-item">Account</Link>
                     <div>
