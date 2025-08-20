@@ -14,11 +14,11 @@ import {
 } from "react-icons/md";
 import { FaStar } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
-import { IoListOutline } from "react-icons/io5";
+import { IoChevronDownOutline, IoListOutline } from "react-icons/io5";
 import { CiFilter, CiGrid41 } from "react-icons/ci";
 import { BsGrid3X3Gap } from "react-icons/bs";
 import category from "../../components/categories";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 // ⭐ star rating component
 const RatingFilter = ({ rating, setRating }) => {
@@ -56,6 +56,7 @@ const RatingFilter = ({ rating, setRating }) => {
 };
 
 const Shop = ({ page }) => {
+  const navigate = useNavigate();
   // --- STATE ---
   const [filter, setFilter] = useState(false);
   const [itemsPerPage, setItemsPerPage] = useState(10);
@@ -64,6 +65,8 @@ const Shop = ({ page }) => {
   const [inStock, setInStock] = useState(""); // "in", "out", or ""
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
+  const [openCategory, setOpenCategory] = useState(null);
+
   const [rating, setRating] = useState(""); // 1–5
   let filteredCategory;
   // --- FILTER (Dry Goods only) ---
@@ -234,18 +237,50 @@ const Shop = ({ page }) => {
             {/* --- Filter category --- */}
             <div className="filter-category">
               <div className="filter-head">Categories</div>
+
               <div className="filter-item mb-3">
-                {category.map((item) => {
+                {category.map((item, index) => {
+                  const isOpen = openCategory === index; // check if this one is open
+
                   return (
-                    <Link
-                      to={`/category-${item.name}`}
-                      className="filter-cat-items"
-                    >
-                      <div>{item.name}</div>
-                      <div>
-                        <MdOutlineChevronRight />
+                    <div key={item.name}>
+                      <Link
+                        className="filter-cat-items"
+                        onClick={
+                          () => setOpenCategory(isOpen ? null : index) // toggle only this one
+                        }
+                      >
+                        <div>{item.name}</div>
+                        <div>
+                          {isOpen ? (
+                            <IoChevronDownOutline />
+                          ) : (
+                            <MdOutlineChevronRight />
+                          )}
+                        </div>
+                      </Link>
+
+                      <div
+                        className={`filter-sub-category-container ${
+                          isOpen ? "active" : ""
+                        }`}
+                      >
+                        <ul>
+                          {item.subcategories.map((sub) => (
+                            <li
+                              key={sub.name}
+                              onClick={() =>
+                                navigate(`/Subcategory-${sub.name}`)
+                              }
+                            >
+                              <Link className="Filter-sub-category-items">
+                                {sub.name}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
-                    </Link>
+                    </div>
                   );
                 })}
               </div>
@@ -437,18 +472,49 @@ const Shop = ({ page }) => {
             <div className="filter-category">
               <div className="filter-head">Categories</div>
               <div className="filter-item mb-3">
-                {category.map((item) => {
+                {category.map((item, index) => {
+                  const isOpen = openCategory === index; // check if this one is open
+
                   return (
-                    <Link
-                      onClick={() => setFilter(false)}
-                      to={`/category-${item.name}`}
-                      className="filter-cat-items"
-                    >
-                      <div>{item.name}</div>
-                      <div>
-                        <MdOutlineChevronRight />
+                    <div key={item.name}>
+                      <Link
+                        className="filter-cat-items"
+                        onClick={
+                          () => setOpenCategory(isOpen ? null : index) // toggle only this one
+                        }
+                      >
+                        <div>{item.name}</div>
+                        <div>
+                          {isOpen ? (
+                            <IoChevronDownOutline />
+                          ) : (
+                            <MdOutlineChevronRight />
+                          )}
+                        </div>
+                      </Link>
+
+                      <div
+                        className={`filter-sub-category-container ${
+                          isOpen ? "active" : ""
+                        }`}
+                      >
+                        <ul>
+                          {item.subcategories.map((sub) => (
+                            <li
+                              key={sub.name}
+                              onClick={() => {
+                                setFilter(false);
+                                navigate(`/Subcategory-${sub.name}`);
+                              }}
+                            >
+                              <Link className="Filter-sub-category-items">
+                                {sub.name}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
-                    </Link>
+                    </div>
                   );
                 })}
               </div>

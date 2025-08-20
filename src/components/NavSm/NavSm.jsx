@@ -1,29 +1,37 @@
 import React, { useContext, useState } from "react";
 import "./NavSm.css";
 import { LiaOpencart } from "react-icons/lia";
-import { RiMenuFill, RiUserLine } from "react-icons/ri";
+import { RiUserLine } from "react-icons/ri";
 import { FiHeart, FiUser } from "react-icons/fi";
 import { LuMenu, LuShoppingBag } from "react-icons/lu";
-import { IoClose, IoCloseOutline, IoSearchOutline } from "react-icons/io5";
+import { IoCloseOutline, IoSearchOutline } from "react-icons/io5";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { PiSquaresFour } from "react-icons/pi";
 import category from "../categories";
 import { Link, useNavigate } from "react-router";
 import { MdChevronRight } from "react-icons/md";
 import { ShopContext } from "../Context/ShopContext";
+
 const NavSm = () => {
   const navigate = useNavigate();
   const { getTotalCart, getTotalList } = useContext(ShopContext);
+
   const [openNav, setOpenNav] = useState(false);
-  const [categoryOpen, setcategoryOpen] = useState(false);
+  const [activeMenu, setActiveMenu] = useState(null);
+  // "category", "account", "mega" or null
+
   const [AccountDrop, setAccountDrop] = useState(false);
-  const [AccountSm, setAccountSm] = useState(false);
-  const [megaMenu, setMegaMenu] = useState(false);
+
+  const toggleMenu = (menu) => {
+    setActiveMenu((prev) => (prev === menu ? null : menu));
+  };
+
   return (
     <div className="nav-sm">
       <div className="nav-sm-container mt-2">
         <div className={`nav-sm-menu-container ${openNav ? "active" : ""}`}>
           <div className="p-3">
+            {/* Top Logo + Close */}
             <div className="d-flex align-items-center justify-content-between">
               <div className="logo-sm">
                 <div>
@@ -33,39 +41,53 @@ const NavSm = () => {
               </div>
               <IoCloseOutline onClick={() => setOpenNav(false)} size={28} />
             </div>
+
+            {/* Search */}
             <div className="menu-search">
               <input type="text" placeholder="search something" />
               <IoSearchOutline />
             </div>
+
+            {/* Location */}
             <div className="menu-location">
               <HiOutlineLocationMarker />
               <div>Pick Location</div>
             </div>
+
+            {/* All Departments */}
             <div
               className="menu-container-sm"
-              onClick={() => setcategoryOpen(!categoryOpen)}
+              onClick={() => toggleMenu("category")}
             >
               <div className="menu-icn-sm">
                 <PiSquaresFour size={17} className="mb-1" />
               </div>
               <div>All Department</div>
             </div>
-            <div className={`department-sm ${categoryOpen ? "active" : ""}`}>
+
+            <div
+              className={`department-sm ${
+                activeMenu === "category" ? "active" : ""
+              }`}
+            >
               <div className="px-2 py-0">
                 {category.map((item) => {
                   return (
                     <Link
+                      key={item.name}
                       to={`/category-${item.name}`}
                       onClick={() => setOpenNav(false)}
                       className="department-sm-itm"
                     >
-                      <img src={item.image} alt="" />
+                      <img src={item.image} alt={item.name} />
                       <div>{item.name}</div>
                     </Link>
                   );
                 })}
               </div>
             </div>
+
+            {/* Navigation List */}
             <div>
               <ul className="nav-sm-list-item-container">
                 <div>
@@ -75,17 +97,19 @@ const NavSm = () => {
                     </Link>
                   </li>
 
-                  <li onClick={() => setAccountSm(!AccountSm)}>
+                  {/* Account */}
+                  <li onClick={() => toggleMenu("account")}>
                     <Link className="nav-sm-list-item">Account</Link>
                     <div>
                       <MdChevronRight />
                     </div>
                   </li>
                 </div>
+
                 {AccountDrop ? (
                   <ul
-                    className={`nav-sm-list-dropdown   ${
-                      AccountSm ? "active" : ""
+                    className={`nav-sm-list-dropdown ${
+                      activeMenu === "account" ? "active" : ""
                     }`}
                   >
                     <div className="px-1 ">
@@ -106,8 +130,8 @@ const NavSm = () => {
                   </ul>
                 ) : (
                   <ul
-                    className={`nav-sm-list-dropdown   ${
-                      AccountSm ? "active" : ""
+                    className={`nav-sm-list-dropdown ${
+                      activeMenu === "account" ? "active" : ""
                     }`}
                   >
                     <div className="p-2 ">
@@ -131,22 +155,22 @@ const NavSm = () => {
                   </ul>
                 )}
 
-                <li
-                  onClick={() => {
-                    setMegaMenu(!megaMenu);
-                  }}
-                >
+                {/* Mega Menu */}
+                <li onClick={() => toggleMenu("mega")}>
                   <Link className="nav-sm-list-item">Mega menu</Link>
                   <div>
                     <MdChevronRight />
                   </div>
                 </li>
+
                 <div
-                  className={`mt-3 mega-menu-sm ${megaMenu ? "active" : ""}`}
+                  className={`mega-menu-sm ${
+                    activeMenu === "mega" ? "active" : ""
+                  }`}
                 >
                   {category.map((item) => {
                     return (
-                      <div className="   ">
+                      <div key={item.name} className="mt-3">
                         <Link
                           to={`/category-${item.name}`}
                           className="mega-sm-head"
@@ -157,6 +181,7 @@ const NavSm = () => {
                           {item.subcategories.map((sub) => {
                             return (
                               <li
+                                key={sub.name}
                                 onClick={() =>
                                   navigate(`/Subcategory-${sub.name}`)
                                 }
@@ -170,6 +195,7 @@ const NavSm = () => {
                     );
                   })}
                 </div>
+
                 <li>
                   <Link className="nav-sm-list-item">About</Link>
                 </li>
@@ -186,6 +212,7 @@ const NavSm = () => {
           </div>
         </div>
 
+        {/* Bottom Navbar */}
         <div>
           <Link to="/" className="logo-sm">
             <div>
@@ -194,6 +221,7 @@ const NavSm = () => {
             <div>FizzMart</div>
           </Link>
         </div>
+
         <div className="nav-sm-icons">
           <Link to="/Wishlist-page" className="shopping-icons-sm">
             <FiHeart size={21} />
@@ -211,6 +239,8 @@ const NavSm = () => {
           </div>
         </div>
       </div>
+
+      {/* Bottom Search */}
       <div className="px-3">
         <div className="nav-bar-input-sm">
           <input type="text" placeholder="Search something" />

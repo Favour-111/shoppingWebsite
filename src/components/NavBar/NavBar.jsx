@@ -154,9 +154,8 @@ const NavBar = () => {
             </li>
             <li
               className="nav-Itm"
-              onMouseEnter={() => setMegaDrop(true)}
-              onMouseLeave={() => setMegaDrop(false)} // ✅ works for both nav + dropdown
-              onClick={() => setMegaDrop(false)}
+              onMouseOver={() => setMegaDrop(true)}
+              onMouseOut={() => setMegaDrop(false)} // ✅ works for both nav + dropdown
             >
               <div className="nav-item-dropdown">
                 <div>Mega menu</div>
@@ -169,7 +168,7 @@ const NavBar = () => {
                 <div className="mega-menu-itm">
                   {category.map((item) => {
                     return (
-                      <div className="menu">
+                      <div className="menu" onClick={() => setMegaDrop(false)}>
                         <Link
                           to={`/category-${item.name}`}
                           className="mega-menu-head"
