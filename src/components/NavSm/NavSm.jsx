@@ -8,15 +8,17 @@ import { IoClose, IoCloseOutline, IoSearchOutline } from "react-icons/io5";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { PiSquaresFour } from "react-icons/pi";
 import category from "../categories";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { MdChevronRight } from "react-icons/md";
 import { ShopContext } from "../Context/ShopContext";
 const NavSm = () => {
+  const navigate = useNavigate();
   const { getTotalCart, getTotalList } = useContext(ShopContext);
   const [openNav, setOpenNav] = useState(false);
   const [categoryOpen, setcategoryOpen] = useState(false);
   const [AccountDrop, setAccountDrop] = useState(false);
   const [AccountSm, setAccountSm] = useState(false);
+  const [megaMenu, setMegaMenu] = useState(false);
   return (
     <div className="nav-sm">
       <div className="nav-sm-container mt-2">
@@ -49,7 +51,7 @@ const NavSm = () => {
               <div>All Department</div>
             </div>
             <div className={`department-sm ${categoryOpen ? "active" : ""}`}>
-              <div className="px-4 py-3">
+              <div className="px-2 py-0">
                 {category.map((item) => {
                   return (
                     <Link
@@ -86,7 +88,7 @@ const NavSm = () => {
                       AccountSm ? "active" : ""
                     }`}
                   >
-                    <div className="p-2 ">
+                    <div className="px-1 ">
                       <li>
                         <Link className="nav-sm-list-dropdown-link">Order</Link>
                       </li>
@@ -129,12 +131,45 @@ const NavSm = () => {
                   </ul>
                 )}
 
-                <li>
+                <li
+                  onClick={() => {
+                    setMegaMenu(!megaMenu);
+                  }}
+                >
                   <Link className="nav-sm-list-item">Mega menu</Link>
                   <div>
                     <MdChevronRight />
                   </div>
                 </li>
+                <div
+                  className={`mt-3 mega-menu-sm ${megaMenu ? "active" : ""}`}
+                >
+                  {category.map((item) => {
+                    return (
+                      <div className="   ">
+                        <Link
+                          to={`/category-${item.name}`}
+                          className="mega-sm-head"
+                        >
+                          {item.name}
+                        </Link>
+                        <ul className="mt-2">
+                          {item.subcategories.map((sub) => {
+                            return (
+                              <li
+                                onClick={() =>
+                                  navigate(`/Subcategory-${sub.name}`)
+                                }
+                              >
+                                <Link className="Mega-Link">{sub.name}</Link>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </div>
+                    );
+                  })}
+                </div>
                 <li>
                   <Link className="nav-sm-list-item">About</Link>
                 </li>

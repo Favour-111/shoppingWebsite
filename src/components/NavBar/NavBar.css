@@ -138,6 +138,64 @@
     gap: 5px;
   }
 }
+.mega-menu {
+  width: 100%;
+  left: 0;
+  right: 0;
+  padding: 40px 50px;
+  position: absolute;
+  margin-top: 15px;
+  height: 330px;
+  box-shadow: -1px 1px 5px -1px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: -1px 1px 5px -1px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: -1px 1px 5px -1px rgba(0, 0, 0, 0.25);
+  z-index: 10000000000;
+  background-color: white;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+
+  transition: 350ms;
+  .menu {
+    width: 16.67%;
+  }
+  ul {
+    padding: 0 !important;
+    margin-top: 10px !important;
+    width: 90% !important;
+  }
+  li {
+    color: #787878 !important;
+    font-weight: 400 !important;
+    font-size: 14px !important;
+    display: flex;
+    align-items: center;
+    height: 30px;
+    margin-top: 5px;
+    padding: 0 5px;
+    transition: 250ms;
+  }
+  li:hover {
+    border-radius: 5px;
+    background-color: #ededed;
+  }
+}
+.mega-menu.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.mega-menu-itm {
+  width: 100% !important;
+  display: flex;
+}
+.mega-menu-head {
+  font-weight: 600;
+  color: var(--primary-blue);
+  font-size: 14.5px;
+  padding: 0 5px;
+  text-decoration: none;
+}
 .drop-down-container {
   position: absolute;
   border-radius: 10px;

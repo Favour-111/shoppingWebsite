@@ -11,20 +11,32 @@ import WishList from "./Pages/WishList/WishList";
 import About from "./Pages/About/About";
 import category from "./components/categories";
 import toast, { Toaster } from "react-hot-toast";
+import ScrollToTop from "./components/ScrollToTop";
+import SubCategory from "./Pages/SubCategory/SubCategory";
 function App() {
   return (
     <>
+      <ScrollToTop />
       <Routes>
         <Route element={<Home />} path="/" />
         <Route element={<Contact />} path="/contact-us" />
-        {category.map((item) => {
-          return (
+        {category.map((item) => (
+          <Route
+            key={item.name}
+            path={`/category-${item.name}`}
+            element={<Shop page={item.name} />}
+          ></Route>
+        ))}
+        {category.map((item) =>
+          item.subcategories.map((sub) => (
             <Route
-              element={<Shop page={item.name} />}
-              path={`/category-${item.name}`}
+              key={sub.name}
+              path={`/subcategory-${sub.name}`}
+              element={<SubCategory page={sub.name} />}
             />
-          );
-        })}
+          ))
+        )}
+
         <Route element={<SignIn />} path="/sign-in" />
         <Route element={<Cart />} path="/cart-page" />
         <Route element={<SignUp />} path="/sign-up" />

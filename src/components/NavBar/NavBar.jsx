@@ -13,9 +13,12 @@ import { HiOutlineLocationMarker } from "react-icons/hi";
 import { FiHeart, FiUser } from "react-icons/fi";
 import category from "../categories";
 import { ShopContext } from "../Context/ShopContext";
+import { useNavigate } from "react-router";
 const NavBar = () => {
+  const navigate = useNavigate();
   const { getTotalCart, getTotalList } = useContext(ShopContext);
   const [mainDrop, setMainDrop] = useState(false);
+  const [megaDrop, setMegaDrop] = useState(false);
   const [AccountDrop, setAccountDrop] = useState(false);
   const [logged, setLogged] = useState(false);
   return (
@@ -84,14 +87,13 @@ const NavBar = () => {
                 <div className="px-4 py-3">
                   {category.map((item) => {
                     return (
-                      <li className="">
+                      <li
+                        onClick={() => navigate(`/category-${item.name}`)}
+                        className=""
+                      >
                         <img src={item.image} alt="" />
-                        <Link
-                          className="Dropdown-link"
-                          to={`/category-${item.name}`}
-                        >
-                          {item.name}
-                        </Link>
+
+                        {item.name}
                       </li>
                     );
                   })}
@@ -150,14 +152,50 @@ const NavBar = () => {
                 </ul>
               )}
             </li>
-            <li className="nav-Itm">
+            <li
+              className="nav-Itm"
+              onMouseEnter={() => setMegaDrop(true)}
+              onMouseLeave={() => setMegaDrop(false)} // ✅ works for both nav + dropdown
+              onClick={() => setMegaDrop(false)}
+            >
               <div className="nav-item-dropdown">
                 <div>Mega menu</div>
                 <div className="menu-icn">
                   <MdKeyboardArrowDown className="mb-1" />
                 </div>
               </div>
+
+              <div className={`mega-menu ${megaDrop ? "active" : ""}`}>
+                <div className="mega-menu-itm">
+                  {category.map((item) => {
+                    return (
+                      <div className="menu">
+                        <Link
+                          to={`/category-${item.name}`}
+                          className="mega-menu-head"
+                        >
+                          {item.name}
+                        </Link>
+                        <ul>
+                          {item.subcategories.map((sub) => {
+                            return (
+                              <li
+                                onClick={() =>
+                                  navigate(`/Subcategory-${sub.name}`)
+                                }
+                              >
+                                {sub.name}
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
             </li>
+
             <li className="nav-Itm">
               <Link className="nav-Itm" to="/About-page">
                 About

@@ -9,7 +9,7 @@ import { IoEyeOutline } from "react-icons/io5";
 import { ShopContext } from "../Context/ShopContext";
 import toast, { Toaster } from "react-hot-toast";
 import { FiShoppingBag } from "react-icons/fi";
-const Item = ({ product }) => {
+const Item = ({ product, category }) => {
   const { addToCart, cartItems, addToList, WishList, removeList } =
     useContext(ShopContext);
   const navigate = useNavigate();
@@ -37,7 +37,7 @@ const Item = ({ product }) => {
           <img src={product.image} alt="" />
         </div>
         <div className="item-content">
-          <div className="item-category">{product.category}</div>
+          <div className="item-category">{category}</div>
           <div className="item-Name">{product.name}</div>
           <div className="rating">
             <div>{renderStars()}</div>

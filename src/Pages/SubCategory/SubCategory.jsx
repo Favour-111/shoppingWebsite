@@ -1,5 +1,4 @@
 import React, { useMemo, useState } from "react";
-import "./Shop.css";
 import NavBar from "../../components/NavBar/NavBar";
 import NavSm from "../../components/NavSm/NavSm";
 import Item from "../../components/Item/Item";
@@ -55,7 +54,7 @@ const RatingFilter = ({ rating, setRating }) => {
   );
 };
 
-const Shop = ({ page }) => {
+const SubCategory = ({ page }) => {
   // --- STATE ---
   const [filter, setFilter] = useState(false);
   const [itemsPerPage, setItemsPerPage] = useState(10);
@@ -70,8 +69,7 @@ const Shop = ({ page }) => {
 
   const filteredProducts = useMemo(() => {
     return product.filter((p) => {
-      filteredCategory = p.category !== page;
-      if (filteredCategory) return false;
+      if (!p.subcategories.includes(page)) return false;
       if (inStock === "in" && !p.inStock) return false;
       if (inStock === "out" && p.inStock) return false;
       if (minPrice && Number(p.newPrice) < Number(minPrice)) return false;
@@ -536,4 +534,4 @@ const Shop = ({ page }) => {
   );
 };
 
-export default Shop;
+export default SubCategory;

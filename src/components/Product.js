@@ -8,6 +8,7 @@ const product = [
     newPrice: 1500,
     category: "Dry Goods",
     rating: 4.5,
+    subcategories: ["Grains & Rice", "Flour & Baking"],
     specialOffer: "Discount",
   },
   {
@@ -18,6 +19,7 @@ const product = [
     oldPrice: 800,
     newPrice: 600,
     category: "Dry Goods",
+    subcategories: ["Grains & Rice", "Canned Foods"],
     rating: 4.3,
   },
   {
@@ -28,6 +30,7 @@ const product = [
     newPrice: 1200,
     category: "Meat & Poultry",
     rating: 4.6,
+    subcategories: ["Chicken", "Beef"],
     specialOffer: "Special Sale",
   },
   {
@@ -38,6 +41,7 @@ const product = [
     oldPrice: 6500,
     newPrice: 6000,
     category: "Processed Goods",
+    subcategories: ["Canned Products", "Instant Noodles"],
     rating: 4.7,
   },
   {
@@ -47,6 +51,7 @@ const product = [
       "https://freshcart.codescandy.com/assets/images/products/product-img-5.jpg",
     newPrice: 1000,
     category: "Dry Goods",
+    subcategories: ["Spices & Seasonings", "Pasta & Noodles"],
     rating: 4.2,
   },
   {
@@ -57,6 +62,7 @@ const product = [
     oldPrice: 7500,
     newPrice: 6800,
     category: "Processed Goods",
+    subcategories: ["Canned Products", "Instant Noodles"],
     rating: 4.8,
   },
   {
@@ -67,6 +73,7 @@ const product = [
     oldPrice: 900,
     newPrice: 750,
     category: "Dry Goods",
+    subcategories: ["Spices & Seasonings", "Pasta & Noodles"],
     rating: 4.1,
   },
   {
@@ -77,6 +84,7 @@ const product = [
     newPrice: 5000,
     category: "Processed Goods",
     rating: 4.4,
+    subcategories: ["Canned Products", "Instant Noodles"],
     specialOffer: "Discount",
   },
   {
@@ -86,6 +94,7 @@ const product = [
       "https://freshcart.codescandy.com/assets/images/products/product-img-3.jpg",
     newPrice: 1800,
     category: "Meat & Poultry",
+    subcategories: ["Chicken", "Turkey"],
     rating: 4.6,
   },
   {
@@ -96,6 +105,7 @@ const product = [
     oldPrice: 1300,
     newPrice: 1100,
     category: "Meat & Poultry",
+    subcategories: ["Turkey", "Beef"],
     rating: 4.3,
   },
   {
@@ -106,6 +116,7 @@ const product = [
     oldPrice: 4200,
     newPrice: 3900,
     category: "Processed Goods",
+    subcategories: ["Canned Products", "Frozen Foods"],
     rating: 4.7,
   },
   {
@@ -115,6 +126,7 @@ const product = [
       "https://freshcart.codescandy.com/assets/images/products/product-img-10.jpg",
     newPrice: 500,
     category: "Dry Goods",
+    subcategories: ["Spices & Seasonings", "Pasta & Noodles"],
     rating: 4.0,
   },
 ];
