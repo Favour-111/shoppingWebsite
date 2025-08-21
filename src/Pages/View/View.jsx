@@ -1,19 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./View.css";
 import NavBar from "../../components/NavBar/NavBar";
 import NavSm from "../../components/NavSm/NavSm";
 import { MdChevronRight } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import Item from "../../components/Item/Item";
 // import your product array
 import product from "../../components/Product";
 import { GoPlus } from "react-icons/go";
 import { LuMinus } from "react-icons/lu";
-import { IoMdHeartEmpty } from "react-icons/io";
+import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import Footer from "../../components/Footer/Footer";
+import { ShopContext } from "../../components/Context/ShopContext";
+import toast, { Toaster } from "react-hot-toast";
 const View = () => {
-  const page = "Canned Products";
+  const { addToCart, cartItems, RemoveCart, addToList, WishList, removeList } =
+    useContext(ShopContext);
+  const location = useLocation();
+  const products = location.state || {};
+  const { id } = products;
+
+  const ProductFind = product.find((item) => item.id === id);
+
+  const page = ProductFind.subcategories[0];
   // pick the first product for now
   const currentProduct = product[0];
 
@@ -68,39 +78,78 @@ const View = () => {
         </div>
         <div className="product-about-container">
           <div className="product-about-container-image">
-            <img
-              src="https://freshcart.codescandy.com/assets/images/products/product-single-img-1.jpg"
-              alt={currentProduct.name}
-            />
+            <img src={ProductFind.image} alt={currentProduct.name} />
           </div>
           <div className="product-about-container-content">
             <div className="cont-1">
               <div className="prod-abt-category">{currentProduct.category}</div>
-              <div className="prod-abt-name">Napolitanke Ljesnjak</div>
+              <div className="prod-abt-name">{ProductFind.name}</div>
 
               {/* rating stars */}
               <div className="d-flex align-items-center gap-1">
                 <div className="prod-abt-rating">{renderStars()}</div>
-                <div className="ratin-num">({currentProduct.rating})</div>
+                <div className="ratin-num">({ProductFind.rating})</div>
               </div>
               {/* price (if available in your array) */}
-              <div className="prod-abt-price">₦{currentProduct.newPrice}</div>
+              <div className="prod-abt-price">₦{ProductFind.newPrice}</div>
             </div>
             <div className="cont-2">
               <div className="abt-counter-body">
-                <button className="abt-button-1">
+                <button
+                  onClick={() => {
+                    addToCart(ProductFind.id);
+                    toast.success(`${ProductFind.name} Added`);
+                  }}
+                  className="abt-button-1"
+                >
                   <GoPlus />
                 </button>
-                <div className="about-counter">0</div>
-                <button className="abt-button-2">
+                <div className="about-counter">{cartItems[ProductFind.id]}</div>
+                <button
+                  onClick={() => {
+                    RemoveCart(ProductFind.id);
+                    toast.success(`${ProductFind.name} removed`);
+                  }}
+                  className="abt-button-2"
+                >
                   <LuMinus />
                 </button>
               </div>
               <div className="abt-buttons">
-                <button className="abt-add-cart">Add to cart</button>
-                <button className="abt-heart-1">
-                  <IoMdHeartEmpty size={20} />
+                <button
+                  className="abt-add-cart"
+                  onClick={() => {
+                    addToCart(ProductFind.id);
+                    toast.success(`${ProductFind.name} removed from wish list`);
+                  }}
+                >
+                  {cartItems[ProductFind.id] > 0
+                    ? "Item in cart"
+                    : "Add to cart"}
                 </button>
+                {WishList[ProductFind.id] > 0 ? (
+                  <button
+                    className="abt-heart-1"
+                    onClick={() => {
+                      removeList(ProductFind.id);
+                      toast.success(
+                        `${ProductFind.name} removed from wish list`
+                      );
+                    }}
+                  >
+                    <IoMdHeart size={20} />
+                  </button>
+                ) : (
+                  <button
+                    className="abt-heart-1"
+                    onClick={() => {
+                      addToList(ProductFind.id);
+                      toast.success(`${ProductFind.name} added to wish list`);
+                    }}
+                  >
+                    <IoMdHeartEmpty size={20} />
+                  </button>
+                )}
               </div>
             </div>
           </div>

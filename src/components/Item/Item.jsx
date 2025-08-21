@@ -115,7 +115,16 @@ const Item = ({ product, category }) => {
                 </div>
               )}
 
-              <div className="button-1 shadow-sm">
+              <div
+                className="button-1 shadow-sm"
+                onClick={() => {
+                  navigate("/View-Page", {
+                    state: {
+                      id: product.id,
+                    },
+                  });
+                }}
+              >
                 <IoEyeOutline />
               </div>
             </div>

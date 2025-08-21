@@ -112,6 +112,7 @@
     border-right: 1px solid #eaeaea;
     background-color: transparent;
     display: flex;
+    color: var(--text-normal) !important;
     align-items: center;
     justify-content: center;
     transition: 100ms;
@@ -130,6 +131,7 @@
     align-items: center;
     justify-content: center;
     width: 35px;
+    color: var(--text-normal) !important;
     border: none;
     border-left: 1px solid #eaeaea;
     background-color: transparent;
@@ -171,6 +173,7 @@
   font-size: 12px !important;
   width: 45px;
   border-radius: 10px;
+  color: var(--text-normal);
   background-color: #f0f0f0;
 }
 .abt-heart-1:hover {
