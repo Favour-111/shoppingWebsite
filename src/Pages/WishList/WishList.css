@@ -81,6 +81,7 @@ td {
   align-items: center;
   justify-content: center;
   gap: 10px;
+  height: 70vh;
   flex-direction: column;
   margin-top: 40px;
   img {
@@ -105,6 +106,9 @@ td {
   }
 }
 @media screen and (max-width: 600px) {
+  .empty-wishlist-container {
+    height: 60vh;
+  }
   .wishlist-container {
     display: none;
   }

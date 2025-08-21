@@ -165,6 +165,8 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  justify-content: center;
+  height: 70vh;
   margin-top: 60px;
   img {
     width: 300px;
@@ -181,9 +183,7 @@
     font-weight: 600;
   }
 }
-.recently-viewed {
-  margin-top: 40px;
-}
+
 .cart-empty-head {
   margin-top: 20px;
   font-size: 20px;
@@ -211,6 +211,9 @@
   }
   .cart-summary {
     width: 100% !important;
+  }
+  .empty-cart {
+    height: 60vh;
   }
 }
 @media screen and (max-width: 1000px) {
