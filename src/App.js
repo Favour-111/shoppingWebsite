@@ -13,6 +13,7 @@ import category from "./components/categories";
 import toast, { Toaster } from "react-hot-toast";
 import ScrollToTop from "./components/ScrollToTop";
 import SubCategory from "./Pages/SubCategory/SubCategory";
+import View from "./Pages/View/View";
 function App() {
   return (
     <>
@@ -42,6 +43,7 @@ function App() {
         <Route element={<SignUp />} path="/sign-up" />
         <Route element={<WishList />} path="/Wishlist-page" />
         <Route element={<About />} path="/About-page" />
+        <Route element={<View />} path="/View-page" />
       </Routes>
       <Toaster
         toastOptions={{

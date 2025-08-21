@@ -251,14 +251,22 @@ const Shop = ({ page }) => {
 
                   return (
                     <div key={item.name}>
-                      <div
+                      <Link
                         className="filter-cat-items"
                         onClick={
                           () => setOpenCategory(isOpen ? null : index) // toggle only this one
                         }
                       >
-                        <div>{item.name}</div>
-
+                        <div className="d-flex align-items-center gap-2">
+                          <div>
+                            <img
+                              src={item.image}
+                              alt=""
+                              className="filter-img"
+                            />
+                          </div>
+                          <div>{item.name}</div>
+                        </div>
                         <div>
                           {isOpen ? (
                             <IoChevronDownOutline />
@@ -266,7 +274,7 @@ const Shop = ({ page }) => {
                             <MdOutlineChevronRight />
                           )}
                         </div>
-                      </div>
+                      </Link>
 
                       <div
                         className={`filter-sub-category-container ${
@@ -373,10 +381,7 @@ const Shop = ({ page }) => {
             <div className="shop-name">
               <div>{page}</div>
               <div>
-                <img
-                  src="https://png.pngtree.com/png-clipart/20240527/original/pngtree-selection-of-liquor-bottles-against-png-image_15187936.png"
-                  alt="banner"
-                />
+                <img src={pageName.image} alt="banner" />
               </div>
             </div>
 
@@ -492,7 +497,16 @@ const Shop = ({ page }) => {
                           () => setOpenCategory(isOpen ? null : index) // toggle only this one
                         }
                       >
-                        <div>{item.name}</div>
+                        <div className="d-flex align-items-center gap-2">
+                          <div>
+                            <img
+                              src={item.image}
+                              alt=""
+                              className="filter-img"
+                            />
+                          </div>
+                          <div>{item.name}</div>
+                        </div>
                         <div>
                           {isOpen ? (
                             <IoChevronDownOutline />

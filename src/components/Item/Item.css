@@ -14,7 +14,7 @@
   overflow: hidden;
   margin-top: 5px;
 
-  height: auto;
+  height: fit-content;
   min-height: fit-content;
 }
 .item-border {
@@ -123,11 +123,12 @@
 .rating {
   display: flex;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 5px;
   gap: 4px;
   font-size: 14px;
 }
 .price {
+  margin: 3px !important;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -140,16 +141,45 @@
 }
 
 .New-price {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--text-blue);
-  font-weight: 600;
+  font-weight: 500;
 }
-
-.item-bottom {
+.item-counter {
   display: flex;
-  margin-top: 10px;
   align-items: center;
   justify-content: space-between;
+  margin-top: 10px;
+
+  button {
+    padding: 7px;
+    color: white;
+    width: 40px;
+    font-size: 17px;
+    border: none;
+    height: 40px;
+    border-radius: 5px;
+    background-color: var(--primary-blue);
+    color: white;
+    display: flex;
+    box-shadow: -1px 2px 11px 0px rgba(0, 0, 0, 0.14);
+    align-items: center;
+    justify-content: center;
+    transition: 100ms;
+  }
+  button:hover {
+    background-color: #15308a;
+  }
+}
+.item-count {
+  font-weight: 600;
+  font-size: 13px;
+}
+.item-bottom {
+  display: flex;
+  gap: 7px;
+
+  flex-direction: column;
 }
 .rating {
   font-weight: 600;
@@ -158,14 +188,17 @@
 }
 /* From Uiverse.io by adamgiebl */
 .cart-btn {
+  margin-top: 10px;
+  box-shadow: -1px 2px 11px 0px rgba(0, 0, 0, 0.14);
   color: white;
   font-family: inherit;
   background: var(--primary-blue);
   color: white;
-  padding: 7px 15px;
+  padding: 10px;
   display: flex;
   font-size: 13px;
-  font-weight: 600;
+  justify-content: center;
+  font-weight: 500;
   align-items: center;
   border: none;
   border-radius: 5px;

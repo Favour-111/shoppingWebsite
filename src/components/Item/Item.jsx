@@ -1,16 +1,23 @@
 import React, { useContext } from "react";
 import "./Item.css";
 import { MdAdd } from "react-icons/md";
-import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
+import {
+  FaMinus,
+  FaPlus,
+  FaRegStar,
+  FaStar,
+  FaStarHalfAlt,
+} from "react-icons/fa";
 import { useNavigate } from "react-router";
 import { GiShoppingCart } from "react-icons/gi";
 import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
-import { IoEyeOutline } from "react-icons/io5";
+import { IoAdd, IoEyeOutline } from "react-icons/io5";
 import { ShopContext } from "../Context/ShopContext";
 import toast, { Toaster } from "react-hot-toast";
-import { FiShoppingBag } from "react-icons/fi";
+import { FiMinus, FiShoppingBag } from "react-icons/fi";
+import { BsCartCheck } from "react-icons/bs";
 const Item = ({ product, category }) => {
-  const { addToCart, cartItems, addToList, WishList, removeList } =
+  const { addToCart, cartItems, RemoveCart, addToList, WishList, removeList } =
     useContext(ShopContext);
   const navigate = useNavigate();
   const renderStars = () => {
@@ -37,7 +44,9 @@ const Item = ({ product, category }) => {
           <img src={product.image} alt="" />
         </div>
         <div className="item-content">
-          <div className="item-category">{category}</div>
+          <div className="item-category">
+            {category === undefined ? product.category : category}
+          </div>
           <div className="item-Name">{product.name}</div>
           <div className="rating">
             <div>{renderStars()}</div>
@@ -47,19 +56,41 @@ const Item = ({ product, category }) => {
             <div className="price">
               <div className="New-price">₦{product.newPrice}</div>
             </div>
-            <button
-              onClick={() => {
-                addToCart(product.id);
-                toast.success(`${product.name} has been added to cart`);
-              }}
-              className="cart-btn"
-            >
-              <FiShoppingBag className="me-2" />
-              {cartItems[product.id] > 0 ? "In cart" : "Add"}
-            </button>
+            {cartItems[product.id] > 0 ? (
+              <div className="item-counter">
+                <button onClick={() => RemoveCart(product.id)}>
+                  <FiMinus />
+                </button>
+                <div className="item-count">{cartItems[product.id]}</div>
+                <button onClick={() => addToCart(product.id)}>
+                  <IoAdd />
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => {
+                  addToCart(product.id);
+                  toast.success(`${product.name} has been added to cart`);
+                }}
+                className="cart-btn"
+              >
+                Add to cart
+              </button>
+            )}
+
             <div className="button-relative-container">
-              <div className="button-1 shadow-sm">
-                <GiShoppingCart />
+              <div
+                className="button-1 shadow-sm"
+                onClick={() => {
+                  addToCart(product.id);
+                  toast.success(`${product.name} added to cart`);
+                }}
+              >
+                {cartItems[product.id] > 0 ? (
+                  <BsCartCheck />
+                ) : (
+                  <GiShoppingCart />
+                )}
               </div>
               {WishList[product.id] > 0 ? (
                 <div

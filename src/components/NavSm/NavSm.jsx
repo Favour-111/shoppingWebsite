@@ -234,9 +234,13 @@ const NavSm = () => {
             <LuShoppingBag size={21} />
             <div className="shopping-counter-sm">{getTotalCart()}</div>
           </Link>
-          <div className="shopping-icons-sm" onClick={() => setOpenNav(true)}>
+          <Link
+            to="/sign-in"
+            className="shopping-icons-sm"
+            onClick={() => setOpenNav(true)}
+          >
             <LuMenu size={25} />
-          </div>
+          </Link>
         </div>
       </div>
 

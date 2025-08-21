@@ -56,9 +56,9 @@ const NavBar = () => {
               <FiHeart />
               <div className="shopping-counter">{getTotalList()}</div>
             </Link>
-            <div className="shopping-icons">
+            <Link to="/sign-in" className="shopping-icons">
               <FiUser size={23} />
-            </div>
+            </Link>
             <Link to="/cart-page" className="shopping-icons">
               <LuShoppingBag />
               <div className="shopping-counter">{getTotalCart()}</div>
