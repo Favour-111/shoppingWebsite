@@ -448,7 +448,13 @@ const Shop = ({ page }) => {
               </div>
             </div>
             {currentProducts.length < 1 ? (
-              <p className="no-prod">No product found in this category</p>
+              <div className="no-prod-cont">
+                <img
+                  src="https://t4.ftcdn.net/jpg/04/16/51/95/360_F_416519523_wabFJQqgcyTX2uSsKaeeqQg0Okr91XYn.jpg"
+                  alt=""
+                />
+                <p className="no-prod-text">no product in this category</p>
+              </div>
             ) : (
               <></>
             )}

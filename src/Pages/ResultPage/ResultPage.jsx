@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import "./Shop.css";
+import "./ResultPage.css";
 import NavBar from "../../components/NavBar/NavBar";
 import NavSm from "../../components/NavSm/NavSm";
 import Item from "../../components/Item/Item";
@@ -18,7 +18,7 @@ import { IoChevronDownOutline, IoListOutline } from "react-icons/io5";
 import { CiFilter, CiGrid41 } from "react-icons/ci";
 import { BsGrid3X3Gap } from "react-icons/bs";
 import category from "../../components/categories";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 
 // ⭐ star rating component
 const RatingFilter = ({ rating, setRating }) => {
@@ -55,7 +55,7 @@ const RatingFilter = ({ rating, setRating }) => {
   );
 };
 
-const Shop = ({ page }) => {
+const ResultPage = () => {
   const navigate = useNavigate();
   // --- STATE ---
   const [filter, setFilter] = useState(false);
@@ -66,6 +66,10 @@ const Shop = ({ page }) => {
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [openCategory, setOpenCategory] = useState(null);
+  const { search } = useLocation();
+
+  const params = new URLSearchParams(search);
+  const searchedItem = params.get("search");
 
   const [rating, setRating] = useState(""); // 1–5
   let filteredCategory;
@@ -73,16 +77,39 @@ const Shop = ({ page }) => {
 
   const filteredProducts = useMemo(() => {
     return product.filter((p) => {
-      filteredCategory = p.category !== page;
-      if (filteredCategory) return false;
+      // search filtering
+      if (
+        searchedItem &&
+        !p.name.toLowerCase().includes(searchedItem.toLowerCase())
+      ) {
+        return false;
+      }
+
+      // category filtering
+      if (filteredCategory && p.category !== filteredCategory) return false;
+
+      // stock filtering
       if (inStock === "in" && !p.inStock) return false;
       if (inStock === "out" && p.inStock) return false;
+
+      // price filtering
       if (minPrice && Number(p.newPrice) < Number(minPrice)) return false;
       if (maxPrice && Number(p.newPrice) > Number(maxPrice)) return false;
+
+      // rating filtering
       if (rating && Number(p.rating) < Number(rating)) return false;
+
       return true;
     });
-  }, [page, inStock, minPrice, maxPrice, rating]);
+  }, [
+    product,
+    searchedItem,
+    filteredCategory,
+    inStock,
+    minPrice,
+    maxPrice,
+    rating,
+  ]);
 
   // --- SORT ---
   const sortedProducts = useMemo(() => {
@@ -212,92 +239,16 @@ const Shop = ({ page }) => {
 
     return pages;
   };
-  const categoryImage = category.find((itm) => {
-    if (itm.name == page) {
-      return itm;
-    }
-  });
+
   return (
     <div>
       <NavBar />
       <NavSm />
       <div className="home-container">
         {/* Breadcrumb */}
-        <div className="bread-crumb mt-3">
-          <Link to="/" className="bread-crumb-link">
-            Home
-          </Link>
-          <div className="slash">
-            <MdChevronRight />
-          </div>
-          <span>Shop</span>
-          <div className="slash">
-            <MdChevronRight />
-          </div>
-          {page}
-        </div>
+
         <div className="shop">
           <div className="filter-container">
-            {/* --- Filter category --- */}
-            <div className="filter-category">
-              <div className="filter-head">Categories</div>
-
-              <div className="filter-item mb-3">
-                {category.map((item, index) => {
-                  const isOpen = openCategory === index; // check if this one is open
-
-                  return (
-                    <div key={item.name}>
-                      <Link
-                        className="filter-cat-items"
-                        onClick={
-                          () => setOpenCategory(isOpen ? null : index) // toggle only this one
-                        }
-                      >
-                        <div className="d-flex align-items-center gap-2">
-                          <div>
-                            <img
-                              src={item.image}
-                              alt=""
-                              className="filter-img"
-                            />
-                          </div>
-                          <div>{item.name}</div>
-                        </div>
-                        <div>
-                          {isOpen ? (
-                            <IoChevronDownOutline />
-                          ) : (
-                            <MdOutlineChevronRight />
-                          )}
-                        </div>
-                      </Link>
-
-                      <div
-                        className={`filter-sub-category-container ${
-                          isOpen ? "active" : ""
-                        }`}
-                      >
-                        <ul>
-                          {item.subcategories.map((sub) => (
-                            <li
-                              key={sub.name}
-                              onClick={() =>
-                                navigate(`/Subcategory-${sub.name}`)
-                              }
-                            >
-                              <Link className="Filter-sub-category-items">
-                                {sub.name}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
             {/* Stock filter */}
             <div className="filter-head mb-2">Stock</div>
             <select
@@ -375,10 +326,7 @@ const Shop = ({ page }) => {
           <div className="shop-bdy">
             {/* Heading + image */}
             <div className="shop-name">
-              <div>{page}</div>
-              <div>
-                <img src={categoryImage.image} alt="banner" />
-              </div>
+              <div>Search result for "{searchedItem}"</div>
             </div>
 
             {/* Top controls */}
@@ -449,7 +397,7 @@ const Shop = ({ page }) => {
                   src="https://t4.ftcdn.net/jpg/04/16/51/95/360_F_416519523_wabFJQqgcyTX2uSsKaeeqQg0Okr91XYn.jpg"
                   alt=""
                 />
-                <p className="no-prod-text">no product in this category</p>
+                <p className="no-prod-text">We couldn't find a match</p>
               </div>
             ) : (
               <></>
@@ -462,7 +410,7 @@ const Shop = ({ page }) => {
                   <Item
                     key={item.id || item.name}
                     product={item}
-                    category={page}
+                    // category={page}
                   />
                 ))}
               </div>
@@ -485,65 +433,7 @@ const Shop = ({ page }) => {
               </div>
             </div>
             {/* --- Filter category --- */}
-            <div className="filter-category">
-              <div className="filter-head">Categories</div>
-              <div className="filter-item mb-3">
-                {category.map((item, index) => {
-                  const isOpen = openCategory === index; // check if this one is open
 
-                  return (
-                    <div key={item.name}>
-                      <Link
-                        className="filter-cat-items"
-                        onClick={
-                          () => setOpenCategory(isOpen ? null : index) // toggle only this one
-                        }
-                      >
-                        <div className="d-flex align-items-center gap-2">
-                          <div>
-                            <img
-                              src={item.image}
-                              alt=""
-                              className="filter-img"
-                            />
-                          </div>
-                          <div>{item.name}</div>
-                        </div>
-                        <div>
-                          {isOpen ? (
-                            <IoChevronDownOutline />
-                          ) : (
-                            <MdOutlineChevronRight />
-                          )}
-                        </div>
-                      </Link>
-
-                      <div
-                        className={`filter-sub-category-container ${
-                          isOpen ? "active" : ""
-                        }`}
-                      >
-                        <ul>
-                          {item.subcategories.map((sub) => (
-                            <li
-                              key={sub.name}
-                              onClick={() => {
-                                setFilter(false);
-                                navigate(`/Subcategory-${sub.name}`);
-                              }}
-                            >
-                              <Link className="Filter-sub-category-items">
-                                {sub.name}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
             {/* Stock filter */}
             <div className="filter-head mb-2">Stock</div>
             <select
@@ -627,4 +517,4 @@ const Shop = ({ page }) => {
   );
 };
 
-export default Shop;
+export default ResultPage;

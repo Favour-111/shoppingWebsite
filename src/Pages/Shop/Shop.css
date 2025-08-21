@@ -43,6 +43,7 @@
   width: 23% !important;
 }
 .shop-bdy {
+  overflow: hidden;
   width: 73%;
 }
 .side-banner {

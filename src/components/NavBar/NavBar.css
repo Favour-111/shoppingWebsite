@@ -195,6 +195,7 @@
 }
 .nav-search-container {
   position: relative;
+  z-index: 1000000000;
 }
 .search-item {
   max-height: 300px;

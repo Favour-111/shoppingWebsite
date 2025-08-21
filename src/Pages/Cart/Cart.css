@@ -181,6 +181,9 @@
     font-weight: 600;
   }
 }
+.recently-viewed {
+  margin-top: 40px;
+}
 .cart-empty-head {
   margin-top: 20px;
   font-size: 20px;

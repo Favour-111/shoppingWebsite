@@ -9,7 +9,9 @@ import { GiShoppingCart } from "react-icons/gi";
 import Footer from "../../components/Footer/Footer";
 import toast from "react-hot-toast";
 import { PiShoppingCartSimpleLight } from "react-icons/pi";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { MdChevronRight } from "react-icons/md";
+import RecentlyViewed from "../../components/RecentlyViewed/RecentlyViewed";
 const WishList = () => {
   const navigate = useNavigate();
   const { WishList, removeList, addToCart } = useContext(ShopContext);
@@ -22,11 +24,17 @@ const WishList = () => {
       <NavBar />
       <NavSm />
       <div className="home-container">
-        <div className="bread-crumb ">
-          <span>Home</span>
-          <div className="slash">/</div>
+        <div className="bread-crumb mt-3">
+          <Link to="/" className="bread-crumb-link">
+            Home
+          </Link>
+          <div className="slash">
+            <MdChevronRight />
+          </div>
           <span>Shop</span>
-          <div className="slash">/</div>
+          <div className="slash">
+            <MdChevronRight />
+          </div>
           My WishList
         </div>
         <div className="cart-header">My Wishlist</div>
@@ -145,6 +153,9 @@ const WishList = () => {
             </button>
           </div>
         )}
+        <div className="recently-viewed">
+          <RecentlyViewed />
+        </div>
       </div>
       <div className="mt-5">
         <Footer />

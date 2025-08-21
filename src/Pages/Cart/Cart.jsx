@@ -8,7 +8,9 @@ import { AiOutlinePlus } from "react-icons/ai";
 import Footer from "../../components/Footer/Footer";
 import { ShopContext } from "../../components/Context/ShopContext";
 import toast, { Toaster } from "react-hot-toast";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { MdChevronRight } from "react-icons/md";
+import RecentlyViewed from "../../components/RecentlyViewed/RecentlyViewed";
 const Cart = () => {
   const Navigate = useNavigate();
   const { product, cartItems, RemoveCart, addToCart, removeFromCart } =
@@ -23,13 +25,20 @@ const Cart = () => {
       <NavBar />
       <NavSm />
       <div className="home-container mb-5">
-        <div className="bread-crumb ">
-          <span>Home</span>
-          <div className="slash">/</div>
+        <div className="bread-crumb mt-3">
+          <Link to="/" className="bread-crumb-link">
+            Home
+          </Link>
+          <div className="slash">
+            <MdChevronRight />
+          </div>
           <span>Shop</span>
-          <div className="slash">/</div>
+          <div className="slash">
+            <MdChevronRight />
+          </div>
           Shopping Cart
         </div>
+
         <div className="cart-header">Shop Cart</div>
         <div className="cart-content">Review your items before checkout</div>
         {cartProducts.length > 0 ? (
@@ -132,6 +141,9 @@ const Cart = () => {
             </button>
           </div>
         )}
+        <div className="recently-viewed">
+          <RecentlyViewed />
+        </div>
       </div>
       <Footer />
     </div>

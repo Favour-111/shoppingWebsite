@@ -49,6 +49,11 @@ const NavSm = () => {
 
     setResults(uniqueNames);
   };
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      navigate(`/Result?search=${encodeURIComponent(query)}`);
+    }
+  };
 
   return (
     <div className="nav-sm">
@@ -73,14 +78,22 @@ const NavSm = () => {
                   type="text"
                   value={query}
                   onChange={handleSearch}
-                  placeholder="search something"
+                  placeholder="Search for product"
+                  onKeyDown={handleKeyDown}
                 />
                 <IoSearchOutline />
               </div>
               {results.length > 0 && (
                 <div className="menu-item-search-sm shadow-sm">
                   {results.map((name, index) => (
-                    <div key={index} className="search-item-container">
+                    <div
+                      onClick={() => {
+                        navigate(`/Result?search=${encodeURIComponent(name)}`);
+                        setResults(false);
+                      }}
+                      key={index}
+                      className="search-item-container"
+                    >
                       <div> {name}</div>
                       <div>
                         <GoArrowUpRight />
@@ -291,14 +304,22 @@ const NavSm = () => {
               type="text"
               value={query}
               onChange={handleSearch}
-              placeholder="Search something"
+              placeholder="Search for product"
+              onKeyDown={handleKeyDown}
             />
             <IoSearchOutline />
           </div>
           {results.length > 0 && (
             <div className="search-item-sm shadow-sm">
               {results.map((name, index) => (
-                <div key={index} className="search-item-container">
+                <div
+                  onClick={() => {
+                    navigate(`/Result?search=${encodeURIComponent(name)}`);
+                    setResults(false);
+                  }}
+                  key={index}
+                  className="search-item-container"
+                >
                   <div> {name}</div>
                   <div>
                     <GoArrowUpRight />

@@ -44,6 +44,12 @@ const NavBar = () => {
 
     setResults(uniqueNames);
   };
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      navigate(`/Result?search=${encodeURIComponent(query)}`);
+    }
+  };
+
   return (
     <div>
       <div className="top-bar">Super Value Deals - Save more with coupons</div>
@@ -64,6 +70,7 @@ const NavBar = () => {
                   value={query}
                   onChange={handleSearch}
                   placeholder="Search for product"
+                  onKeyDown={handleKeyDown}
                 />
                 <div className="search-icon">
                   <GoSearch />
@@ -72,7 +79,14 @@ const NavBar = () => {
               {results.length > 0 && (
                 <div className="search-item shadow-sm">
                   {results.map((name, index) => (
-                    <div key={index} className="search-item-container">
+                    <div
+                      onClick={() => {
+                        navigate(`/Result?search=${encodeURIComponent(name)}`);
+                        setResults(false);
+                      }}
+                      key={index}
+                      className="search-item-container"
+                    >
                       <div> {name}</div>
                       <div>
                         <GoArrowUpRight />

@@ -14,6 +14,7 @@ import toast, { Toaster } from "react-hot-toast";
 import ScrollToTop from "./components/ScrollToTop";
 import SubCategory from "./Pages/SubCategory/SubCategory";
 import View from "./Pages/View/View";
+import ResultPage from "./Pages/ResultPage/ResultPage";
 function App() {
   return (
     <>
@@ -44,6 +45,7 @@ function App() {
         <Route element={<WishList />} path="/Wishlist-page" />
         <Route element={<About />} path="/About-page" />
         <Route element={<View />} path="/View-page" />
+        <Route element={<ResultPage />} path="/Result" />
       </Routes>
       <Toaster
         toastOptions={{
