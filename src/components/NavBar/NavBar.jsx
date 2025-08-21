@@ -3,7 +3,7 @@ import "./NavBar.css";
 import { LiaOpencart } from "react-icons/lia";
 import { LuShoppingBag } from "react-icons/lu";
 import { RiUserLine } from "react-icons/ri";
-import { GoHeart, GoSearch } from "react-icons/go";
+import { GoArrowUpRight, GoHeart, GoSearch } from "react-icons/go";
 import { FaSearch } from "react-icons/fa";
 import { PiSquaresFour } from "react-icons/pi";
 import { MdKeyboardArrowDown } from "react-icons/md";
@@ -14,6 +14,7 @@ import { FiHeart, FiUser } from "react-icons/fi";
 import category from "../categories";
 import { ShopContext } from "../Context/ShopContext";
 import { useNavigate } from "react-router";
+import product from "../Product";
 const NavBar = () => {
   const navigate = useNavigate();
   const { getTotalCart, getTotalList } = useContext(ShopContext);
@@ -21,6 +22,28 @@ const NavBar = () => {
   const [megaDrop, setMegaDrop] = useState(false);
   const [AccountDrop, setAccountDrop] = useState(false);
   const [logged, setLogged] = useState(false);
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState([]);
+
+  const handleSearch = (e) => {
+    const value = e.target.value.toLowerCase();
+    setQuery(value);
+
+    if (value.trim() === "") {
+      setResults([]);
+      return;
+    }
+
+    // filter matching products
+    const filtered = product.filter((item) =>
+      item.name.toLowerCase().includes(value)
+    );
+
+    // get unique names
+    const uniqueNames = [...new Set(filtered.map((item) => item.name))];
+
+    setResults(uniqueNames);
+  };
   return (
     <div>
       <div className="top-bar">Super Value Deals - Save more with coupons</div>
@@ -33,16 +56,33 @@ const NavBar = () => {
             <div>FizzMart</div>
           </div>
           <div className="d-flex align-items-center gap-3">
-            <div className="Nav-search-input">
-              <input
-                type="text"
-                name="product"
-                placeholder="Search for product"
-              />
-              <div className="search-icon">
-                <GoSearch />
+            <div className="nav-search-container">
+              <div className="Nav-search-input">
+                <input
+                  type="text"
+                  name="product"
+                  value={query}
+                  onChange={handleSearch}
+                  placeholder="Search for product"
+                />
+                <div className="search-icon">
+                  <GoSearch />
+                </div>
               </div>
+              {results.length > 0 && (
+                <div className="search-item shadow-sm">
+                  {results.map((name, index) => (
+                    <div key={index} className="search-item-container">
+                      <div> {name}</div>
+                      <div>
+                        <GoArrowUpRight />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
+
             <div className="location-cont">
               <div>
                 <HiOutlineLocationMarker className="mb-1" />

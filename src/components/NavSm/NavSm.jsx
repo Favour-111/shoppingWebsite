@@ -11,6 +11,8 @@ import category from "../categories";
 import { Link, useNavigate } from "react-router";
 import { MdChevronRight } from "react-icons/md";
 import { ShopContext } from "../Context/ShopContext";
+import product from "../Product";
+import { GoArrowUpRight } from "react-icons/go";
 
 const NavSm = () => {
   const navigate = useNavigate();
@@ -24,6 +26,28 @@ const NavSm = () => {
 
   const toggleMenu = (menu) => {
     setActiveMenu((prev) => (prev === menu ? null : menu));
+  };
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState([]);
+
+  const handleSearch = (e) => {
+    const value = e.target.value.toLowerCase();
+    setQuery(value);
+
+    if (value.trim() === "") {
+      setResults([]);
+      return;
+    }
+
+    // filter matching products
+    const filtered = product.filter((item) =>
+      item.name.toLowerCase().includes(value)
+    );
+
+    // get unique names
+    const uniqueNames = [...new Set(filtered.map((item) => item.name))];
+
+    setResults(uniqueNames);
   };
 
   return (
@@ -43,9 +67,28 @@ const NavSm = () => {
             </div>
 
             {/* Search */}
-            <div className="menu-search">
-              <input type="text" placeholder="search something" />
-              <IoSearchOutline />
+            <div className="nav-search-container-sm">
+              <div className="menu-search">
+                <input
+                  type="text"
+                  value={query}
+                  onChange={handleSearch}
+                  placeholder="search something"
+                />
+                <IoSearchOutline />
+              </div>
+              {results.length > 0 && (
+                <div className="menu-item-search-sm shadow-sm">
+                  {results.map((name, index) => (
+                    <div key={index} className="search-item-container">
+                      <div> {name}</div>
+                      <div>
+                        <GoArrowUpRight />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Location */}
@@ -227,28 +270,43 @@ const NavSm = () => {
             <FiHeart size={21} />
             <div className="shopping-counter-sm">{getTotalList()}</div>
           </Link>
-          <div className="shopping-icons-sm">
+          <Link to="/sign-in" className="shopping-icons-sm">
             <FiUser size={25} />
-          </div>
+          </Link>
           <Link to="/cart-page" className="shopping-icons-sm">
             <LuShoppingBag size={21} />
             <div className="shopping-counter-sm">{getTotalCart()}</div>
           </Link>
-          <Link
-            to="/sign-in"
-            className="shopping-icons-sm"
-            onClick={() => setOpenNav(true)}
-          >
+          <div className="shopping-icons-sm" onClick={() => setOpenNav(true)}>
             <LuMenu size={25} />
-          </Link>
+          </div>
         </div>
       </div>
 
       {/* Bottom Search */}
       <div className="px-3">
-        <div className="nav-bar-input-sm">
-          <input type="text" placeholder="Search something" />
-          <IoSearchOutline />
+        <div className="nav-search-container-sm">
+          <div className="nav-bar-input-sm ">
+            <input
+              type="text"
+              value={query}
+              onChange={handleSearch}
+              placeholder="Search something"
+            />
+            <IoSearchOutline />
+          </div>
+          {results.length > 0 && (
+            <div className="search-item-sm shadow-sm">
+              {results.map((name, index) => (
+                <div key={index} className="search-item-container">
+                  <div> {name}</div>
+                  <div>
+                    <GoArrowUpRight />
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

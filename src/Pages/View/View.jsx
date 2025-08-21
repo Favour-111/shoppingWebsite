@@ -78,7 +78,10 @@ const View = () => {
         </div>
         <div className="product-about-container">
           <div className="product-about-container-image">
-            <img src={ProductFind.image} alt={currentProduct.name} />
+            <img
+              src="https://freshcart.codescandy.com/assets/images/products/product-single-img-1.jpg"
+              alt={currentProduct.name}
+            />
           </div>
           <div className="product-about-container-content">
             <div className="cont-1">
@@ -86,12 +89,15 @@ const View = () => {
               <div className="prod-abt-name">{ProductFind.name}</div>
 
               {/* rating stars */}
-              <div className="d-flex align-items-center gap-1">
+              <div className="d-flex align-items-center gap-1 ">
                 <div className="prod-abt-rating">{renderStars()}</div>
-                <div className="ratin-num">({ProductFind.rating})</div>
+                <div className="ratin-num mt-1">
+                  ({ProductFind.rating} star)
+                </div>
               </div>
               {/* price (if available in your array) */}
               <div className="prod-abt-price">₦{ProductFind.newPrice}</div>
+              <div className="gram-cont">250g</div>
             </div>
             <div className="cont-2">
               <div className="abt-counter-body">

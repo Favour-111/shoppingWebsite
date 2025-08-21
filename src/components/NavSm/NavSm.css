@@ -56,12 +56,12 @@
   border: 1px solid #d3d3d3;
   display: flex;
   align-items: center;
-  border-radius: 20px;
+  border-radius: 12px;
   padding: 0 15px;
   input {
     border: none;
     outline: none;
-    height: 40px;
+    height: 43px;
     width: 100%;
   }
 }
@@ -73,6 +73,7 @@
   border-radius: 7px;
   padding: 0 20px;
   input {
+    padding: 0 !important;
     border: none;
     outline: none;
     height: 40px;
@@ -218,6 +219,71 @@
     text-decoration: none;
     color: var(--primary-blue);
   }
+}
+.nav-search-container-sm {
+  position: relative;
+}
+.menu-item-search-sm {
+  max-height: 300px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 10px 0;
+  width: 100%;
+  margin-top: 5px;
+  z-index: 1000000000;
+  background-color: white;
+  position: absolute;
+  border-radius: 10px;
+  border: 1px solid #efefef;
+}
+.search-item-sm {
+  max-height: 300px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 10px 0;
+  width: 100%;
+  margin-top: 5px;
+  z-index: 1000000000;
+  background-color: white;
+  position: absolute;
+  border-radius: 10px;
+  border: 1px solid #efefef;
+}
+::-webkit-scrollbar {
+  width: 8px; /* vertical scrollbar */
+  height: 8px; /* horizontal scrollbar */
+}
+
+/* scrollbar track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+/* draggable part */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+/* hover effect */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.search-item-container {
+  padding: 0 15px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 500;
+  font-size: 13px;
+  color: #787878;
+  cursor: pointer;
+  transition: 100ms;
+}
+.search-item-container:hover {
+  background-color: #eeeeee;
 }
 .Mega-Link {
   color: #787878;
