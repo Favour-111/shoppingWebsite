@@ -9,7 +9,7 @@ import { HiOutlineLocationMarker } from "react-icons/hi";
 import { PiSquaresFour } from "react-icons/pi";
 import category from "../categories";
 import { Link, useNavigate } from "react-router";
-import { MdChevronRight } from "react-icons/md";
+import { MdChevronRight, MdOutlineShoppingCart } from "react-icons/md";
 import { ShopContext } from "../Context/ShopContext";
 import product from "../Product";
 import { GoArrowUpRight } from "react-icons/go";
@@ -287,8 +287,10 @@ const NavSm = () => {
             <FiUser size={25} />
           </Link>
           <Link to="/cart-page" className="shopping-icons-sm">
-            <LuShoppingBag size={21} />
-            <div className="shopping-counter-sm">{getTotalCart()}</div>
+            <MdOutlineShoppingCart size={21} />
+            <div className="shopping-counter-sm">
+              <div>{getTotalCart()}</div>
+            </div>
           </Link>
           <div className="shopping-icons-sm" onClick={() => setOpenNav(true)}>
             <LuMenu size={25} />

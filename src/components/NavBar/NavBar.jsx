@@ -6,7 +6,7 @@ import { RiUserLine } from "react-icons/ri";
 import { GoArrowUpRight, GoHeart, GoSearch } from "react-icons/go";
 import { FaSearch } from "react-icons/fa";
 import { PiSquaresFour } from "react-icons/pi";
-import { MdKeyboardArrowDown } from "react-icons/md";
+import { MdKeyboardArrowDown, MdOutlineShoppingCart } from "react-icons/md";
 import { Link } from "react-router";
 import { IoLocationOutline } from "react-icons/io5";
 import { HiOutlineLocationMarker } from "react-icons/hi";
@@ -15,6 +15,9 @@ import category from "../categories";
 import { ShopContext } from "../Context/ShopContext";
 import { useNavigate } from "react-router";
 import product from "../Product";
+import { TfiPackage } from "react-icons/tfi";
+import { IoIosHeartEmpty } from "react-icons/io";
+import { RxExit } from "react-icons/rx";
 const NavBar = () => {
   const navigate = useNavigate();
   const { getTotalCart, getTotalList } = useContext(ShopContext);
@@ -24,7 +27,7 @@ const NavBar = () => {
   const [logged, setLogged] = useState(false);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
-
+  const [accountMenu, setAccountMenu] = useState(false);
   const handleSearch = (e) => {
     const value = e.target.value.toLowerCase();
     setQuery(value);
@@ -110,11 +113,51 @@ const NavBar = () => {
               <FiHeart />
               <div className="shopping-counter">{getTotalList()}</div>
             </Link>
-            <Link to="/sign-in" className="shopping-icons">
-              <FiUser size={23} />
-            </Link>
+            <div
+              className="user-menu"
+              onMouseOver={() => setAccountMenu(true)}
+              onMouseOut={() => setAccountMenu(false)}
+            >
+              <Link to="/sign-in" className="shopping-icons">
+                <FiUser size={23} />
+              </Link>
+              <div
+                className={`user-menu-container ${accountMenu ? "active" : ""}`}
+              >
+                <div className="user-menu-items">
+                  <div>
+                    <FiUser />
+                  </div>
+                  <div>My Account</div>
+                </div>
+                <div className="user-menu-items">
+                  <div>
+                    <TfiPackage />
+                  </div>
+                  <div>Orders</div>
+                </div>
+                <div
+                  className="user-menu-items"
+                  onClick={() => navigate("/wishlist-page")}
+                >
+                  <div>
+                    <GoHeart />
+                  </div>
+                  <div>Wishlist</div>
+                </div>
+                <div
+                  className="user-menu-items-log-out"
+                  onClick={() => navigate("/wishlist-page")}
+                >
+                  <div>
+                    <RxExit />
+                  </div>
+                  <div>Log out</div>
+                </div>
+              </div>
+            </div>
             <Link to="/cart-page" className="shopping-icons">
-              <LuShoppingBag />
+              <MdOutlineShoppingCart />
               <div className="shopping-counter">{getTotalCart()}</div>
             </Link>
           </div>

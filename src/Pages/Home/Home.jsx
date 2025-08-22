@@ -30,14 +30,14 @@ var settings = {
 };
 const Home = () => {
   const bannerItems = [
-    {
-      image: chicken,
-      offer: "35",
-      Head: "Premium Drinks at Unbeatable Prices",
-      Price: "3,500",
-      ButtonText: "Shop This Week Offer",
-      bannerClass: "Left2",
-    },
+    // {
+    //   image: chicken,
+    //   offer: "35",
+    //   Head: "Premium Drinks at Unbeatable Prices",
+    //   Price: "3,500",
+    //   ButtonText: "Shop This Week Offer",
+    //   bannerClass: "Left2",
+    // },
     {
       image: chicken,
       offer: "20",

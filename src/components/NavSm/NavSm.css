@@ -21,23 +21,25 @@
 }
 .shopping-icons-sm {
   position: relative;
-  color: #787878;
+  color: #1e293b;
   font-size: 18px;
 }
 .shopping-counter-sm {
-  height: 14px;
-  width: 14px;
+  height: 18px;
+  width: 18px;
   background-color: #1e40af;
   color: white;
+  border: 2px solid #fff;
+  box-sizing: border-box; /* ✅ keeps border inside */
   position: absolute;
-  font-size: 8px;
+  font-size: 9px;
   display: flex;
-  border-radius: 20px;
+  border-radius: 50%;
   font-weight: bold;
   align-items: center;
   justify-content: center;
   top: 0;
-  right: -6px;
+  right: -5px;
 }
 .logo-icon {
   color: var(--primary-blue);
