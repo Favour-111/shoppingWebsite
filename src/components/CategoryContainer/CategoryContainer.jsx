@@ -19,7 +19,7 @@ const CategoryContainer = () => {
             >
               <div className="category-item ">
                 <div>
-                  <img src={item.image} alt="" />
+                  <img loading="lazy" src={item.image} alt="" />
                 </div>
               </div>
               <div className="category-list-name">{item.name}</div>

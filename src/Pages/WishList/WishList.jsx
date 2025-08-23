@@ -99,7 +99,7 @@ const WishList = () => {
                     <div className="wishlist-itm-sm">
                       <div>Product</div>
                       <div>
-                        <img src={item.image} alt="" />
+                        <img loading="lazy" src={item.image} alt="" />
                       </div>
                     </div>
                     <div className="wishlist-itm-sm">

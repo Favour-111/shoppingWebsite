@@ -201,7 +201,7 @@ const NavBar = () => {
                         onClick={() => navigate(`/category-${item.name}`)}
                         className=""
                       >
-                        <img src={item.image} alt="" />
+                        <img loading="lazy" src={item.image} alt="" />
 
                         {item.name}
                       </li>

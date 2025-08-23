@@ -86,7 +86,7 @@ const Orders = () => {
         ) : (
           <div className="no-order">
             <div className="no-order-image">
-              <img src={orderimg} alt="" />
+              <img loading="lazy" src={orderimg} alt="" />
             </div>
             <div className="no-order-head">
               No{" "}

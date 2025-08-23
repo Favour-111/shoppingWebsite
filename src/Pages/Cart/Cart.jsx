@@ -50,7 +50,12 @@ const Cart = () => {
                     <div className="cart-item">
                       <div className="d-flex align-items-center gap-2">
                         <div>
-                          <img src={item.image} alt="" className="cart-image" />
+                          <img
+                            loading="lazy"
+                            src={item.image}
+                            alt=""
+                            className="cart-image"
+                          />
                         </div>
                         <div>
                           <div className="cart-item-name">{item.name}</div>

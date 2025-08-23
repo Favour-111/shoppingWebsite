@@ -381,7 +381,7 @@ const Shop = ({ page }) => {
             <div className="shop-name">
               <div>{page}</div>
               <div>
-                <img src={pageName.image} alt="banner" />
+                <img loading="lazy" src={pageName.image} alt="banner" />
               </div>
             </div>
 

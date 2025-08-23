@@ -69,7 +69,7 @@ const About = () => {
                 return (
                   <div className="about-item">
                     <div className="about-item-img">
-                      <img src={item.image} alt="" />
+                      <img loading="lazy" src={item.image} alt="" />
                     </div>
                     <div className="about-item-head">{item.heading}</div>
                     <div className="about-item-content">{item.text}</div>

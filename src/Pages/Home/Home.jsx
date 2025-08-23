@@ -74,7 +74,12 @@ const Home = () => {
                         <LuMoveRight />
                       </div>
                     </button>
-                    <img src={item.image} className="img-fluid" alt="" />
+                    <img
+                      loading="lazy"
+                      src={item.image}
+                      className="img-fluid"
+                      alt=""
+                    />
                   </div>
                 );
               })}

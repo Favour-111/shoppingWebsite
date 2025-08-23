@@ -144,7 +144,7 @@ const NavSm = () => {
                       onClick={() => setOpenNav(false)}
                       className="department-sm-itm"
                     >
-                      <img src={item.image} alt={item.name} />
+                      <img loading="lazy" src={item.image} alt={item.name} />
                       <div>{item.name}</div>
                     </Link>
                   );

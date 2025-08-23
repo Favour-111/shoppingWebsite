@@ -41,7 +41,7 @@ const Item = ({ product, category }) => {
     <div className="item-body">
       <div className="item-border">
         <div className="item-image">
-          <img src={product.image} alt="" />
+          <img loading="lazy" src={product.image} alt="" />
         </div>
         <div className="item-content">
           <div className="item-category">
