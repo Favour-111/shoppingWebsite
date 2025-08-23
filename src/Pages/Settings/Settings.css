@@ -330,6 +330,96 @@
   margin-bottom: 80px;
   flex-wrap: wrap;
 }
+.address-overlay {
+  background-color: rgba(0, 0, 0, 0.409);
+  z-index: 10000000000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 0;
+}
+.add-adress-modal {
+  height: auto;
+  background-color: white;
+  border-radius: 5px;
+  position: relative;
+  width: 50%;
+  padding: 20px !important;
+}
+.modal-head {
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--text-normal);
+}
+.modal-content {
+  color: var(--text-normal);
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 5px;
+}
+.modal-input-flex {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-normal);
+  }
+}
+.modal-flex-item {
+  width: 49%;
+}
+.modal-flex-item-lg {
+  width: 100%;
+}
+.modal-flex-item-select {
+  width: 49%;
+  select {
+    width: 100% !important;
+    padding: 10px;
+    outline: none;
+    font-size: 13px;
+    font-weight: 400;
+    border-radius: 5px;
+    color: #787878;
+    border: 1px solid #d3d3d3;
+    option {
+    }
+  }
+}
+.checkBox {
+  label {
+    font-size: 13px;
+    font-weight: 400;
+  }
+}
+.add-address-modal {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  button {
+    background-color: var(--text-blue);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+}
+.cancel-modal-btn {
+  position: absolute;
+  top: 10px;
+  cursor: pointer;
+  right: 10px;
+}
 .address-head {
   display: flex;
   align-items: center;
@@ -421,6 +511,16 @@
 .side-header {
   display: none;
 }
+.overlay-side {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000000;
+  background-color: #0000008a;
+}
+
 @media screen and (max-width: 970px) {
   .settings-layout {
     gap: 20px;
@@ -435,6 +535,9 @@
 @media screen and (max-width: 870px) {
   .address-item {
     width: 100%;
+  }
+  .add-adress-modal {
+    width: 80%;
   }
 }
 @media screen and (max-width: 768px) {
@@ -517,6 +620,11 @@
     margin-bottom: 0 !important;
   }
 }
+@media screen and (max-width: 510px) {
+  .add-adress-modal {
+    width: 90%;
+  }
+}
 @media screen and (max-width: 450px) {
   .settings-input-item {
     input {
@@ -528,5 +636,17 @@
   }
   .notification-container {
     height: 70vh;
+  }
+  .modal-input-flex {
+    flex-direction: column;
+  }
+  .modal-flex-item {
+    width: 100%;
+    input {
+      width: 100% !important;
+    }
+  }
+  .modal-flex-item-select {
+    width: 100%;
   }
 }

@@ -20,7 +20,12 @@ const Settings = () => {
       <div className="home-container">
         <div className="settings-layout">
           {/* Sidebar */}
-
+          {isOpen && (
+            <div
+              className={`overlay-side`}
+              onClick={() => setIsOpen(false)}
+            ></div>
+          )}
           <aside className={`settings-sidebar  ${isOpen ? "opened" : ""}`}>
             <div className="side-header">
               <div>Account Settings</div>
