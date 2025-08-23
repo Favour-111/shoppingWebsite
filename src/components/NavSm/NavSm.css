@@ -180,8 +180,7 @@
   max-height: 0; /* instead of height */
   padding: 0 !important;
   transition: border 500ms, max-height 350ms ease;
-  border-left: 1px solid #d3d3d368;
-  border-right: 1px solid #d3d3d368;
+
   border-bottom: none;
 
   li {
@@ -190,6 +189,9 @@
   }
 
   .nav-sm-list-dropdown-link {
+    display: flex;
+    align-items: center;
+    gap: 5px;
     color: #787878;
     text-decoration: none;
     font-size: 13.5px;

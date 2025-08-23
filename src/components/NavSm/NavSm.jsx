@@ -3,8 +3,12 @@ import "./NavSm.css";
 import { LiaOpencart } from "react-icons/lia";
 import { RiUserLine } from "react-icons/ri";
 import { FiHeart, FiUser } from "react-icons/fi";
-import { LuMenu, LuShoppingBag } from "react-icons/lu";
-import { IoCloseOutline, IoSearchOutline } from "react-icons/io5";
+import { LuMenu, LuShoppingBag, LuUser } from "react-icons/lu";
+import {
+  IoChevronDown,
+  IoCloseOutline,
+  IoSearchOutline,
+} from "react-icons/io5";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { PiSquaresFour } from "react-icons/pi";
 import category from "../categories";
@@ -13,6 +17,10 @@ import { MdChevronRight, MdOutlineShoppingCart } from "react-icons/md";
 import { ShopContext } from "../Context/ShopContext";
 import product from "../Product";
 import { GoArrowUpRight } from "react-icons/go";
+import { BiBell } from "react-icons/bi";
+import { CiLocationOn } from "react-icons/ci";
+import { TfiPackage } from "react-icons/tfi";
+import { IoMdHeartEmpty } from "react-icons/io";
 
 const NavSm = () => {
   const navigate = useNavigate();
@@ -29,6 +37,7 @@ const NavSm = () => {
   };
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const handleSearch = (e) => {
     const value = e.target.value.toLowerCase();
@@ -157,7 +166,11 @@ const NavSm = () => {
                   <li onClick={() => toggleMenu("account")}>
                     <Link className="nav-sm-list-item">Account</Link>
                     <div>
-                      <MdChevronRight />
+                      {activeMenu === "account" ? (
+                        <IoChevronDown />
+                      ) : (
+                        <MdChevronRight />
+                      )}
                     </div>
                   </li>
                 </div>
@@ -190,24 +203,83 @@ const NavSm = () => {
                       activeMenu === "account" ? "active" : ""
                     }`}
                   >
-                    <div className="p-2 ">
-                      <li>
-                        <Link
-                          className="nav-sm-list-dropdown-link"
-                          to="/sign-in"
-                        >
-                          Sign In
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          className="nav-sm-list-dropdown-link"
-                          to="/sign-up"
-                        >
-                          Sign Up
-                        </Link>
-                      </li>
-                    </div>
+                    {loggedIn ? (
+                      <div className="p-2 ">
+                        <li>
+                          <Link
+                            className="nav-sm-list-dropdown-link"
+                            to="/sign-in"
+                          >
+                            Sign In
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            className="nav-sm-list-dropdown-link"
+                            to="/sign-up"
+                          >
+                            Sign Up
+                          </Link>
+                        </li>
+                      </div>
+                    ) : (
+                      <div className="py-2  ">
+                        <li>
+                          <Link
+                            className="nav-sm-list-dropdown-link"
+                            to="/settings/profile"
+                          >
+                            <LuUser />
+                            <div>My Account</div>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            className="nav-sm-list-dropdown-link"
+                            to="/settings/notification"
+                          >
+                            <BiBell />
+                            <div>Notification</div>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            className="nav-sm-list-dropdown-link"
+                            to="/settings/address"
+                          >
+                            <CiLocationOn />
+                            <div>Address</div>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            className="nav-sm-list-dropdown-link"
+                            to="/settings/orders"
+                          >
+                            <TfiPackage />
+                            <div>Orders</div>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            className="nav-sm-list-dropdown-link"
+                            to="/settings/Wishlist-page"
+                          >
+                            <IoMdHeartEmpty />
+                            <div>Wishlist</div>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            className="nav-sm-list-dropdown-link"
+                            to="/settings/notification"
+                          >
+                            <BiBell />
+                            <div>Notification</div>
+                          </Link>
+                        </li>
+                      </div>
+                    )}
                   </ul>
                 )}
 
@@ -215,7 +287,11 @@ const NavSm = () => {
                 <li onClick={() => toggleMenu("mega")}>
                   <Link className="nav-sm-list-item">Mega menu</Link>
                   <div>
-                    <MdChevronRight />
+                    {activeMenu === "mega" ? (
+                      <IoChevronDown />
+                    ) : (
+                      <MdChevronRight />
+                    )}
                   </div>
                 </li>
 

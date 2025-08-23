@@ -18,6 +18,7 @@ import product from "../Product";
 import { TfiPackage } from "react-icons/tfi";
 import { IoIosHeartEmpty } from "react-icons/io";
 import { RxExit } from "react-icons/rx";
+import { BsBell } from "react-icons/bs";
 const NavBar = () => {
   const navigate = useNavigate();
   const { getTotalCart, getTotalList } = useContext(ShopContext);
@@ -118,24 +119,36 @@ const NavBar = () => {
               onMouseOver={() => setAccountMenu(true)}
               onMouseOut={() => setAccountMenu(false)}
             >
-              <Link to="/sign-in" className="shopping-icons">
+              <div className="shopping-icons">
                 <FiUser size={23} />
-              </Link>
+              </div>
               <div
                 className={`user-menu-container ${accountMenu ? "active" : ""}`}
               >
-                <div className="user-menu-items">
+                <Link to="/settings/profile" className="user-menu-items">
                   <div>
                     <FiUser />
                   </div>
                   <div>My Account</div>
-                </div>
-                <div className="user-menu-items">
+                </Link>
+                <Link to="/settings/notification" className="user-menu-items">
+                  <div>
+                    <BsBell />
+                  </div>
+                  <div>Notification</div>
+                </Link>
+                <Link to="/settings/address" className="user-menu-items">
+                  <div>
+                    <IoLocationOutline />
+                  </div>
+                  <div>Address</div>
+                </Link>
+                <Link to="/settings/orders" className="user-menu-items">
                   <div>
                     <TfiPackage />
                   </div>
                   <div>Orders</div>
-                </div>
+                </Link>
                 <div
                   className="user-menu-items"
                   onClick={() => navigate("/wishlist-page")}

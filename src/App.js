@@ -15,6 +15,12 @@ import ScrollToTop from "./components/ScrollToTop";
 import SubCategory from "./Pages/SubCategory/SubCategory";
 import View from "./Pages/View/View";
 import ResultPage from "./Pages/ResultPage/ResultPage";
+import Settings from "./Pages/Settings/Settings";
+import Profile from "./Pages/Settings/Profile";
+import Orders from "./Pages/Settings/Orders";
+import Address from "./Pages/Settings/Address";
+import Notification from "./Pages/Settings/Notification";
+import SingleOrder from "./Pages/SingleOrder/SingleOrder";
 function App() {
   return (
     <>
@@ -46,6 +52,13 @@ function App() {
         <Route element={<About />} path="/About-page" />
         <Route element={<View />} path="/View-page" />
         <Route element={<ResultPage />} path="/Result" />
+        <Route element={<Settings />} path="/settings">
+          <Route element={<Profile />} path="profile" />
+          <Route element={<Orders />} path="orders" />
+          <Route element={<Address />} path="address" />
+          <Route element={<Notification />} path="notification" />
+        </Route>
+        <Route element={<SingleOrder />} path="/order-details"></Route>
       </Routes>
       <Toaster
         toastOptions={{
