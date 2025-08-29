@@ -13,6 +13,7 @@ import { RiCloseLargeFill, RiMenuFold4Line } from "react-icons/ri";
 import { MdOutlineClose } from "react-icons/md";
 const Settings = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const userId = localStorage.getItem("userId");
   return (
     <div>
       <NavBar />
@@ -42,7 +43,7 @@ const Settings = () => {
               <ul>
                 <li>
                   <NavLink
-                    to="profile"
+                    to={`profile/${userId}`}
                     className={`profile-item ${({ isActive }) =>
                       isActive ? "active" : ""}`}
                   >
@@ -89,7 +90,14 @@ const Settings = () => {
                   </NavLink>
                 </li>
                 <div className="side-line"></div>
-                <div className="side-logout">
+                <div
+                  className="side-logout"
+                  onClick={() => {
+                    localStorage.removeItem("auth-token");
+                    localStorage.removeItem("userId");
+                    window.location.replace("/");
+                  }}
+                >
                   <div>
                     <RxExit />
                   </div>

@@ -101,7 +101,10 @@ const NavBar = () => {
               )}
             </div>
 
-            <div className="location-cont">
+            <div
+              onClick={() => navigate("/settings/address")}
+              className="location-cont"
+            >
               <div>
                 <HiOutlineLocationMarker className="mb-1" />
               </div>
@@ -122,52 +125,100 @@ const NavBar = () => {
               <div className="shopping-icons">
                 <FiUser size={23} />
               </div>
-              <div
-                className={`user-menu-container ${accountMenu ? "active" : ""}`}
-              >
-                <Link to="/settings/profile" className="user-menu-items">
-                  <div>
-                    <FiUser />
-                  </div>
-                  <div>My Account</div>
-                </Link>
-                <Link to="/settings/notification" className="user-menu-items">
-                  <div>
-                    <BsBell />
-                  </div>
-                  <div>Notification</div>
-                </Link>
-                <Link to="/settings/address" className="user-menu-items">
-                  <div>
-                    <IoLocationOutline />
-                  </div>
-                  <div>Address</div>
-                </Link>
-                <Link to="/settings/orders" className="user-menu-items">
-                  <div>
-                    <TfiPackage />
-                  </div>
-                  <div>Orders</div>
-                </Link>
+              {localStorage.getItem("auth-token") ? (
                 <div
-                  className="user-menu-items"
-                  onClick={() => navigate("/wishlist-page")}
+                  className={`user-menu-container ${
+                    accountMenu ? "active" : ""
+                  }`}
                 >
-                  <div>
-                    <GoHeart />
+                  <Link
+                    to={`/settings/profile/${localStorage.getItem("userId")}`}
+                    className="user-menu-items"
+                  >
+                    <div>
+                      <FiUser />
+                    </div>
+                    <div>My Account</div>
+                  </Link>
+
+                  <Link to="/settings/notification" className="user-menu-items">
+                    <div>
+                      <BsBell />
+                    </div>
+                    <div>Notification</div>
+                  </Link>
+                  <Link to="/settings/address" className="user-menu-items">
+                    <div>
+                      <IoLocationOutline />
+                    </div>
+                    <div>Address</div>
+                  </Link>
+                  <Link to="/settings/orders" className="user-menu-items">
+                    <div>
+                      <TfiPackage />
+                    </div>
+                    <div>Orders</div>
+                  </Link>
+                  <div
+                    className="user-menu-items"
+                    onClick={() => navigate("/wishlist-page")}
+                  >
+                    <div>
+                      <GoHeart />
+                    </div>
+                    <div>Wishlist</div>
                   </div>
-                  <div>Wishlist</div>
+                  <div
+                    className="user-menu-items-log-out"
+                    onClick={() => {
+                      localStorage.removeItem("auth-token");
+                      localStorage.removeItem("userId");
+                      window.location.replace("/");
+                    }}
+                  >
+                    <div>
+                      <RxExit />
+                    </div>
+                    <div>Log out</div>
+                  </div>
                 </div>
+              ) : (
                 <div
-                  className="user-menu-items-log-out"
-                  onClick={() => navigate("/wishlist-page")}
+                  className={`user-menu-container ${
+                    accountMenu ? "active" : ""
+                  }`}
                 >
-                  <div>
-                    <RxExit />
+                  <Link to="/sign-in" className="user-menu-button">
+                    <div>Sign in</div>
+                  </Link>
+                  <hr />
+                  <Link
+                    to={`/settings/profile/${localStorage.getItem("userId")}`}
+                    className="user-menu-items"
+                  >
+                    <div>
+                      <FiUser />
+                    </div>
+                    <div>My Account</div>
+                  </Link>
+
+                  <Link to="/settings/orders" className="user-menu-items">
+                    <div>
+                      <TfiPackage />
+                    </div>
+                    <div>Orders</div>
+                  </Link>
+                  <div
+                    className="user-menu-items"
+                    onClick={() => navigate("/wishlist-page")}
+                  >
+                    <div>
+                      <GoHeart />
+                    </div>
+                    <div>Wishlist</div>
                   </div>
-                  <div>Log out</div>
                 </div>
-              </div>
+              )}
             </div>
             <Link to="/cart-page" className="shopping-icons">
               <MdOutlineShoppingCart />
@@ -227,20 +278,29 @@ const NavBar = () => {
                   <MdKeyboardArrowDown className="mb-1" />
                 </div>
               </div>
-              {logged === true ? (
+              {localStorage.getItem("auth-token") ? (
                 <ul
                   className={`account-drop-down shadow-sm ${
                     AccountDrop ? "active" : ""
                   }`}
                 >
                   <li>
-                    <Link className="account-link">Order</Link>
+                    <Link to="/settings/orders" className="account-link">
+                      Orders
+                    </Link>
                   </li>
                   <li>
-                    <Link className="account-link">Settings</Link>
+                    <Link
+                      to={`/settings/profile/${localStorage.getItem("userId")}`}
+                      className="account-link"
+                    >
+                      My Account
+                    </Link>
                   </li>
                   <li>
-                    <Link className="account-link">Address</Link>
+                    <Link to="/settings/address" className="account-link">
+                      Address
+                    </Link>
                   </li>
                 </ul>
               ) : (
@@ -315,7 +375,11 @@ const NavBar = () => {
                 Contact
               </Link>
             </li>
-            <li className="nav-Itm">Blog Page</li>
+            <li>
+              <Link className="nav-Itm" to="/store-categories">
+                Categories
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

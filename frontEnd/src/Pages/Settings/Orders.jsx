@@ -1,15 +1,43 @@
-import React, { useState } from "react";
-import order from "../../components/Orders";
+import React, { useEffect, useState } from "react";
 import orderimg from "../../assets/images/png-transparent-shopping-trolley-with-parcel-boxes-shopping-trolley-parcel-box-shopping-cart-shopping-cart-3d-icon.png";
 import { useNavigate } from "react-router";
+import axios from "axios";
+
 const Orders = () => {
   const [orderFilter, setOrderFilter] = useState("shipping");
-  const filterOrder = order.filter((item) => {
-    if (item.orderStatus === orderFilter) {
-      return item;
-    }
-  });
+  const [orders, setOrders] = useState([]);
+  const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
+
+  const FetchOrder = async () => {
+    try {
+      setLoader(true);
+      const response = await axios.get(`${process.env.REACT_APP_API}/orders`);
+      if (response) {
+        const userId = localStorage.getItem("userId");
+
+        setOrders(
+          response.data.message.filter((item) => item.UserID == userId)
+        );
+      }
+    } catch (error) {
+      console.error("Error fetching orders:", error);
+      alert("Error fetching orders");
+    } finally {
+      setLoader(false);
+    }
+  };
+  console.log(orders);
+
+  useEffect(() => {
+    FetchOrder();
+  }, []);
+
+  // ✅ filter API orders, not imported dummy data
+  const filteredOrders = orders.filter(
+    (item) => item.orderStatus === orderFilter
+  );
+
   return (
     <div>
       <div className="order-container-body">
@@ -25,11 +53,11 @@ const Orders = () => {
           </div>
           <div
             className={`delivered-filter ${
-              orderFilter === "shipped" ? "active" : ""
+              orderFilter === "delivered" ? "active" : ""
             }`}
-            onClick={() => setOrderFilter("shipped")}
+            onClick={() => setOrderFilter("delivered")}
           >
-            delivered
+            Delivered
           </div>
           <div
             className={`delivered-filter ${
@@ -37,76 +65,82 @@ const Orders = () => {
             }`}
             onClick={() => setOrderFilter("cancelled")}
           >
-            cancelled
+            Cancelled
           </div>
         </div>
-        {filterOrder.length > 0 ? (
-          filterOrder.map((item) => {
-            return (
-              <div className="order-item-body">
-                <div className="order-item">
-                  <div>
-                    <img
-                      src="https://villyz-store-md6b.vercel.app/static/media/b4728tKYUsFQNOfV.537d369a65a20af92a46.webp"
-                      alt=""
-                    />
-                  </div>
-                  <div className="mt-2">
-                    <div className="order-name">ORDER_{item.id}</div>
-                    <div
-                      className={`order-status ${
-                        item.orderStatus === "shipped"
-                          ? "delivered"
-                          : item.orderStatus === "shipping"
-                          ? "pending"
-                          : "cancelled"
-                      }`}
-                    >
-                      {item.orderStatus}
+        {loader ? (
+          <div className="text-center mt-4">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <div className="getting-text">getting orders..</div>
+          </div>
+        ) : (
+          <div className="orders-cont">
+            {filteredOrders.length > 0 ? (
+              filteredOrders.map((item) => (
+                <div key={item.id} className="order-item-body">
+                  <div className="order-item">
+                    <div>
+                      <img
+                        src="https://villyz-store-md6b.vercel.app/static/media/b4728tKYUsFQNOfV.537d369a65a20af92a46.webp"
+                        alt=""
+                      />
                     </div>
-
-                    <div className="order-date">On 20-03-2025</div>
-                  </div>
-                  <div
-                    className="see-details"
-                    onClick={() =>
-                      navigate("/order-details", {
-                        state: {
-                          id: item.id,
-                        },
-                      })
-                    }
-                  >
-                    See details
+                    <div className="mt-2">
+                      <div className="order-name">ORDER_{item.id}</div>
+                      <div
+                        className={`order-status ${
+                          item.orderStatus === "delivered"
+                            ? "delivered"
+                            : item.orderStatus === "shipping"
+                            ? "pending"
+                            : "cancelled"
+                        }`}
+                      >
+                        {item.orderStatus}
+                      </div>
+                      <div className="order-date">On {item.date}</div>
+                    </div>
+                    <div
+                      className="see-details"
+                      onClick={() =>
+                        navigate(`/order-details/${item._id}`, {
+                          state: { id: item._id, orders: orders },
+                        })
+                      }
+                    >
+                      See details
+                    </div>
                   </div>
                 </div>
+              ))
+            ) : (
+              <div className="no-order">
+                <div className="no-order-image">
+                  <img loading="lazy" src={orderimg} alt="" />
+                </div>
+                <div className="no-order-head">
+                  No{" "}
+                  {orderFilter === "cancelled"
+                    ? "closed"
+                    : orderFilter === "shipped"
+                    ? "delivered"
+                    : "pending"}{" "}
+                  order to display
+                </div>
+                <div className="no-order-content">
+                  All your{" "}
+                  {orderFilter === "cancelled"
+                    ? "closed"
+                    : orderFilter === "shipped"
+                    ? "delivered"
+                    : "pending"}{" "}
+                  orders will be saved here
+                </div>
+                <button onClick={() => navigate("/")}>Start shopping</button>
               </div>
-            );
-          })
-        ) : (
-          <div className="no-order">
-            <div className="no-order-image">
-              <img loading="lazy" src={orderimg} alt="" />
-            </div>
-            <div className="no-order-head">
-              No{" "}
-              {orderFilter === "cancelled"
-                ? "closed"
-                : orderFilter === "shipped"
-                ? "delivered"
-                : "pending"}{" "}
-              order to display
-            </div>
-            <div className="no-order-content">
-              All your{" "}
-              {orderFilter === "cancelled"
-                ? "closed"
-                : orderFilter === "shipped"
-                ? "delivered"
-                : "pending"}{" "}
-              order will be saved here
-            </div>
-            <button onClick={() => navigate("/")}>Start shopping</button>
+            )}
           </div>
         )}
       </div>

@@ -90,8 +90,8 @@ const Contact = () => {
                 />
               </div>
               <div>
-                Igba otun phase 2 sango
-                <br /> ota ogun state
+                no 35 joel ogunaike
+                <br /> ikeja lagos state
               </div>
             </div>
           </div>

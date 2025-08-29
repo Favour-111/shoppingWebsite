@@ -17,8 +17,15 @@ import toast, { Toaster } from "react-hot-toast";
 import { FiMinus, FiShoppingBag } from "react-icons/fi";
 import { BsCartCheck } from "react-icons/bs";
 const Item = ({ product, category }) => {
-  const { addToCart, cartItems, RemoveCart, addToList, WishList, removeList } =
-    useContext(ShopContext);
+  const {
+    addToCart,
+    cartItems,
+    RemoveCart,
+    cartLoader,
+    addToList,
+    WishList,
+    removeList,
+  } = useContext(ShopContext);
   const navigate = useNavigate();
   const renderStars = () => {
     const stars = [];
@@ -61,7 +68,18 @@ const Item = ({ product, category }) => {
                 <button onClick={() => RemoveCart(product.id)}>
                   <FiMinus />
                 </button>
-                <div className="item-count">{cartItems[product.id]}</div>
+
+                {cartLoader === product.id ? (
+                  <div
+                    className="spinner-border spinner-border-sm"
+                    role="status"
+                  >
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                ) : (
+                  <div className="item-count">{cartItems[product.id]}</div>
+                )}
+
                 <button onClick={() => addToCart(product.id)}>
                   <IoAdd />
                 </button>

@@ -31,7 +31,11 @@ const NavSm = () => {
   // "category", "account", "mega" or null
 
   const [AccountDrop, setAccountDrop] = useState(false);
-
+  // {
+  //   localStorage.getItem("auth-token")
+  //     ? setAccountDrop(false)
+  //     : setAccountDrop(true);
+  // }
   const toggleMenu = (menu) => {
     setActiveMenu((prev) => (prev === menu ? null : menu));
   };
@@ -114,7 +118,10 @@ const NavSm = () => {
             </div>
 
             {/* Location */}
-            <div className="menu-location">
+            <div
+              onClick={() => navigate("/settings/address")}
+              className="menu-location"
+            >
               <HiOutlineLocationMarker />
               <div>Pick Location</div>
             </div>
@@ -175,113 +182,112 @@ const NavSm = () => {
                   </li>
                 </div>
 
-                {AccountDrop ? (
-                  <ul
-                    className={`nav-sm-list-dropdown ${
-                      activeMenu === "account" ? "active" : ""
-                    }`}
-                  >
-                    <div className="px-1 ">
+                <ul
+                  className={`nav-sm-list-dropdown ${
+                    activeMenu === "account" ? "active" : ""
+                  }`}
+                >
+                  {!localStorage.getItem("auth-token") ? (
+                    <div className="py-2  ">
                       <li>
-                        <Link className="nav-sm-list-dropdown-link">Order</Link>
+                        <Link
+                          className="nav-sm-list-dropdown-link"
+                          to="/settings/profile"
+                        >
+                          <LuUser />
+                          <div>Sign In</div>
+                        </Link>
                       </li>
+
                       <li>
-                        <Link className="nav-sm-list-dropdown-link">
-                          Settings
+                        <Link
+                          className="nav-sm-list-dropdown-link"
+                          to="/settings/orders"
+                        >
+                          <TfiPackage />
+                          <div>Orders</div>
                         </Link>
                       </li>
                       <li>
-                        <Link className="nav-sm-list-dropdown-link">
-                          Address
+                        <Link
+                          className="nav-sm-list-dropdown-link"
+                          to="/settings/Wishlist-page"
+                        >
+                          <IoMdHeartEmpty />
+                          <div>Wishlist</div>
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          className="nav-sm-list-dropdown-link"
+                          to="/settings/notification"
+                        >
+                          <BiBell />
+                          <div>Notification</div>
                         </Link>
                       </li>
                     </div>
-                  </ul>
-                ) : (
-                  <ul
-                    className={`nav-sm-list-dropdown ${
-                      activeMenu === "account" ? "active" : ""
-                    }`}
-                  >
-                    {loggedIn ? (
-                      <div className="p-2 ">
-                        <li>
-                          <Link
-                            className="nav-sm-list-dropdown-link"
-                            to="/sign-in"
-                          >
-                            Sign In
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            className="nav-sm-list-dropdown-link"
-                            to="/sign-up"
-                          >
-                            Sign Up
-                          </Link>
-                        </li>
-                      </div>
-                    ) : (
-                      <div className="py-2  ">
-                        <li>
-                          <Link
-                            className="nav-sm-list-dropdown-link"
-                            to="/settings/profile"
-                          >
-                            <LuUser />
-                            <div>My Account</div>
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            className="nav-sm-list-dropdown-link"
-                            to="/settings/notification"
-                          >
-                            <BiBell />
-                            <div>Notification</div>
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            className="nav-sm-list-dropdown-link"
-                            to="/settings/address"
-                          >
-                            <CiLocationOn />
-                            <div>Address</div>
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            className="nav-sm-list-dropdown-link"
-                            to="/settings/orders"
-                          >
-                            <TfiPackage />
-                            <div>Orders</div>
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            className="nav-sm-list-dropdown-link"
-                            to="/settings/Wishlist-page"
-                          >
-                            <IoMdHeartEmpty />
-                            <div>Wishlist</div>
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            className="nav-sm-list-dropdown-link"
-                            to="/settings/notification"
-                          >
-                            <BiBell />
-                            <div>Notification</div>
-                          </Link>
-                        </li>
-                      </div>
-                    )}
-                  </ul>
-                )}
+                  ) : (
+                    <div className="py-2  ">
+                      <li>
+                        <Link
+                          className="nav-sm-list-dropdown-link"
+                          to={`/settings/profile/${localStorage.getItem(
+                            "userId"
+                          )}`}
+                        >
+                          <LuUser />
+                          <div>My Account</div>
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          className="nav-sm-list-dropdown-link"
+                          to="/settings/notification"
+                        >
+                          <BiBell />
+                          <div>Notification</div>
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          className="nav-sm-list-dropdown-link"
+                          to="/settings/address"
+                        >
+                          <CiLocationOn />
+                          <div>Address</div>
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          className="nav-sm-list-dropdown-link"
+                          to="/settings/orders"
+                        >
+                          <TfiPackage />
+                          <div>Orders</div>
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          className="nav-sm-list-dropdown-link"
+                          to="/settings/Wishlist-page"
+                        >
+                          <IoMdHeartEmpty />
+                          <div>Wishlist</div>
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          className="nav-sm-list-dropdown-link"
+                          to="/settings/notification"
+                        >
+                          <BiBell />
+                          <div>Notification</div>
+                        </Link>
+                      </li>
+                    </div>
+                  )}
+                </ul>
 
                 {/* Mega Menu */}
                 <li onClick={() => toggleMenu("mega")}>
@@ -337,16 +343,19 @@ const NavSm = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link className="nav-sm-list-item">Blog page</Link>
+                  <Link to="/store-categories" className="nav-sm-list-item">
+                    Categories
+                  </Link>
                 </li>
               </ul>
             </div>
           </div>
         </div>
-        <div className="shopping-icons-sm" onClick={() => setOpenNav(true)}>
-          <LuMenu size={21} />
-        </div>
+
         {/* Bottom Navbar */}
+        <div className="shopping-icons-sm" onClick={() => setOpenNav(true)}>
+          <LuMenu size={25} />
+        </div>
         <div>
           <Link to="/" className="logo-sm">
             <div>
@@ -361,7 +370,14 @@ const NavSm = () => {
             <FiHeart size={21} />
             <div className="shopping-counter-sm">{getTotalList()}</div>
           </Link>
-          <Link to="/sign-in" className="shopping-icons-sm">
+          <Link
+            to={`${
+              localStorage.getItem("auth-token")
+                ? `/settings/profile/${localStorage.getItem("userId")}`
+                : "/sign-in"
+            }`}
+            className="shopping-icons-sm"
+          >
             <FiUser size={25} />
           </Link>
           <Link to="/cart-page" className="shopping-icons-sm">
@@ -374,7 +390,7 @@ const NavSm = () => {
       </div>
 
       {/* Bottom Search */}
-      <div className="">
+      <div className="nav-search">
         <div className="nav-search-container-sm">
           <div className="nav-bar-input-sm ">
             <input

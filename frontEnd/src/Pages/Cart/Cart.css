@@ -33,7 +33,7 @@
 .cart-summary {
   padding: 20px;
   width: 35%;
-  height: 350px;
+  height: fit-content;
   background-color: rgb(243 243 243);
 }
 .coupon-button {
@@ -61,11 +61,11 @@
   font-size: 13px;
 }
 .price {
-  margin-top: 12px;
+  margin-top: 15px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--text-normal);
   font-size: 14px;
 }
@@ -196,6 +196,38 @@
   color: var(--text-normal);
   font-weight: 500;
   font-size: 15px;
+}
+.shipping-content-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  button {
+    font-size: 12px;
+    font-weight: 500;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 9px 20px;
+    span {
+      font-weight: bold;
+      font-size: 12px;
+    }
+  }
+}
+.continue-shopping {
+  transition: 200ms;
+  background-color: var(--primary-blue);
+}
+.continue-shopping:hover {
+  background-color: #152e81;
+}
+.checkout-button {
+  transition: 200ms;
+  background-color: var(--text-blue);
+}
+.checkout-button:hover {
+  background-color: #0e131c;
 }
 @media screen and (max-width: 768px) {
   .cart-empty-content {

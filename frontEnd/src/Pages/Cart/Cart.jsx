@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import NavSm from "../../components/NavSm/NavSm";
 import NavBar from "../../components/NavBar/NavBar";
 import "./Cart.css";
@@ -12,14 +12,41 @@ import { Link, useNavigate } from "react-router";
 import { MdChevronRight } from "react-icons/md";
 import RecentlyViewed from "../../components/RecentlyViewed/RecentlyViewed";
 const Cart = () => {
+  const navigate = useNavigate();
+  const [text, setText] = useState({
+    value: "",
+  });
+  const handleChange = (e) => {
+    setText({ ...text, [e.target.name]: e.target.value });
+  };
   const Navigate = useNavigate();
-  const { product, cartItems, RemoveCart, addToCart, removeFromCart } =
-    useContext(ShopContext);
+  const {
+    product,
+    cartItems,
+    RemoveCart,
+    cartLoader,
+    addToCart,
+    getTotalValue,
+    removeFromCart,
+  } = useContext(ShopContext);
   console.log(cartItems);
   const cartProducts = product.filter(
     (itm) => cartItems && cartItems[itm.id] && cartItems[itm.id] > 0
   );
-
+  const [Coupon, setCoupon] = useState(0);
+  const couponDiscount = (Coupon / 100) * Number(getTotalValue());
+  const handleSubmit = () => {
+    if (text.value === "") {
+      toast.error("coupon input is required");
+    } else if (text.value === "SAVE4") {
+      setCoupon(4);
+      toast.success("coupon applied successfully");
+    } else {
+      setCoupon(0);
+      toast.error("invalid coupon code");
+    }
+    // console.log(Coupon);
+  };
   return (
     <div>
       <NavBar />
@@ -78,21 +105,32 @@ const Cart = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="cart-counter">
+                      {cartLoader === product.id ? (
                         <div
-                          className="cart-counter-btn"
-                          onClick={() => addToCart(item.id)}
+                          className="spinner-border spinner-border-sm"
+                          role="status"
                         >
-                          <AiOutlinePlus />
+                          <span className="visually-hidden">Loading...</span>
                         </div>
-                        <div className="cart-amount">{cartItems[item.id]}</div>
-                        <div
-                          className="cart-counter-btn"
-                          onClick={() => RemoveCart(item.id)}
-                        >
-                          <RiSubtractFill />
+                      ) : (
+                        <div className="cart-counter">
+                          <div
+                            className="cart-counter-btn"
+                            onClick={() => addToCart(item.id)}
+                          >
+                            <AiOutlinePlus />
+                          </div>
+                          <div className="cart-amount">
+                            {cartItems[item.id]}
+                          </div>
+                          <div
+                            className="cart-counter-btn"
+                            onClick={() => RemoveCart(item.id)}
+                          >
+                            <RiSubtractFill />
+                          </div>
                         </div>
-                      </div>
+                      )}
                       <div className="Cart-price">
                         ₦{item.newPrice * cartItems[item.id]}
                       </div>
@@ -104,29 +142,67 @@ const Cart = () => {
             <div className="cart-summary">
               <div className="cart-head">Summary</div>
               <div className="shipping-head">Estimated shipping</div>
-              <div className="shipping-content">
+              <div className="shipping-content mb-3">
                 Enter your destination to get a shipping estimate
               </div>
               <div className="price">
                 <div>sub-total</div>
-                <div className="cart-sub-price">3,000</div>
+                <div className="cart-sub-price">₦ {getTotalValue()}</div>
+              </div>
+
+              <div className="price">
+                <div>coupon-discount</div>
+                <div className="cart-sub-price">{Coupon}% discount</div>
               </div>
               <div className="price">
                 <div>Coupon</div>
-                <div className="cart-sub-price">0</div>
+                <div className="cart-sub-price">
+                  ₦ {couponDiscount !== 0 ? "-" : ""} {couponDiscount}
+                </div>
               </div>
               <div className="price">
-                <div>coupon-discount</div>
-                <div className="cart-sub-price">0%</div>
-              </div>
-              <div className="price">
-                <input type="text" className="coupon-input" />
-                <button className="coupon-button">Apply</button>
+                <input
+                  type="text"
+                  name="value"
+                  onChange={handleChange}
+                  value={text.value}
+                  className="coupon-input"
+                />
+                <button className="coupon-button" onClick={handleSubmit}>
+                  Apply
+                </button>
               </div>
               <div className="line"></div>
               <div className="price">
                 <div>Total</div>
-                <div className="cart-sub-price">3,000</div>
+                <div className="cart-sub-price">
+                  ₦ {getTotalValue() - couponDiscount}{" "}
+                  <span>
+                    {couponDiscount !== 0 ? " (-2 % discount)" : null}
+                  </span>
+                </div>
+              </div>
+              <div className="shipping-content-buttons">
+                <button
+                  className="continue-shopping"
+                  onClick={() => navigate("/store-categories")}
+                >
+                  Continue Shopping
+                </button>
+                <button
+                  className="checkout-button"
+                  onClick={() => {
+                    if (!localStorage.getItem("auth-token")) {
+                      toast("Please ensure you sign in before checking out");
+                    } else {
+                      navigate("/checkout-items", {
+                        state: { couponDiscount }, // ✅ wrap in object
+                      });
+                    }
+                  }}
+                >
+                  Check out <span>{getTotalValue() - couponDiscount}</span>
+                </button>
               </div>
             </div>
           </div>
@@ -141,7 +217,7 @@ const Cart = () => {
               Before proceeding to checkout you must add some product to your
               shopping cart you will find alot of product on our "shop page"
             </div>
-            <button onClick={() => Navigate("/shop-list")}>
+            <button onClick={() => Navigate("/store-categories")}>
               Start Shopping
             </button>
           </div>

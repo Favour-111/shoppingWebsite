@@ -37,8 +37,10 @@
   color: #4b5966;
   font-weight: 700;
 }
+
 .location-cont {
   display: flex;
+  cursor: pointer;
   align-items: center;
   gap: 13px;
   border: 1px solid #d3d3d3;
@@ -156,6 +158,27 @@
 }
 .user-menu-items-log-out:hover {
   background-color: rgba(255, 0, 0, 0.073);
+}
+.user-menu-button {
+  background-color: var(--text-blue);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  color: white;
+  text-decoration: none;
+  height: 40px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: 100ms;
+  box-shadow: -1px 1px 5px -1px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: -1px 1px 5px -1px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: -1px 1px 5px -1px rgba(0, 0, 0, 0.25);
+  margin: 10px 20px;
+}
+.user-menu-button:hover {
+  background-color: #10161f;
 }
 .shopping-counter {
   height: 18px;
@@ -338,6 +361,7 @@
   overflow: hidden;
   background-color: white;
   transition: 350ms;
+  z-index: 10000000000;
   li {
     margin-top: 14px;
     opacity: 0.7;

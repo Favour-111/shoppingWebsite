@@ -7,11 +7,11 @@ const EmailVerify = () => {
   const [loading, setLoading] = useState(true); // New state for loading
   const navigate = useNavigate();
   const param = useParams();
-
+  const api = process.env.REACT_APP_API;
   useEffect(() => {
     const verifyEmail = async () => {
       try {
-        const url = `https://shopping-website-three-swart.vercel.app/users/${param.id}/verify/${param.token}`;
+        const url = `${api}/users/${param.id}/verify/${param.token}`;
         const { data } = await axios.get(url);
         console.log(data);
         setValidUrl(true);
@@ -50,10 +50,14 @@ const EmailVerify = () => {
             <img
               src="https://freepngimg.com/save/167774-logo-verification-free-png-hq/512x512"
               alt="Email Verified"
+              loading="lazy"
             />
           </div>
-          <button className="verified-login" onClick={() => navigate("/login")}>
-            Login
+          <button
+            className="verified-login"
+            onClick={() => navigate("/sign-in")}
+          >
+            sign in
           </button>
         </div>
       ) : (

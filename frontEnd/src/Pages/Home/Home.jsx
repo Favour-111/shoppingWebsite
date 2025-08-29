@@ -17,6 +17,7 @@ import AboutSection from "../../components/AboutSection/AboutSection";
 import Footer from "../../components/Footer/Footer";
 import BackToTop from "../../components/BackToTop/BackToTop";
 import chicken from "../../assets/images/43-430088_chicken-png-free-commercial-use-images-chicken-meat.png";
+import PopUP from "../../components/PopUp/PopUP";
 var settings = {
   dots: false,
   infinite: true,
@@ -51,6 +52,7 @@ const Home = () => {
     <div>
       <NavBar />
       <NavSm />
+      <PopUP />
       <div className="home-container">
         <div className="banners-container">
           <div className="first-banner ">

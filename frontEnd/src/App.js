@@ -22,6 +22,11 @@ import Address from "./Pages/Settings/Address";
 import Notification from "./Pages/Settings/Notification";
 import SingleOrder from "./Pages/SingleOrder/SingleOrder";
 import EmailVerify from "./Pages/EmailVerify/EmailVerify";
+import Checkout from "./Pages/Checkout/Checkout";
+import Category from "./Pages/Category/Category";
+import OrderConfirmation from "./Pages/OrderConfirmation/OrderConfirmation";
+import ForgotPass from "./Pages/ForgotPass/ForgotPass";
+import Reset from "./Pages/Reset/Reset";
 function App() {
   return (
     <>
@@ -54,13 +59,19 @@ function App() {
         <Route element={<View />} path="/View-page" />
         <Route element={<ResultPage />} path="/Result" />
         <Route element={<Settings />} path="/settings">
-          <Route element={<Profile />} path="profile" />
+          <Route element={<Profile />} path="profile/:id" />
           <Route element={<Orders />} path="orders" />
           <Route element={<Address />} path="address" />
           <Route element={<Notification />} path="notification" />
         </Route>
-        <Route element={<SingleOrder />} path="/order-details"></Route>
+        <Route element={<SingleOrder />} path="/order-details/:id"></Route>
         <Route element={<EmailVerify />} path="/users/:id/verify/:token" />
+        <Route element={<Checkout />} path="/checkout-items" />
+        <Route element={<Category />} path="/store-categories" />
+        <Route element={<ForgotPass />} path="/Password-reset" />
+        <Route element={<Reset />} path="/users/reset-password/:id/:token" />
+        <Route element={<OrderConfirmation />} path="/Order-successful/:id" />
+        {/* // for store categories = store-categories */}
       </Routes>
       <Toaster
         toastOptions={{

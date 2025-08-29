@@ -10,6 +10,58 @@
   display: flex;
   gap: 50px;
 }
+.orders-cont {
+  height: fit-content;
+}
+.modal-delete-overlay {
+  padding: 0 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #0000007e;
+  z-index: 1000000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-delete-body {
+  background-color: white;
+  width: 450px;
+  border-radius: 10px;
+  height: fit-content;
+}
+.password-input {
+  padding: 0 20px 20px 20px;
+}
+.password-input-item {
+  margin-top: 10px;
+  label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #787878;
+  }
+}
+.error-text {
+  font-size: 12px;
+}
+.modal-delete-head {
+  display: flex;
+  padding: 20px;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--text-normal);
+  font-size: 16px;
+  font-weight: 500;
+  border-bottom: 1px solid #d3d3d3;
+}
+.modal-delete-content {
+  margin-top: 10px;
+  color: var(--text-normal);
+  font-size: 13px;
+  font-weight: 500;
+}
 .settings-sidebar {
   width: 22%;
   border-right: 1px solid #f1f1f1;
@@ -116,7 +168,7 @@
 .order-container-body {
   margin-bottom: 60px;
   margin-top: 60px;
-  height: 80vh;
+  height: 100%;
 }
 .order-head {
   font-size: 21px;
@@ -144,6 +196,12 @@
 }
 .order-item-body {
   margin-top: 20px;
+}
+.getting-text {
+  margin-top: 10px;
+  color: var(--text-normal);
+  font-size: 13px;
+  font-weight: 500;
 }
 .order-item {
   border-radius: 5px;
@@ -489,6 +547,17 @@
 .default-text {
   cursor: pointer;
 }
+.default-text-active {
+  color: var(--primary-blue);
+  font-weight: 600;
+  cursor: pointer;
+}
+.loading-text {
+  margin-top: 40px;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text-normal);
+}
 .bottom-address-icon {
   font-size: 17px !important;
   color: #1e40af;
@@ -520,7 +589,13 @@
   z-index: 1000000;
   background-color: #0000008a;
 }
-
+.empty-text {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-normal);
+  margin-top: 20px;
+  text-align: center;
+}
 @media screen and (max-width: 970px) {
   .settings-layout {
     gap: 20px;
@@ -637,16 +712,8 @@
   .notification-container {
     height: 70vh;
   }
-  .modal-input-flex {
-    flex-direction: column;
-  }
-  .modal-flex-item {
+
+  /* .modal-flex-item-select {
     width: 100%;
-    input {
-      width: 100% !important;
-    }
-  }
-  .modal-flex-item-select {
-    width: 100%;
-  }
+  } */
 }

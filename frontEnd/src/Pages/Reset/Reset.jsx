@@ -1,16 +1,19 @@
 import React, { useState } from "react";
-import "./SignIn.css";
+import "./Reset.css";
 import { LiaOpencart } from "react-icons/lia";
-import { Link } from "react-router";
+import { Link, useParams } from "react-router";
 import { useNavigate } from "react-router";
 import Footer from "../../components/Footer/Footer";
 import axios from "axios";
-const SignIn = () => {
+import toast from "react-hot-toast";
+const Reset = () => {
+  const { id, token } = useParams();
+
   const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
   const [formData, setFormData] = useState({
     password: "",
-    email: "",
+    confirmPassword: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -21,13 +24,14 @@ const SignIn = () => {
 
   const validate = () => {
     const newErrors = {};
-    if (!formData.password.trim()) {
+
+    if (!formData.password) {
       newErrors.password = "password is required";
     }
-    if (!formData.email) {
-      newErrors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Please enter a valid email";
+    if (!formData.confirmPassword) {
+      newErrors.confirmPassword = "confirm Password is required";
+    } else if (formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = "password do not match";
     }
     return newErrors;
   };
@@ -41,20 +45,20 @@ const SignIn = () => {
       try {
         setLoader(true);
         const response = await axios.post(
-          `${process.env.REACT_APP_API}/login`,
-          formData
+          `${process.env.REACT_APP_API}/reset-password/${id}/${token}`,
+          { password: formData.password }
         );
 
         if (response.data.success) {
-          localStorage.setItem("auth-token", response.data.token);
-          localStorage.setItem("userId", response.data.id);
-
-          setFormData({ email: "", password: "" });
-          window.location.replace(`/`);
+          toast.success("password reset successful");
+          setTimeout(() => {
+            navigate("/sign-in");
+          }, 2000);
+          setFormData({ password: "" });
         }
       } catch (error) {
         console.log("Registration error:", error);
-        alert(error.response?.data?.msg || "Something went wrong!");
+        toast.error(error.response?.data?.msg || "Something went wrong!");
       } finally {
         setLoader(false);
       }
@@ -84,54 +88,44 @@ const SignIn = () => {
         </div>
         <div className="sing-in-container">
           <form onSubmit={handleSubmit} className="form-container">
-            <div className="form-head">Sign In</div>
+            <div className="form-head">Reset your password?</div>
             <div className="form-Content">
-              Welcome back FizzMart Enter your credentials to continue
+              Enter a new password with at least 8 characters, including
+              letters, numbers, or symbols.
             </div>
-            <div className="form-group">
-              <input
-                name="email"
-                type="email"
-                placeholder="Email"
-                value={formData.email}
-                onChange={handleChange}
-                className={errors.email ? "error-input" : ""}
-              />
-              {errors.email && <p className="error-text">{errors.email}</p>}
-            </div>
-
             <div className="form-group">
               <input
                 name="password"
                 type="password"
-                placeholder="Password"
+                placeholder="input Passwords"
                 value={formData.password}
                 onChange={handleChange}
-                className={`mt-3 ${errors.password ? "error-input" : ""}`}
+                className={errors.password ? "error-input" : ""}
               />
               {errors.password && (
                 <p className="error-text">{errors.password}</p>
               )}
             </div>
-            <div className="d-flex align-items-center justify-content-between mt-2 w-100 ">
-              <div className="d-flex align-items-center gap-1">
-                <div>
-                  <input type="checkbox" className="checkBox-container" />
-                </div>
-                <div className="form-label mt-2">Remember me</div>
-              </div>
-              <Link to="/Password-reset" className="Forgot-password">
-                Forgot Password?
-              </Link>
+            <div className="form-group">
+              <input
+                name="confirmPassword"
+                type="password"
+                placeholder="confirm Passwords"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                className={errors.confirmPassword ? "error-input" : ""}
+              />
+              {errors.confirmPassword && (
+                <p className="error-text">{errors.confirmPassword}</p>
+              )}
             </div>
 
             <button type="submit" className="submit">
-              {loader ? "Loading..." : "Sign In"}
+              {loader ? "Loading..." : "Reset Password"}
             </button>
-            <div className="create-div">
-              Don't have an account?{" "}
-              <span onClick={() => navigate("/sign-Up")}>Create one </span>
-            </div>
+            <button className="back-btn" onClick={() => navigate("/sign-in")}>
+              Back
+            </button>
           </form>
         </div>
       </div>
@@ -140,4 +134,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default Reset;

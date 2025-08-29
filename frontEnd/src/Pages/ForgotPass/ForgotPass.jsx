@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import "./SignIn.css";
+import "./ForgotPass.css";
 import { LiaOpencart } from "react-icons/lia";
 import { Link } from "react-router";
 import { useNavigate } from "react-router";
 import Footer from "../../components/Footer/Footer";
 import axios from "axios";
-const SignIn = () => {
+import toast from "react-hot-toast";
+const ForgotPass = () => {
   const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
   const [formData, setFormData] = useState({
-    password: "",
     email: "",
   });
 
@@ -21,9 +21,7 @@ const SignIn = () => {
 
   const validate = () => {
     const newErrors = {};
-    if (!formData.password.trim()) {
-      newErrors.password = "password is required";
-    }
+
     if (!formData.email) {
       newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
@@ -41,20 +39,16 @@ const SignIn = () => {
       try {
         setLoader(true);
         const response = await axios.post(
-          `${process.env.REACT_APP_API}/login`,
+          `${process.env.REACT_APP_API}/forgot_password`,
           formData
         );
 
         if (response.data.success) {
-          localStorage.setItem("auth-token", response.data.token);
-          localStorage.setItem("userId", response.data.id);
-
-          setFormData({ email: "", password: "" });
-          window.location.replace(`/`);
+          setFormData({ email: "" });
         }
       } catch (error) {
         console.log("Registration error:", error);
-        alert(error.response?.data?.msg || "Something went wrong!");
+        toast.error(error.response?.data?.msg || "Something went wrong!");
       } finally {
         setLoader(false);
       }
@@ -84,9 +78,10 @@ const SignIn = () => {
         </div>
         <div className="sing-in-container">
           <form onSubmit={handleSubmit} className="form-container">
-            <div className="form-head">Sign In</div>
+            <div className="form-head">Forgot your password?</div>
             <div className="form-Content">
-              Welcome back FizzMart Enter your credentials to continue
+              Please enter the email address associated with your account and We
+              will email you a link to reset your password.
             </div>
             <div className="form-group">
               <input
@@ -100,38 +95,12 @@ const SignIn = () => {
               {errors.email && <p className="error-text">{errors.email}</p>}
             </div>
 
-            <div className="form-group">
-              <input
-                name="password"
-                type="password"
-                placeholder="Password"
-                value={formData.password}
-                onChange={handleChange}
-                className={`mt-3 ${errors.password ? "error-input" : ""}`}
-              />
-              {errors.password && (
-                <p className="error-text">{errors.password}</p>
-              )}
-            </div>
-            <div className="d-flex align-items-center justify-content-between mt-2 w-100 ">
-              <div className="d-flex align-items-center gap-1">
-                <div>
-                  <input type="checkbox" className="checkBox-container" />
-                </div>
-                <div className="form-label mt-2">Remember me</div>
-              </div>
-              <Link to="/Password-reset" className="Forgot-password">
-                Forgot Password?
-              </Link>
-            </div>
-
             <button type="submit" className="submit">
-              {loader ? "Loading..." : "Sign In"}
+              {loader ? "Loading..." : "Reset Password"}
             </button>
-            <div className="create-div">
-              Don't have an account?{" "}
-              <span onClick={() => navigate("/sign-Up")}>Create one </span>
-            </div>
+            <button className="back-btn" onClick={() => navigate("/sign-in")}>
+              Back
+            </button>
           </form>
         </div>
       </div>
@@ -140,4 +109,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default ForgotPass;

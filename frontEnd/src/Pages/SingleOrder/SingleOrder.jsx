@@ -8,15 +8,17 @@ import Footer from "../../components/Footer/Footer";
 const SingleOrder = () => {
   const location = useLocation();
   const orderID = location.state || {};
-  const { id } = orderID;
+  const { id, orders } = orderID;
+  console.log(orders);
+
   console.log(id);
-  const OrderFilter = order.find((item) => id === item.id);
-  console.log(OrderFilter);
-  const [orderStatus, setOrderStatus] = useState(OrderFilter.orderStatus);
-  const total = OrderFilter.products.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  );
+  const OrderFilter = orders.find((item) => item._id === id);
+  console.log(OrderFilter.Orders);
+  const [orderStatus, setOrderStatus] = useState("pending");
+  // const total = OrderFilter.products.reduce(
+  //   (acc, item) => acc + item.price * item.quantity,
+  //   0
+  // );
   return (
     <div>
       <NavBar />
@@ -27,7 +29,7 @@ const SingleOrder = () => {
             <div className="single-item">
               <div className="single-order-head">Order Id</div>
               <div className="single-order-content-text">
-                Order_{OrderFilter.id}
+                Order_${OrderFilter.paymentReference}
               </div>
             </div>
             <div className="single-item">
@@ -47,32 +49,32 @@ const SingleOrder = () => {
             <div className="single-item">
               <div className="single-order-head">Delivery Address</div>
               <div className="single-order-content-text">
-                {OrderFilter.address.street}
+                {OrderFilter.street}
               </div>
             </div>
             <div className="single-item">
               <div className="single-order-head">State</div>
               <div className="single-order-content-text">
                 {" "}
-                {OrderFilter.address.state}
+                {OrderFilter.state}
               </div>
             </div>
             <div className="single-item">
-              <div className="single-order-head">City</div>
+              <div className="single-order-head">Region</div>
               <div className="single-order-content-text">
-                {OrderFilter.address.city}
+                {OrderFilter.Region}
               </div>
             </div>
             <div className="single-item">
               <div className="single-order-head">Payment Details</div>
               <div className="single-order-content-text">
-                Items total:₦{total}
+                Items total:₦{OrderFilter.OrderPrice}
               </div>
               <div className="single-order-content-text">
-                Shipping Fee:₦{OrderFilter.shipping}
+                Shipping Fee:₦{OrderFilter.DeliveryFee}
               </div>
               <div className="single-order-content-text">
-                total:{OrderFilter.shipping + total}
+                total:₦{OrderFilter.OrderPrice + OrderFilter.DeliveryFee}
               </div>
             </div>
             <div className="single-item">
@@ -81,13 +83,10 @@ const SingleOrder = () => {
             </div>
           </div>
           <div className="single-order-content">
-            {OrderFilter.products.map((item) => (
+            {OrderFilter.Orders.map((item) => (
               <div className="single-item-order">
                 <div className="single-image">
-                  <img
-                    src="https://freshcart.codescandy.com/assets/images/products/product-img-4.jpg"
-                    alt=""
-                  />
+                  <img src={item.image} alt="" />
                 </div>
                 <div>
                   <div className="single-prod-name mt-1">{item.name}</div>

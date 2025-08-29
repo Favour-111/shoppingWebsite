@@ -324,7 +324,7 @@
 
 @media screen and (max-width: 768px) {
   .home-container {
-    padding: 20px;
+    padding: 0 20px;
   }
   .banner-right-head {
     font-size: 35px;
@@ -341,7 +341,7 @@
 
 @media screen and (max-width: 550px) {
   .home-container {
-    padding: 15px 20px;
+    padding: 0 20px;
   }
   .banner-right-button {
     height: 35px;
@@ -401,6 +401,7 @@
   }
   .banners-container {
     flex-direction: column;
+    padding: 0 !important;
     width: 100% !important;
   }
   .first-banner {
@@ -448,6 +449,6 @@
     width: 100%;
   }
   .banners-container {
-    padding: 10px 0;
+    padding: 0;
   }
 }

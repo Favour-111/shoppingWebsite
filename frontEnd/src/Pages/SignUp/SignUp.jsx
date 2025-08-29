@@ -52,7 +52,7 @@ const SignUp = () => {
       try {
         setLoader(true);
         const response = await axios.post(
-          "http://localhost:5000/users",
+          `${process.env.REACT_APP_API}/users`,
           formData
         );
 
@@ -96,8 +96,7 @@ const SignUp = () => {
           <form onSubmit={handleSubmit} className="form-container">
             <div className="form-head">Sign Up</div>
             <div className="form-Content">
-              Welcome to Fizz Mart!
-              <br /> Enter your details to get started.
+              Welcome to Fizz Mart! Enter your details to get started.
             </div>
             <div className="row">
               <div className="form-group col-6">
