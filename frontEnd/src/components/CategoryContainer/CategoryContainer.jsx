@@ -7,7 +7,8 @@ const CategoryContainer = () => {
   const navigate = useNavigate();
   return (
     <div className="CategoryContainer">
-      <div className="CategoryContainer-head">Shop Popular Categories</div>
+      <div className="header-sub-head">Categories</div>
+      <div className="New-ProductHead">Shop by Top Categories</div>
       <div className="Category-body-container">
         {category.map((item) => {
           return (

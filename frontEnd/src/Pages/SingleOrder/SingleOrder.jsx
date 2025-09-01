@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import "./SingleOrder.css";
 import NavBar from "../../components/NavBar/NavBar";
 import NavSm from "../../components/NavSm/NavSm";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import order from "../../components/Orders";
 import Footer from "../../components/Footer/Footer";
+import { HiOutlineBackward } from "react-icons/hi2";
+import { MdKeyboardBackspace } from "react-icons/md";
 const SingleOrder = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const orderID = location.state || {};
   const { id, orders } = orderID;
@@ -34,17 +37,17 @@ const SingleOrder = () => {
             </div>
             <div className="single-item">
               <div className="single-order-head">Order Status</div>
-              <div
-                className={`single-order-content-text ${
-                  orderStatus === "pending"
-                    ? "text-warning"
-                    : orderStatus === "shipped"
-                    ? "text-success"
-                    : "text-danger"
-                }`}
-              >
-                {orderStatus}
-              </div>
+              {OrderFilter.orderStatus === "Processing" ? (
+                <div className="processing">Processing Delivery</div>
+              ) : OrderFilter.orderStatus === "delivered" ? (
+                <div className="delivered">Order Delivered ✅ </div>
+              ) : OrderFilter.orderStatus === "ongoing" ? (
+                <div className="Shipped">Ready for PickUp</div>
+              ) : OrderFilter.orderStatus === "Shipping" ? (
+                <div className="Shipping">Out for Delivery</div>
+              ) : (
+                <div className="cancelled">Order Cancelled</div>
+              )}
             </div>
             <div className="single-item">
               <div className="single-order-head">Delivery Address</div>
@@ -83,6 +86,15 @@ const SingleOrder = () => {
             </div>
           </div>
           <div className="single-order-content">
+            <button
+              className="Order-list-btn shadow-sm"
+              onClick={() => navigate("/settings/orders")}
+            >
+              <div className="back-icn">
+                <MdKeyboardBackspace />
+              </div>
+              <div>Return to Orders</div>
+            </button>
             {OrderFilter.Orders.map((item) => (
               <div className="single-item-order">
                 <div className="single-image">

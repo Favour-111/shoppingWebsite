@@ -288,7 +288,12 @@ const Address = () => {
         </div>
       )}
       {fetchLoader ? (
-        <div className="loading-text">loading Addresses.....</div>
+        <div className="text-center mt-4">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <div className="loading-text">loading Addresses.....</div>
+        </div>
       ) : addressList.length === 0 ? (
         <div className="empty-text">no address present add a new address</div>
       ) : (

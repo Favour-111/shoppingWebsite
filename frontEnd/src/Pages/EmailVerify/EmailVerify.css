@@ -15,12 +15,10 @@
   flex-direction: column;
 }
 .verified-head {
-  font-family: poppinsSemiBold;
   font-size: 30px;
   color: #787878;
 }
 .verified-content {
-  font-family: poppinsLight;
   font-size: 13px;
   color: #393939;
   margin: 20px 0;
@@ -38,7 +36,7 @@
   height: 100vh;
   align-items: center;
   justify-content: center;
-  font-family: poppinsLight;
+
   font-size: 13px;
   color: #393939;
   margin: 20px 0;
@@ -70,9 +68,7 @@
 }
 .not-found-text {
   font-size: 90px;
-  font-family: poppinsBold;
 }
 .cont-not-found {
-  font-family: poppinsLight;
   font-size: 15px;
 }

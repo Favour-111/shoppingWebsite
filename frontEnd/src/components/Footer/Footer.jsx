@@ -15,7 +15,9 @@ const Footer = () => {
               {category.map((item) => {
                 return (
                   <li>
-                    <Link className="footer-link">{item.name}</Link>
+                    <Link to={`/category-${item.name}`} className="footer-link">
+                      {item.name}
+                    </Link>
                   </li>
                 );
               })}
@@ -25,20 +27,28 @@ const Footer = () => {
             <div className="footer-item-header">Get to know us</div>
             <ul className="footer-list">
               <li>
-                <Link className="footer-link">Company</Link>
+                <Link className="footer-link" to="/About-page">
+                  Company
+                </Link>
               </li>
               <li>
-                <Link className="footer-link">Our Value</Link>
+                <Link className="footer-link" to="/ABout-page">
+                  Our Value
+                </Link>
               </li>
               <li>
-                <Link className="footer-link">Blog</Link>
+                <Link className="footer-link" to="/contact-us">
+                  Contact
+                </Link>
               </li>
               <li>
-                <Link className="footer-link">About</Link>
+                <Link className="footer-link" to="/About-us">
+                  About
+                </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link className="footer-link">Help center</Link>
-              </li>
+              </li> */}
             </ul>
           </div>
           <div className="footer-item">

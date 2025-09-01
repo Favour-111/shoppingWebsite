@@ -18,6 +18,7 @@ import Footer from "../../components/Footer/Footer";
 import BackToTop from "../../components/BackToTop/BackToTop";
 import chicken from "../../assets/images/43-430088_chicken-png-free-commercial-use-images-chicken-meat.png";
 import PopUP from "../../components/PopUp/PopUP";
+import { useNavigate } from "react-router";
 var settings = {
   dots: false,
   infinite: true,
@@ -30,6 +31,7 @@ var settings = {
   pauseOnFocus: true, // ✅ Pause if user interacts
 };
 const Home = () => {
+  const navigate = useNavigate();
   const bannerItems = [
     // {
     //   image: chicken,
@@ -70,7 +72,10 @@ const Home = () => {
                   <div className="banner-right-price">
                     Start from <span>₦{item.Price}</span>
                   </div>
-                  <button className="banner-right-button">
+                  <button
+                    onClick={() => navigate("/store-categories")}
+                    className="banner-right-button"
+                  >
                     <div>{item.ButtonText}</div>
                     <div>
                       <LuMoveRight />
@@ -95,7 +100,12 @@ const Home = () => {
                 Refresh your day the
                 <br /> with Fresh Seasoning
               </div>
-              <button className="banner-top-button">Shop Now</button>
+              <button
+                onClick={() => navigate("/store-categories")}
+                className="banner-top-button"
+              >
+                Shop Now
+              </button>
               <img
                 src="https://png.pngtree.com/png-vector/20240529/ourmid/pngtree-pina-colada-with-pineapple-slice-and-cherry-png-image_12511808.png"
                 alt=""
@@ -107,7 +117,12 @@ const Home = () => {
                 Refresh your day the
                 <br /> with Fresh Seasoning
               </div>
-              <button className="banner-top-button">Shop Now</button>
+              <button
+                onClick={() => navigate("/store-categories")}
+                className="banner-top-button"
+              >
+                Shop Now
+              </button>
               <img
                 src="https://static.vecteezy.com/system/resources/previews/051/960/680/non_2x/an-assortment-of-various-grocery-items-including-fruits-bread-cereals-and-jars-arranged-neatly-for-display-perfect-for-food-related-projects-png.png"
                 alt=""
@@ -126,7 +141,11 @@ const Home = () => {
               Shopping for your furry friend? Find food, treats, and more in one
               easy spot.
             </div>
-            <button href="tel:+2347069961314" className="fancy-button">
+            <button
+              onClick={() => navigate("/store-categories")}
+              href="tel:+2347069961314"
+              className="fancy-button"
+            >
               <span>Start shop now</span>
             </button>
           </div>

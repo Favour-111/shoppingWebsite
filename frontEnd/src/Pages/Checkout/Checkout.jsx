@@ -59,7 +59,7 @@ const Checkout = () => {
     paymentStatus: "",
     paymentReference: "",
     deliveryFee: 300,
-    orderStatus: "delivered",
+    // orderStatus: "ongoing",
     phoneNumber: "",
     secondNumber: "",
     cartItems: cartProducts,
@@ -317,7 +317,7 @@ const Checkout = () => {
           paymentReference: transaction.reference,
           Note: form.Note,
           date: formattedDate,
-          orderStatus: form.orderStatus,
+          // orderStatus: form.orderStatus,
           cartItems: updatedCartItems, // ✅ aligned with backend
         };
 
@@ -522,8 +522,11 @@ const Checkout = () => {
                   </div>
                 )}
                 {fetchLoader ? (
-                  <div className="loading-text mb-4">
-                    loading Addresses.....
+                  <div className="my-4 text-center">
+                    <div class="spinner-border" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <div className="loading-text">loading Addresses.....</div>
                   </div>
                 ) : addressList.length === 0 ? (
                   <div className="empty-text mb-3">

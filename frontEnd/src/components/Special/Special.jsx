@@ -9,6 +9,7 @@ const Special = () => {
       <div className="NewProduct-container">
         <div className="newproduct">
           <div className="new-prod-top2">
+            <div className="header-sub-head">Products</div>
             <div className="New-ProductHead">
               Special Offers of the View All Week!
             </div>

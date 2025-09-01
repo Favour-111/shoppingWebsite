@@ -21,6 +21,26 @@
 .single-item {
   margin-top: 15px;
 }
+.Order-list-btn {
+  background-color: var(--text-blue);
+  color: white;
+  font-size: 11px;
+  font-weight: 400;
+  border: none;
+  padding: 7px 10px;
+  transition: 200ms;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  border-radius: 5px;
+  .back-icn {
+    margin-bottom: 2px;
+  }
+}
+.Order-list-btn:hover {
+  background-color: #1e293b;
+  opacity: 0.8;
+}
 .single-order-head {
   color: var(--text-blue);
   font-weight: 600;

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import orderimg from "../../assets/images/png-transparent-shopping-trolley-with-parcel-boxes-shopping-trolley-parcel-box-shopping-cart-shopping-cart-3d-icon.png";
 import { useNavigate } from "react-router";
 import axios from "axios";
-
+import { SlRefresh } from "react-icons/sl";
 const Orders = () => {
-  const [orderFilter, setOrderFilter] = useState("shipping");
+  const [orderFilter, setOrderFilter] = useState("ongoing");
   const [orders, setOrders] = useState([]);
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
@@ -41,15 +41,28 @@ const Orders = () => {
   return (
     <div>
       <div className="order-container-body">
-        <div className="order-head">My Orders</div>
+        <div className="d-flex align-items-center justify-content-between">
+          <div className="order-head">My Orders</div>
+          <button
+            onClick={() => {
+              FetchOrder();
+            }}
+            className="order-refersh-button"
+          >
+            <div className="icn">
+              <SlRefresh />
+            </div>{" "}
+            <div>Refresh Order</div>
+          </button>
+        </div>
         <div className="filter-order-body">
           <div
             className={`delivered-filter ${
-              orderFilter === "shipping" ? "active" : ""
+              orderFilter === "ongoing" ? "active" : ""
             }`}
-            onClick={() => setOrderFilter("shipping")}
+            onClick={() => setOrderFilter("ongoing")}
           >
-            Ongoing
+            ongoing
           </div>
           <div
             className={`delivered-filter ${
@@ -63,20 +76,20 @@ const Orders = () => {
             className={`delivered-filter ${
               orderFilter === "cancelled" ? "active" : ""
             }`}
-            onClick={() => setOrderFilter("cancelled")}
+            onClick={() => setOrderFilter("Cancelled")}
           >
             Cancelled
           </div>
         </div>
         {loader ? (
-          <div className="text-center mt-4">
+          <div className="text-center my-4">
             <div class="spinner-border" role="status">
               <span class="visually-hidden">Loading...</span>
             </div>
             <div className="getting-text">getting orders..</div>
           </div>
         ) : (
-          <div className="orders-cont">
+          <div className="orders-cont mb-5">
             {filteredOrders.length > 0 ? (
               filteredOrders.map((item) => (
                 <div key={item.id} className="order-item-body">
@@ -89,18 +102,20 @@ const Orders = () => {
                     </div>
                     <div className="mt-2">
                       <div className="order-name">ORDER_{item.id}</div>
-                      <div
-                        className={`order-status ${
-                          item.orderStatus === "delivered"
-                            ? "delivered"
-                            : item.orderStatus === "shipping"
-                            ? "pending"
-                            : "cancelled"
-                        }`}
-                      >
-                        {item.orderStatus}
+                      {item.orderStatus === "Processing" ? (
+                        <div className="processing">Processing Delivery</div>
+                      ) : item.orderStatus === "delivered" ? (
+                        <div className="delivered">Order Delivered ✅ </div>
+                      ) : item.orderStatus === "ongoing" ? (
+                        <div className="Shipped">Ready for PickUp</div>
+                      ) : item.orderStatus === "Shipping" ? (
+                        <div className="Shipping">Out for Delivery</div>
+                      ) : (
+                        <div className="cancelled">Order Cancelled</div>
+                      )}
+                      <div className="order-date">
+                        On {item.date.slice(0, 10)}
                       </div>
-                      <div className="order-date">On {item.date}</div>
                     </div>
                     <div
                       className="see-details"

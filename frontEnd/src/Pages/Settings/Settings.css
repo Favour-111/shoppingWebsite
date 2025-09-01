@@ -13,6 +13,71 @@
 .orders-cont {
   height: fit-content;
 }
+.processing {
+  color: orange;
+  background-color: rgba(255, 166, 0, 0.205);
+  padding: 4px 10px;
+  border-radius: 5px;
+  font-size: 11px;
+  text-align: center;
+  width: fit-content;
+}
+.delivered {
+  color: rgb(91 212 145);
+  background-color: rgba(91, 212, 145, 0.135);
+  padding: 4px 10px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 11px;
+  width: fit-content;
+}
+.Shipped {
+  color: rgb(21 192 213);
+  background-color: rgba(21, 191, 213, 0.11);
+  padding: 4px 10px;
+  border-radius: 5px;
+  width: fit-content;
+  font-size: 11px;
+  text-align: center;
+}
+.Shipping {
+  color: rgb(126 115 241);
+  background-color: rgba(125, 115, 241, 0.132);
+  padding: 4px 10px;
+  border-radius: 5px;
+  font-size: 11px;
+  width: fit-content;
+  text-align: center;
+}
+.cancelled {
+  color: red;
+  background-color: rgba(255, 0, 0, 0.132);
+  padding: 4px 10px;
+  border-radius: 5px;
+  width: fit-content;
+  font-size: 11px;
+  text-align: center;
+}
+
+.order-refersh-button {
+  background-color: var(--text-blue);
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  border-radius: 10px;
+  border: none;
+  font-size: 10px;
+  color: white;
+  transition: 200ms;
+  font-weight: 500;
+  .icn {
+    padding-bottom: 2px;
+  }
+}
+.order-refersh-button:hover {
+  background-color: #0e131a;
+}
 .modal-delete-overlay {
   padding: 0 20px;
   position: fixed;
