@@ -12,6 +12,7 @@ const Address = () => {
   const [loader, setAddLoader] = useState(false);
   const [defaultLoader, setDefaultLoader] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [delivery, setFee] = useState(0);
   const [addressAdd, setAddressAdd] = useState({
     FirstName: "",
     LastName: "",
@@ -49,6 +50,66 @@ const Address = () => {
   useEffect(() => {
     fetchAllAddress();
   }, []);
+  const [locations, setLocation] = useState({});
+  useEffect(() => {
+    const fetchLocations = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_API}/countries`
+        );
+        const locationsData = response.data.reduce((acc, location) => {
+          acc[location.Region] = {
+            price: location.price,
+            city: location.city,
+          };
+          return acc;
+        }, {});
+        setLocation(locationsData);
+      } catch (error) {
+        console.error("Error fetching locations:", error);
+      }
+    };
+
+    fetchLocations();
+  }, []);
+  const [selectedLocation, setSelectedLocation] = useState("");
+  const [selectedState, setSelectedState] = useState("");
+  const handleLocationChange = (e) => {
+    const location = e.target.value;
+    setSelectedLocation(location);
+    setSelectedState(""); // Reset state selection
+
+    setAddressAdd((prev) => ({
+      ...prev,
+      Region: location, // save selected region
+      city: "", // reset city when region changes
+    }));
+
+    if (location) {
+      const locationPrice = locations[location].price;
+      setTotalPrice(locationPrice);
+    } else {
+      setTotalPrice(0);
+    }
+  };
+
+  const handleStateChange = (e) => {
+    const city = e.target.value;
+    setSelectedState(city);
+
+    setAddressAdd((prev) => ({
+      ...prev,
+      Region: selectedLocation,
+      city, // ✅ set selected city
+    }));
+
+    if (city) {
+      const statePrice = locations[selectedLocation].city[city];
+      const locationPrice = locations[selectedLocation].price;
+      setTotalPrice(locationPrice + statePrice);
+    }
+  };
+
   const handleAddAddress = async () => {
     if (
       !addressAdd.FirstName ||
@@ -58,6 +119,8 @@ const Address = () => {
       !addressAdd.street ||
       !addressAdd.Region
     ) {
+      console.log(addressAdd);
+
       toast.error("All required fields must be filled");
       return;
     }
@@ -72,25 +135,26 @@ const Address = () => {
           userId,
         }
       );
+      if (response) {
+        toast.success("Address added successfully");
+        fetchAllAddress();
 
-      toast.success("Address added successfully");
-      fetchAllAddress();
+        // Reset form
+        setAddressAdd({
+          FirstName: "",
+          LastName: "",
+          PhoneNumber: "",
+          SparePhoneNumber: "",
+          street: "",
+          city: "",
+          Region: "",
+          Note: "",
+          Fee: 0,
+          isDefault: false,
+        });
 
-      // Reset form
-      setAddressAdd({
-        FirstName: "",
-        LastName: "",
-        PhoneNumber: "",
-        SparePhoneNumber: "",
-        street: "",
-        city: "",
-        Region: "",
-        Note: "",
-        Fee: 0,
-        isDefault: false,
-      });
-
-      setAddressModal(false);
+        setAddressModal(false);
+      }
     } catch (err) {
       toast.error(err.response?.data?.message || "Server error");
     } finally {
@@ -230,31 +294,41 @@ const Address = () => {
               <div className="modal-flex-item-select">
                 <label htmlFor="">Region</label>
                 <select
-                  value={addressAdd.Region}
-                  onChange={handleInputChange}
-                  name="Region"
+                  className="select"
+                  onChange={handleLocationChange}
+                  value={selectedLocation}
                 >
-                  <option value="Gombe">Gombe</option>
-                  <option value="Lagos">Lagos</option>
-                  <option value="Ogun">Ogun</option>
-                  <option value="Ekiti">Ekiti</option>
+                  <option value="">Select Region</option>
+                  {Object.keys(locations).map((region) => (
+                    <option key={region} value={region}>
+                      {region}
+                    </option>
+                  ))}
                 </select>
               </div>
+
               <div className="modal-flex-item-select">
-                <label htmlFor="">city</label>
+                <label htmlFor="">City</label>
                 <select
-                  value={addressAdd.city}
-                  onChange={handleInputChange}
-                  name="city"
-                  id=""
+                  className="select"
+                  onChange={handleStateChange}
+                  value={selectedState}
+                  disabled={!selectedLocation}
                 >
-                  <option value="Gombe">Gombe</option>
-                  <option value="Lagos">Lagos</option>
-                  <option value="Ogun">Ogun</option>
-                  <option value="Ekiti">Ekiti</option>
+                  <option value="kkkk">Select City</option>
+                  <option value="kkkk">Select City</option>
+                  {selectedLocation &&
+                    Object.keys(locations[selectedLocation].city).map(
+                      (city) => (
+                        <option key={city} value={city}>
+                          {city}
+                        </option>
+                      )
+                    )}
                 </select>
               </div>
             </div>
+
             <div className="d-flex align-items-center gap-1 checkBox mt-3">
               <div>
                 <input

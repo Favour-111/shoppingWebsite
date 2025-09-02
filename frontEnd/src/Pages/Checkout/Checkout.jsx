@@ -50,6 +50,190 @@ const Checkout = () => {
     Fee: totalPrice,
     isDefault: false,
   });
+
+  const userId = localStorage.getItem("userId");
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setAddressAdd((prev) => ({ ...prev, [name]: value }));
+  };
+  const fetchAllAddress = async () => {
+    try {
+      setFetchLoader(true);
+      const response = await axios.get(
+        `${process.env.REACT_APP_API}/address/${userId}`
+      );
+      if (response) {
+        console.log(response.data);
+        setAddressList(response.data);
+      }
+    } catch (error) {
+      console.log(error.message);
+    } finally {
+      setFetchLoader(false);
+    }
+  };
+  useEffect(() => {
+    fetchAllAddress();
+  }, []);
+  const [locations, setLocation] = useState({});
+  useEffect(() => {
+    const fetchLocations = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_API}/countries`
+        );
+        const locationsData = response.data.reduce((acc, location) => {
+          acc[location.Region] = {
+            price: location.price,
+            city: location.city,
+          };
+          return acc;
+        }, {});
+        setLocation(locationsData);
+      } catch (error) {
+        console.error("Error fetching locations:", error);
+      }
+    };
+
+    fetchLocations();
+  }, []);
+  const [selectedLocation, setSelectedLocation] = useState("");
+  const [selectedState, setSelectedState] = useState("");
+  const handleLocationChange = (e) => {
+    const location = e.target.value;
+    setSelectedLocation(location);
+    setSelectedState(""); // Reset state selection
+
+    setAddressAdd((prev) => ({
+      ...prev,
+      Region: location, // save selected region
+      city: "", // reset city when region changes
+    }));
+
+    if (location) {
+      const locationPrice = locations[location].price;
+      setTotalPrice(locationPrice);
+    } else {
+      setTotalPrice(0);
+    }
+  };
+
+  const handleStateChange = (e) => {
+    const city = e.target.value;
+    setSelectedState(city);
+
+    setAddressAdd((prev) => ({
+      ...prev,
+      Region: selectedLocation,
+      city, // ✅ set selected city
+    }));
+
+    if (city) {
+      const statePrice = locations[selectedLocation].city[city];
+      const locationPrice = locations[selectedLocation].price;
+      setTotalPrice(locationPrice + statePrice);
+    }
+  };
+
+  const handleAddAddress = async () => {
+    if (
+      !addressAdd.FirstName ||
+      !addressAdd.LastName ||
+      !addressAdd.PhoneNumber ||
+      !addressAdd.city ||
+      !addressAdd.street ||
+      !addressAdd.Region
+    ) {
+      console.log(addressAdd);
+
+      toast.error("All required fields must be filled");
+      return;
+    }
+
+    try {
+      setAddLoader(true);
+      const response = await axios.post(
+        `${process.env.REACT_APP_API}/addAddress`,
+        {
+          ...addressAdd,
+          Fee: totalPrice,
+          userId,
+        }
+      );
+      if (response) {
+        toast.success("Address added successfully");
+        fetchAllAddress();
+
+        // Reset form
+        setAddressAdd({
+          FirstName: "",
+          LastName: "",
+          PhoneNumber: "",
+          SparePhoneNumber: "",
+          street: "",
+          city: "",
+          Region: "",
+          Note: "",
+          Fee: 0,
+          isDefault: false,
+        });
+
+        setAddressModal(false);
+      }
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Server error");
+    } finally {
+      setAddLoader(false);
+    }
+  };
+  const handleDeleteAddress = async (id) => {
+    try {
+      setDeleteLoader(id);
+      const response = await axios.delete(
+        `${process.env.REACT_APP_API}/address/${id}`
+      );
+
+      if (response.status === 200) {
+        toast.success(" address deleted successfully");
+
+        // Update the AllAddress state by removing the deleted address
+        fetchAllAddress();
+      } else {
+        toast.error("problem deleting address");
+      }
+    } catch (error) {
+      console.log(error.message);
+    } finally {
+      setDeleteLoader(null);
+    }
+  };
+  const setDefaultAddress = async (id) => {
+    try {
+      setDefaultLoader(true);
+      const response = await axios.put(
+        `${process.env.REACT_APP_API}/addresses/${id}/set-default`,
+        { userId } // in case your backend needs userId
+      );
+
+      if (response.status === 200) {
+        toast.success("Default address selected");
+
+        // Update state: set the clicked address as default, others as false
+        setAddressList((prev) =>
+          prev.map((address) => ({
+            ...address,
+            isDefault: address._id === id,
+          }))
+        );
+      }
+    } catch (error) {
+      console.error("Error updating default address:", error);
+      toast.error(error.response?.data?.message || "Server error");
+    } finally {
+      setDefaultLoader(false);
+    }
+  };
+
   //Post Order State
   const [form, setForm] = useState({
     UserID: "",
@@ -58,7 +242,7 @@ const Checkout = () => {
     OrderPrice: "",
     paymentStatus: "",
     paymentReference: "",
-    deliveryFee: 300,
+    deliveryFee: totalPrice,
     // orderStatus: "ongoing",
     phoneNumber: "",
     secondNumber: "",
@@ -89,92 +273,6 @@ const Checkout = () => {
       });
     }
   }, [cartItems, cartProducts]);
-
-  const userId = localStorage.getItem("userId");
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setAddressAdd((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const fetchAllAddress = async () => {
-    try {
-      setFetchLoader(true);
-      const response = await axios.get(
-        `${process.env.REACT_APP_API}/address/${userId}`
-      );
-      if (response) {
-        const addresses = response.data;
-        setAddressList(addresses);
-
-        // 👉 Automatically set the default address when fetching
-        const defaultAddr = addresses.find((addr) => addr.isDefault);
-        if (defaultAddr) {
-          setSelectedAddress(defaultAddr);
-        }
-      }
-    } catch (error) {
-      console.log(error.message);
-    } finally {
-      setFetchLoader(false);
-    }
-  };
-
-  const handleAddAddress = async () => {
-    if (
-      !addressAdd.FirstName ||
-      !addressAdd.LastName ||
-      !addressAdd.PhoneNumber ||
-      !addressAdd.city ||
-      !addressAdd.street ||
-      !addressAdd.Region
-    ) {
-      toast.error("All required fields must be filled");
-      return;
-    }
-
-    try {
-      setAddLoader(true);
-      const response = await axios.post(
-        `${process.env.REACT_APP_API}/addAddress`,
-        {
-          ...addressAdd,
-          Fee: totalPrice,
-          userId,
-          isDefault: true, // ✅ force new address as default
-        }
-      );
-
-      if (response) {
-        toast.success("Address added successfully");
-
-        fetchAllAddress();
-
-        // 👉 make sure selectedAddress points to the new one
-        setSelectedAddress(response.data);
-
-        // Reset form
-        setAddressAdd({
-          FirstName: "",
-          LastName: "",
-          PhoneNumber: "",
-          SparePhoneNumber: "",
-          street: "",
-          city: "",
-          Region: "",
-          Note: "",
-          Fee: 0,
-          isDefault: false,
-        });
-
-        setAddressModal(false);
-      }
-    } catch (err) {
-      toast.error(err.response?.data?.message || "Server error");
-    } finally {
-      setAddLoader(false);
-    }
-  };
-
   const allUsers = async () => {
     try {
       const userFETCH = await axios.get(`${process.env.REACT_APP_API}/allUser`);
@@ -186,59 +284,6 @@ const Checkout = () => {
     }
   };
   const fetchUser = user.find((item) => item._id === userId);
-
-  useEffect(() => {
-    fetchAllAddress();
-    allUsers();
-  }, []);
-  const handleDeleteAddress = async (id) => {
-    try {
-      setDeleteLoader(id);
-      const response = await axios.delete(
-        `${process.env.REACT_APP_API}/address/${id}`
-      );
-
-      if (response.status === 200) {
-        toast.success(" address deleted successfully");
-
-        // Update the AllAddress state by removing the deleted address
-        fetchAllAddress();
-      } else {
-        toast.error("problem deleting address");
-      }
-    } catch (error) {
-      console.log(error.message);
-    } finally {
-      setDeleteLoader(null);
-    }
-  };
-
-  const setDefaultAddress = async (id) => {
-    try {
-      setDefaultLoader(true);
-      const response = await axios.put(
-        `${process.env.REACT_APP_API}/addresses/${id}/set-default`,
-        { userId } // in case your backend needs userId
-      );
-
-      if (response.status === 200) {
-        toast.success("Default address selected");
-
-        // Update state: set the clicked address as default, others as false
-        setAddressList((prev) =>
-          prev.map((address) => ({
-            ...address,
-            isDefault: address._id === id,
-          }))
-        );
-      }
-    } catch (error) {
-      console.error("Error updating default address:", error);
-      toast.error(error.response?.data?.message || "Server error");
-    } finally {
-      setDefaultLoader(false);
-    }
-  };
   // console.log(selectedAddress);
 
   const publicKey = "pk_test_906a70561b64d6cbee516bc9258552ffce77f14a"; // Replace with your Paystack public key
@@ -310,7 +355,7 @@ const Checkout = () => {
           phoneNumber: fetchUser?.phoneNumber || "",
           SecondNumber: selectedAddress?.SparePhoneNumber || "",
           DeliveryFee: form.deliveryFee,
-          OrderPrice: getTotalValue() + 276 - (couponDiscount || 0),
+          OrderPrice: getTotalValue() + totalPrice - (couponDiscount || 0),
           street: selectedAddress?.street,
           Region: selectedAddress?.Region,
           city: selectedAddress?.city,
@@ -464,28 +509,37 @@ const Checkout = () => {
                         <div className="modal-flex-item-select">
                           <label htmlFor="">Region</label>
                           <select
-                            value={addressAdd.Region}
-                            onChange={handleInputChange}
-                            name="Region"
+                            className="select"
+                            onChange={handleLocationChange}
+                            value={selectedLocation}
                           >
-                            <option value="Gombe">Gombe</option>
-                            <option value="Lagos">Lagos</option>
-                            <option value="Ogun">Ogun</option>
-                            <option value="Ekiti">Ekiti</option>
+                            <option value="">Select Region</option>
+                            {Object.keys(locations).map((region) => (
+                              <option key={region} value={region}>
+                                {region}
+                              </option>
+                            ))}
                           </select>
                         </div>
+
                         <div className="modal-flex-item-select">
-                          <label htmlFor="">city</label>
+                          <label htmlFor="">City</label>
                           <select
-                            value={addressAdd.city}
-                            onChange={handleInputChange}
-                            name="city"
-                            id=""
+                            className="select"
+                            onChange={handleStateChange}
+                            value={selectedState}
+                            disabled={!selectedLocation}
                           >
-                            <option value="Gombe">Gombe</option>
-                            <option value="Lagos">Lagos</option>
-                            <option value="Ogun">Ogun</option>
-                            <option value="Ekiti">Ekiti</option>
+                            <option value="kkkk">Select City</option>
+                            <option value="kkkk">Select City</option>
+                            {selectedLocation &&
+                              Object.keys(locations[selectedLocation].city).map(
+                                (city) => (
+                                  <option key={city} value={city}>
+                                    {city}
+                                  </option>
+                                )
+                              )}
                           </select>
                         </div>
                       </div>
@@ -625,7 +679,9 @@ const Checkout = () => {
                     </div>
                     <div className="d-flex align-items-center justify-content-between gap-1">
                       <div>Delivery</div>
-                      <div className="price">₦276</div>
+                      <div className="price">
+                        ₦{totalPrice.toLocaleString()}
+                      </div>
                     </div>
                     {couponDiscount ? (
                       <div className="d-flex align-items-center justify-content-between gap-1">
